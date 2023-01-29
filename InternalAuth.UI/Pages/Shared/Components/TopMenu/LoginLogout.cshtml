@@ -1,0 +1,12 @@
+﻿@model bool
+<div>
+    @if (@Model)
+    {
+        <a asp-page="/user/index">About me</a>
+        <a asp-page="/auth/logout">Log out</a>
+    }
+    else
+    {
+        <a asp-page="/auth/login">Login</a>
+    }
+</div>

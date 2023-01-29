@@ -1,0 +1,16 @@
+﻿@page
+@model AboutMeModel
+@{
+}
+<h1>
+    My claims
+
+</h1>
+
+@foreach (Tuple<string, String> t in Model.Claims)
+{
+    <div>
+        <span>@t.Item1</span><span>|</span><span>@t.Item2</span>
+    </div>
+
+}

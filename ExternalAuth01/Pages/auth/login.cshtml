@@ -1,0 +1,16 @@
+﻿@page 
+@model Kepler.UI.Web.Pages.auth.loginModel
+@{
+    Layout = "_Layout";
+}
+<div class="text-center">
+    <p>Choose a login method</p>
+    @foreach (string m in Model.AuthPartners)
+    {
+        <div>
+            <a asp-page="/auth/login" asp-route-idProvider="@m" asp-route-ReturnUrl="@Model.ReturnUrl">@m</a>
+        </div>
+
+    }
+
+</div>
