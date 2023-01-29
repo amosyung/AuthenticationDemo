@@ -1,0 +1,13 @@
+﻿@page
+@model AuthDemo.ClientWeb.Pages.UserInfoModel
+@{
+    ViewData["Title"] = "User information";
+}
+<h1>User Information</h1>
+<table>
+    <tr><th>Type</th><th>value</th></tr>
+    @foreach(var c in Model.Claims)
+    {
+        <tr><td>@c.Key</td><td>@c.Value</td></tr>
+    }
+</table>
