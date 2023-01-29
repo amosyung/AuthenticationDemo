@@ -14,7 +14,12 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+{
+    //customize the access deny path. If not specified, ASP.NET core will 
+    //default to /Account/AccessDenied
+    o.AccessDeniedPath = "/NoEntry"; 
+})
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, o =>
 {
     o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -31,6 +36,13 @@ builder.Services.AddAuthentication(options =>
     o.GetClaimsFromUserInfoEndpoint= true;
     o.ClaimActions.Remove("aud");
     o.ClaimActions.DeleteClaim("sid");
+    o.Scope.Add("user_group"); //add the custom scope that the IDP allowed
+    o.ClaimActions.MapJsonKey("role", "employee_classification"); //map the custom claim from the IDP to the role claim
+    o.TokenValidationParameters = new() //map the claim type to ASP.NET Core's RoleClaim
+    {
+        NameClaimType = "name",
+        RoleClaimType = "role"
+    };
 });
 
 

@@ -9,7 +9,9 @@ public static class Config
         new IdentityResource[]
         { 
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile()
+            new IdentityResources.Profile(),
+            //add a new scope to include the new custom claim.
+            new IdentityResource("user_group", "Employee classification or category", new []{"employee_classification" })
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
@@ -35,7 +37,8 @@ public static class Config
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "user_group" //open the scope for request
                     },
                     ClientSecrets = {new Secret("perfect_harmony_18".Sha512()) }
                 }
