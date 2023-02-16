@@ -1,9 +1,37 @@
+using AuthDemo.API;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
+
+builder.Services.AddAuthorization(o =>
+    o.AddPolicy("info_scope", policy => policy.RequireClaim("role"))
+    );
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //clear the claim type mapping to allow custom mapping in the next line
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //add Jwt bearer token processing middleware
+    .AddJwtBearer(o => //Keep in mind this part is the configuration of the authentication scheme
+    {
+        o.Authority = "https://localhost:5001"; //the IDP. When the application is running for the first time it will
+                                                //read the meta data from the IDP including all the endpoints available.                                                 
+        o.Audience = "accountapi";  //the middleware is also responsible for validating the access token. This check to make 
+                                    // sure this api ("accountapi") is specified in the access token as the audience.
+        o.TokenValidationParameters = new TokenValidationParameters()
+        {
+            NameClaimType = "name", //Mapping the claim type from the tokens manually to avoid confusion.
+            RoleClaimType = "role",
+            ValidTypes = new[] { "at+jwt" } //counter the token confusion attack.
+        };
+    });
 
 var app = builder.Build();
 
@@ -15,6 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication(); //use authentication now!
 
 var summaries = new[]
 {
@@ -33,7 +62,18 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast");
+    .RequireAuthorization("info_scope")
+    .WithName("GetWeatherForecast");
+
+app.MapGet("/account", (string id, IAccountRepository repo) =>
+{
+    return repo.GetAccount(id);
+});
+
+app.MapPost("/transaction", (string id, AccountTransaction tran, IAccountRepository repo) =>
+{
+    return repo.ProcessTransaction(id, tran);
+});
 
 app.Run();
 

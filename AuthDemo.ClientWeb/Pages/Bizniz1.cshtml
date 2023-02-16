@@ -3,3 +3,13 @@
 @{
 }
 <h3>Important business function happens here!</h3>
+@foreach(var f in Model.Forecasts) {
+    <p>
+        @f.Date.ToShortDateString() - @f.TemperatureC - @f.Summary
+    </p>
+}
+<p>Opening balance: @Model.AccountDetail.OpeningBalance</p>
+<p>Current balance: @Model.AccountDetail.CurrentBalance</p>
+@foreach(var tran in Model.AccountDetail.TransactionList) {
+    <p>@tran.TransactionType - @tran.TransactionTime.ToShortDateString() - @tran.Amount.ToString("0.00")</p>
+}

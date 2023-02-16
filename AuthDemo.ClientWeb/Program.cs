@@ -37,6 +37,8 @@ builder.Services.AddAuthentication(options =>
     o.ClaimActions.Remove("aud");
     o.ClaimActions.DeleteClaim("sid");
     o.Scope.Add("user_group"); //add the custom scope that the IDP allowed
+    o.Scope.Add("accountapi.info"); //request the scope to be included in the access token
+    
     o.ClaimActions.MapJsonKey("role", "employee_classification"); //map the custom claim from the IDP to the role claim
     o.TokenValidationParameters = new() //map the claim type to ASP.NET Core's RoleClaim
     {
