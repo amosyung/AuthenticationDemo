@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net.Http;
 
 namespace AuthDemo.ClientWeb.Pages
 {
@@ -25,13 +26,19 @@ namespace AuthDemo.ClientWeb.Pages
         private ILogger<Bizniz1Model> _logger;
         public IEnumerable<WeatherForecast> Forecasts { get; private set; }
         public AccountDetail AccountDetail { get; private set; }
-        public Bizniz1Model(ILogger<Bizniz1Model> logger) 
+
+        IHttpClientFactory _clientFactory;
+        public Bizniz1Model(ILogger<Bizniz1Model> logger, IHttpClientFactory httpClientFactory) 
         {
             _logger = logger;
+            _clientFactory = httpClientFactory;
         }
         public async Task OnGetAsync()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = _clientFactory.CreateClient("ApiClient");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/weatherforecast");
+            var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
             Forecasts = await client.GetFromJsonAsync< WeatherForecast[]>("https://localhost:7139/weatherforecast");
             AccountDetail = await client.GetFromJsonAsync<AccountDetail>($"https://localhost:7139/account?id=alice");
         }

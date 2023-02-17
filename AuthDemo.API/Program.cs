@@ -1,7 +1,11 @@
 using AuthDemo.API;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
-
-builder.Services.AddAuthorization(o =>
-    o.AddPolicy("info_scope", policy => policy.RequireClaim("role"))
-    );
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //clear the claim type mapping to allow custom mapping in the next line
 
@@ -31,7 +31,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //add
             RoleClaimType = "role",
             ValidTypes = new[] { "at+jwt" } //counter the token confusion attack.
         };
+
     });
+builder.Services.AddAuthorization(options =>
+{
+    /*
+   options.DefaultPolicy = new AuthorizationPolicyBuilder()
+  .RequireAuthenticatedUser()
+  .build();
+    */
+    //options.AddPolicy("info_scope", policy => policy.RequireClaim("accountapi.info"));
+    /*options.AddPolicy("manager", policy => policy.RequireRole("B10"));
+    options.AddPolicy("operator", policy => policy.RequireRole("operator"));
+    */
+    options.AddPolicy("info_scope", policy => policy.RequireClaim("client_id", new string[] { "sc1024" }));
+});
 
 var app = builder.Build();
 
@@ -44,14 +58,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication(); //use authentication now!
+app.UseAuthorization();
 
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/weatherforecast", (HttpContext context) =>
 {
+    var s = context.User;
+    var g = context.GetTokenAsync(OpenIdConnectParameterNames.IdToken).Result;
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (

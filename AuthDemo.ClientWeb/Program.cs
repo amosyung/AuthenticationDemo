@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+string x = builder.Configuration["accountApiRoot"];
 
+builder.Services.AddAccessTokenManagement(); //Handles access token for us
+
+//create a HTTP client for accessing the API
+builder.Services.AddHttpClient("ApiClient", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["accountApiRoot"]);
+    client.DefaultRequestHeaders.Clear();
+    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+})
+    .AddUserAccessTokenHandler(); //add handler so that every request will include
+                                  //the access token to the authorization header
+;
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

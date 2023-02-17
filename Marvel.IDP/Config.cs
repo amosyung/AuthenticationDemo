@@ -51,7 +51,8 @@ public static class Config
                         "accountapi.info",
                         "accountapi.transact"
                     },
-                    ClientSecrets = {new Secret("perfect_harmony_18".Sha512()) }
+                    ClientSecrets = {new Secret("perfect_harmony_18".Sha512()) },
+                    RequireConsent = true
                 }
             };
 }
