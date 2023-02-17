@@ -16,9 +16,15 @@ public static class Config
 
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
     {
-        new ApiResource("accountapi", "Account API")
+        new ApiResource(
+            "accountapi", 
+            "Account API",
+            new []{"employee_classification"}
+            )
         {
-            //Tie the API resources together with the API scopes
+            //Tie the API resources together with the API scopes. When client 
+            //request this scope [accountapi.info], the audience will become
+            //"accountapi" because of this association. 
             Scopes = { "accountapi.info", "accountapi.transact" }
         }
     };

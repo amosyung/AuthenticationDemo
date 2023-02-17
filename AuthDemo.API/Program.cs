@@ -44,7 +44,11 @@ builder.Services.AddAuthorization(options =>
     /*options.AddPolicy("manager", policy => policy.RequireRole("B10"));
     options.AddPolicy("operator", policy => policy.RequireRole("operator"));
     */
-    options.AddPolicy("info_scope", policy => policy.RequireClaim("client_id", new string[] { "sc1024" }));
+    //A policy to specify allowed clients
+    options.AddPolicy("approved_client", policy => policy.RequireClaim("client_id", new string[] { "sc1024" })); 
+    //A policy to specify specific scopes
+    options.AddPolicy("allow_info", policy => policy.RequireClaim("scope", "accountapi.info"));
+    options.AddPolicy("allow_transact", policy => policy.RequireClaim("scope", "accountapi.transact"));
 });
 
 var app = builder.Build();
@@ -79,18 +83,21 @@ app.MapGet("/weatherforecast", (HttpContext context) =>
         .ToArray();
     return forecast;
 })
-    .RequireAuthorization("info_scope")
+    //.RequireAuthorization("approved_client")    
+    //.RequireAuthorization("allow_info")
     .WithName("GetWeatherForecast");
 
-app.MapGet("/account", (string id, IAccountRepository repo) =>
+app.MapGet("/account", (string id, IAccountRepository repo, HttpContext context) =>
 {
+    string idpUserId = context.User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
     return repo.GetAccount(id);
-});
+}).RequireAuthorization("allow_info");
+    
 
 app.MapPost("/transaction", (string id, AccountTransaction tran, IAccountRepository repo) =>
 {
     return repo.ProcessTransaction(id, tran);
-});
+}).RequireAuthorization("allow_transact");
 
 app.Run();
 
