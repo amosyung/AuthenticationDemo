@@ -31,24 +31,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //add
             RoleClaimType = "role",
             ValidTypes = new[] { "at+jwt" } //counter the token confusion attack.
         };
-
+        
     });
 builder.Services.AddAuthorization(options =>
 {
-    /*
-   options.DefaultPolicy = new AuthorizationPolicyBuilder()
-  .RequireAuthenticatedUser()
-  .build();
-    */
-    //options.AddPolicy("info_scope", policy => policy.RequireClaim("accountapi.info"));
-    /*options.AddPolicy("manager", policy => policy.RequireRole("B10"));
-    options.AddPolicy("operator", policy => policy.RequireRole("operator"));
-    */
     //A policy to specify allowed clients
     options.AddPolicy("approved_client", policy => policy.RequireClaim("client_id", new string[] { "sc1024" })); 
     //A policy to specify specific scopes
     options.AddPolicy("allow_info", policy => policy.RequireClaim("scope", "accountapi.info"));
     options.AddPolicy("allow_transact", policy => policy.RequireClaim("scope", "accountapi.transact"));
+    options.AddPolicy("manager", policy => policy.RequireClaim("employee_classification", "B10", "B11"));
+    //options.AddPolicy("allow_transact", o => AuthorizationLibrary.AccessPolicy.AddCanSubmitTransaction(options));
+    
 });
 
 var app = builder.Build();
@@ -87,11 +81,12 @@ app.MapGet("/weatherforecast", (HttpContext context) =>
     //.RequireAuthorization("allow_info")
     .WithName("GetWeatherForecast");
 
-app.MapGet("/account", (string id, IAccountRepository repo, HttpContext context) =>
+app.MapGet("/account", (IAccountRepository repo, HttpContext context) =>
 {
     string idpUserId = context.User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
-    return repo.GetAccount(id);
-}).RequireAuthorization("allow_info");
+    return repo.GetAccount(idpUserId);
+}).RequireAuthorization("allow_info")
+.RequireAuthorization("manager");
     
 
 app.MapPost("/transaction", (string id, AccountTransaction tran, IAccountRepository repo) =>

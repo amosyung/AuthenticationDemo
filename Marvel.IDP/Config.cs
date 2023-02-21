@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using IdentityModel;
 
 namespace Marvel.IDP;
 
@@ -11,7 +12,7 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             //add a new scope to include the new custom claim.
-            new IdentityResource("user_group", "Employee classification or category", new []{"employee_classification" })
+            new IdentityResource("user_group", "Employee classification or category", new []{"employee_classification", "nationality", "ACL" })
         };
 
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
@@ -19,7 +20,7 @@ public static class Config
         new ApiResource(
             "accountapi", 
             "Account API",
-            new []{"employee_classification"}
+            new []{"employee_classification", JwtClaimTypes.BirthDate, "nationality", "ACL" }
             )
         {
             //Tie the API resources together with the API scopes. When client 

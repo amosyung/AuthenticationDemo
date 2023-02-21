@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthDemo.API", "AuthDemo.API\AuthDemo.API.csproj", "{2988BCAC-D9B4-436D-BFA8-3C1C3A16314E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDemo.API", "AuthDemo.API\AuthDemo.API.csproj", "{2988BCAC-D9B4-436D-BFA8-3C1C3A16314E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marvel.IDP", "Marvel.IDP\Marvel.IDP.csproj", "{FEBAD538-34F7-47D3-AF8A-3CADEB3EB788}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalAuth01", "ExternalAuth01\ExternalAuth01.csproj", "{FCA9ADB9-580D-446B-9BF6-882F8EF05630}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternalAuth.UI", "InternalAuth.UI\InternalAuth.UI.csproj", "{53D15F26-D3EB-4DFE-9100-4EC6C1CA0E9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationLibrary", "AuthorizationLibrary\AuthorizationLibrary.csproj", "{31ECEE47-D265-4F58-9E2C-7061435CFB94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{53D15F26-D3EB-4DFE-9100-4EC6C1CA0E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D15F26-D3EB-4DFE-9100-4EC6C1CA0E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D15F26-D3EB-4DFE-9100-4EC6C1CA0E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

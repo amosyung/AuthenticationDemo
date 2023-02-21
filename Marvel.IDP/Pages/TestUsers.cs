@@ -23,7 +23,7 @@ public class TestUsers
                 postal_code = 69118,
                 country = "Germany"
             };
-                
+
             return new List<TestUser>
             {
                 new TestUser
@@ -40,7 +40,13 @@ public class TestUsers
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                         new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
                         new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
-                        new Claim("employee_classification", "B10") //this claim will be mapped to role on the client side
+                        new Claim("employee_classification", "B10"), //this claim will be mapped to role on the client side
+                        new Claim(JwtClaimTypes.BirthDate, "1988-10-14"),
+                        new Claim("nationality", "British"),                        
+                        new Claim("ACL", "toronto_au"),
+                        new Claim("ACL", "public_market"),
+                        new Claim("ACL", "auth_demo_dev"),
+                        new Claim("ACL", "auth_demo_tester")
                     }
                 },
                 new TestUser
@@ -57,7 +63,57 @@ public class TestUsers
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                         new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
                         new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
-                        new Claim("employee_classification", "B11") //this claim will be mapped to role on the client side
+                        new Claim("employee_classification", "B11"), //this claim will be mapped to role on the client side
+                        new Claim(JwtClaimTypes.BirthDate, "2001-09-02"),
+                        new Claim("nationality", "American"),
+                        new Claim("ACL", "boston_au"),
+                        new Claim("ACL", "private_market"),
+                        new Claim("ACL", "auth_demo_user")
+                    }
+                },
+                new TestUser
+                {
+                    SubjectId = "mx003",
+                    Username = "dave",
+                    Password = "dave",
+                    Claims =
+                    {
+                        new Claim(JwtClaimTypes.Name, "Dave Jones"),
+                        new Claim(JwtClaimTypes.GivenName, "Dave"),
+                        new Claim(JwtClaimTypes.FamilyName, "Jones"),
+                        new Claim(JwtClaimTypes.Email, "DaveJones@email.com"),
+                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                        new Claim(JwtClaimTypes.WebSite, "http://dave.com"),
+                        new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
+                        new Claim("employee_classification", "test subject"), //this claim will be mapped to role on the client side
+                        new Claim(JwtClaimTypes.BirthDate, "1987-05-13"),
+                        new Claim("nationality", "Jamaican"),
+                        new Claim("ACL", "sanjose_au"),
+                        new Claim("ACL", "private_market"),
+                        new Claim("ACL", "auth_demo_user")                    
+                    }
+                },
+                new TestUser
+                {
+                    SubjectId = "mx004",
+                    Username = "amos",
+                    Password = "amos",
+                    Claims =
+                    {
+                        new Claim(JwtClaimTypes.Name, "Amos Yung"),
+                        new Claim(JwtClaimTypes.GivenName, "Amos"),
+                        new Claim(JwtClaimTypes.FamilyName, "Yung"),
+                        new Claim(JwtClaimTypes.Email, "Amos@email.com"),
+                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                        new Claim(JwtClaimTypes.WebSite, "http://dave.com"),
+                        new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
+                        new Claim("employee_classification", "B10"), //this claim will be mapped to role on the client side
+                        new Claim(JwtClaimTypes.BirthDate, "1976-12-01"),
+                        new Claim("nationality", "Canadian"),
+                        new Claim("ACL", "toronto_au"),
+                        new Claim("ACL", "public_market"),
+                        new Claim("ACL", "auth_demo_dev"),
+                        new Claim("ACL", "auth_demo_admin")
                     }
                 }
             };

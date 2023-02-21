@@ -1,3 +1,4 @@
+using AuthorizationLibrary;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -52,14 +53,20 @@ builder.Services.AddAuthentication(options =>
     o.ClaimActions.DeleteClaim("sid");
     o.Scope.Add("user_group"); //add the custom scope that the IDP allowed
     o.Scope.Add("accountapi.info"); //request the scope to be included in the access token
-    
+
+    //The Name claim and the Role claim are mapped to default properties in the ASP.NET Core HTTP context
     o.ClaimActions.MapJsonKey("role", "employee_classification"); //map the custom claim from the IDP to the role claim
+    o.ClaimActions.MapUniqueJsonKey("birthdate", "birthdate");
+    o.ClaimActions.MapUniqueJsonKey("nationality", "nationality");
+    o.ClaimActions.MapUniqueJsonKey("acl", "ACL");
     o.TokenValidationParameters = new() //map the claim type to ASP.NET Core's RoleClaim
     {
         NameClaimType = "name",
         RoleClaimType = "role"
     };
 });
+
+builder.Services.AddAuthorization(o => o.AddCanSubmitTransaction());
 
 
 var app = builder.Build();

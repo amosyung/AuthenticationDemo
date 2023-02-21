@@ -35,6 +35,7 @@ namespace AuthDemo.ClientWeb.Pages
         }
         public async Task OnGetAsync()
         {
+            string x = User.Identity.Name;
             HttpClient client = _clientFactory.CreateClient("ApiClient");
             var request = new HttpRequestMessage(HttpMethod.Get, "/weatherforecast");
             var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
