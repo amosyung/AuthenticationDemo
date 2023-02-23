@@ -9,7 +9,8 @@
 
         public AccountDetail(double openingBalance, IEnumerable<AccountTransaction> trans):this( openingBalance)
         {
-            foreach(var transaction in trans) { DoTransaction(transaction); }
+            CurrentBalance = openingBalance;
+            foreach (var transaction in trans) { DoTransaction(transaction); }
         }
         public double OpeningBalance { get; private set; }
         public double CurrentBalance { get; private set; }

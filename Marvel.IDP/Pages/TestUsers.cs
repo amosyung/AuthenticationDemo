@@ -43,10 +43,10 @@ public class TestUsers
                         new Claim("employee_classification", "B10"), //this claim will be mapped to role on the client side
                         new Claim(JwtClaimTypes.BirthDate, "1988-10-14"),
                         new Claim("nationality", "British"),                        
-                        new Claim("ACL", "toronto_au"),
-                        new Claim("ACL", "public_market"),
-                        new Claim("ACL", "auth_demo_dev"),
-                        new Claim("ACL", "auth_demo_tester")
+                        new Claim("acl", "toronto_au"),
+                        new Claim("acl", "public_market"),
+                        new Claim("acl", "auth_demo_dev"),
+                        new Claim("acl", "auth_demo_tester")
                     }
                 },
                 new TestUser
@@ -66,9 +66,9 @@ public class TestUsers
                         new Claim("employee_classification", "B11"), //this claim will be mapped to role on the client side
                         new Claim(JwtClaimTypes.BirthDate, "2001-09-02"),
                         new Claim("nationality", "American"),
-                        new Claim("ACL", "boston_au"),
-                        new Claim("ACL", "private_market"),
-                        new Claim("ACL", "auth_demo_user")
+                        new Claim("acl", "boston_au"),
+                        new Claim("acl", "private_market"),
+                        new Claim("acl", "auth_demo_user")
                     }
                 },
                 new TestUser
@@ -88,9 +88,9 @@ public class TestUsers
                         new Claim("employee_classification", "test subject"), //this claim will be mapped to role on the client side
                         new Claim(JwtClaimTypes.BirthDate, "1987-05-13"),
                         new Claim("nationality", "Jamaican"),
-                        new Claim("ACL", "sanjose_au"),
-                        new Claim("ACL", "private_market"),
-                        new Claim("ACL", "auth_demo_user")                    
+                        new Claim("acl", "sanjose_au"),
+                        new Claim("acl", "private_market"),
+                        new Claim("acl", "auth_demo_user")                    
                     }
                 },
                 new TestUser
@@ -110,10 +110,10 @@ public class TestUsers
                         new Claim("employee_classification", "B10"), //this claim will be mapped to role on the client side
                         new Claim(JwtClaimTypes.BirthDate, "1976-12-01"),
                         new Claim("nationality", "Canadian"),
-                        new Claim("ACL", "toronto_au"),
-                        new Claim("ACL", "public_market"),
-                        new Claim("ACL", "auth_demo_dev"),
-                        new Claim("ACL", "auth_demo_admin")
+                        new Claim("acl", "toronto_au"),
+                        new Claim("acl", "public_market"),
+                        new Claim("acl", "auth_demo_dev"),
+                        new Claim("acl", "auth_demo_admin")
                     }
                 }
             };

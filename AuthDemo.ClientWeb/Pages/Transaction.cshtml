@@ -1,5 +1,16 @@
 ﻿@page
+@using static AuthDemo.ClientWeb.Pages.TransactionModel;
 @model AuthDemo.ClientWeb.Pages.TransactionModel
 @{
 }
 <h1>Transaction happens here</h1>
+
+<form method="post" >
+<p>
+
+        <select asp-for="@Model.TransactionType" asp-items="@Html.GetEnumSelectList<TransactionTypeEnum>()"></select>
+        <input asp-for="@Model.TransactionAmount" />
+        <button type="submit">Submit</button>
+
+</p>
+</form>

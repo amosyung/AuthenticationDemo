@@ -32,6 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //add
             ValidTypes = new[] { "at+jwt" } //counter the token confusion attack.
         };
         
+        
     });
 builder.Services.AddAuthorization(options =>
 {
@@ -39,10 +40,10 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("approved_client", policy => policy.RequireClaim("client_id", new string[] { "sc1024" })); 
     //A policy to specify specific scopes
     options.AddPolicy("allow_info", policy => policy.RequireClaim("scope", "accountapi.info"));
-    options.AddPolicy("allow_transact", policy => policy.RequireClaim("scope", "accountapi.transact"));
+    //options.AddPolicy("allow_transact", policy => policy.RequireClaim("scope", "accountapi.transact"));
     options.AddPolicy("manager", policy => policy.RequireClaim("employee_classification", "B10", "B11"));
-    //options.AddPolicy("allow_transact", o => AuthorizationLibrary.AccessPolicy.AddCanSubmitTransaction(options));
-    
+    options.AddPolicy("allow_transact", AuthorizationLibrary.AccessPolicy.CanSubmitTransactionPolicy2());
+    options.AddPolicy("client_allow_transact", policy => policy.RequireClaim("scope", "accountapi.transact"));
 });
 
 var app = builder.Build();
@@ -66,7 +67,8 @@ var summaries = new[]
 app.MapGet("/weatherforecast", (HttpContext context) =>
 {
     var s = context.User;
-    var g = context.GetTokenAsync(OpenIdConnectParameterNames.IdToken).Result;
+    var idToken = context.GetTokenAsync(OpenIdConnectParameterNames.IdToken).Result;
+    var accessToken = context.GetTokenAsync(OpenIdConnectParameterNames.AccessToken).Result;
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
@@ -87,12 +89,14 @@ app.MapGet("/account", (IAccountRepository repo, HttpContext context) =>
     return repo.GetAccount(idpUserId);
 }).RequireAuthorization("allow_info")
 .RequireAuthorization("manager");
-    
 
-app.MapPost("/transaction", (string id, AccountTransaction tran, IAccountRepository repo) =>
+
+app.MapPost("/transaction", (AccountTransaction tran, IAccountRepository repo, HttpContext context) =>
 {
+    string id = context.User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
     return repo.ProcessTransaction(id, tran);
-}).RequireAuthorization("allow_transact");
+}).RequireAuthorization("allow_transact")
+.RequireAuthorization("client_allow_transact");
 
 app.Run();
 
