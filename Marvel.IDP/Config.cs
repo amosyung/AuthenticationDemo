@@ -42,6 +42,17 @@ public static class Config
                     ClientName = "small_client",
                     ClientId= "sc1024",
                     AllowedGrantTypes = GrantTypes.Code,
+                    AllowOfflineAccess= true,   //by allowing offline access, the "offline_access" scope is added for request 
+                                                //which is required for refresh token.
+                    //AbsoluteRefreshTokenLifetime - these two values allow us to control the life time of the refresh token
+                    //SlidingRefreshTokenLifetime
+                    UpdateAccessTokenClaimsOnRefresh=true,  //this option allows a new access token will be created with updated information 
+                                                            //any time it is refreshed.
+
+
+                    //AuthorizationCodeLifetime = ... option to control the expiration of the authorization code
+                    // IdentityTokenLifetime = ... option to control the expiration of the identity token
+                    AccessTokenLifetime = 60, //default is 1 hour
                     RedirectUris =
                     {
                         "https://localhost:7106/signin-oidc"
@@ -59,7 +70,7 @@ public static class Config
                         "accountapi.transact"
                     },
                     ClientSecrets = {new Secret("perfect_harmony_18".Sha512()) },
-                    RequireConsent = true
+                    //RequireConsent = true // take it out so that we bother with it anymore
                 }
             };
 }

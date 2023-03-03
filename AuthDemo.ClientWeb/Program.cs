@@ -54,6 +54,7 @@ builder.Services.AddAuthentication(options =>
     o.Scope.Add("user_group"); //add the custom scope that the IDP allowed
     o.Scope.Add("accountapi.info"); //request the scope to be included in the access token
     o.Scope.Add("accountapi.transact"); //request the scope to be included in the access token
+    o.Scope.Add("offline_access"); //adding this scope we will get the refresh_token from the IDP
 
     //The Name claim and the Role claim are mapped to default properties in the ASP.NET Core HTTP context
     o.ClaimActions.MapJsonKey("role", "employee_classification"); //map the custom claim from the IDP to the role claim

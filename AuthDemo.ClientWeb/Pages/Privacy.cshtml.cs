@@ -20,7 +20,9 @@ namespace AuthDemo.ClientWeb.Pages
         public async Task OnGetAsync()
         {
             await LogIdentityInfoAsync();
-            await LogAccessTokenAsync();
+            //await LogAccessTokenAsync();
+            await LogTokenAsync(OpenIdConnectParameterNames.AccessToken, "Access token");
+            await LogTokenAsync(OpenIdConnectParameterNames.RefreshToken, "Refresh token");
         }
 
         public async Task LogIdentityInfoAsync()
@@ -35,11 +37,23 @@ namespace AuthDemo.ClientWeb.Pages
 
             _logger.LogInformation($"Identity Token & user claims: \n{identityToken}\n{userClaimStringBuilder}");
         }
-
+        /*
         public async Task LogAccessTokenAsync()
         {
-            var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
-            _logger.LogInformation($"Access token: \n{accessToken}");
+            var token = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+            _logger.LogInformation($"Access token: \n{token}");
+        }
+
+        public async Task LogRefreshTokenAsync()
+        {
+            var token = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+            _logger.LogInformation($"Refresh token: \n{token}");
+        }
+        */
+        private async Task LogTokenAsync(string tokenType, string headerText)
+        {
+            var token = await HttpContext.GetTokenAsync(tokenType);
+            _logger.LogInformation($"{headerText}: \n{token}");
         }
     }
 }
