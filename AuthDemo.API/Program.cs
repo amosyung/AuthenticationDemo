@@ -19,7 +19,15 @@ builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //clear the claim type mapping to allow custom mapping in the next line
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //add Jwt bearer token processing middleware
-    .AddJwtBearer(o => //Keep in mind this part is the configuration of the authentication scheme
+    .AddOAuth2Introspection(options =>
+    {
+        options.Authority = "https://localhost:5001";
+        options.ClientId = "accountapi";
+        options.ClientSecret = "Ihavenosecret";
+        options.NameClaimType = "name";
+        options.RoleClaimType = "role";
+    });
+    /*.AddJwtBearer(o => //Keep in mind this part is the configuration of the authentication scheme
     {
         o.Authority = "https://localhost:5001"; //the IDP. When the application is running for the first time it will
                                                 //read the meta data from the IDP including all the endpoints available.                                                 
@@ -33,7 +41,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //add
         };
         
         
-    });
+    });*/
 builder.Services.AddAuthorization(options =>
 {
     //A policy to specify allowed clients

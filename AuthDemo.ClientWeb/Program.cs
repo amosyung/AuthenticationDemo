@@ -25,6 +25,12 @@ builder.Services.AddHttpClient("ApiClient", client =>
     .AddUserAccessTokenHandler(); //add handler so that every request will include
                                   //the access token to the authorization header
 ;
+
+builder.Services.AddHttpClient("IDPClient", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["idpConnection:idpHost"]);
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -38,9 +44,9 @@ builder.Services.AddAuthentication(options =>
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, o =>
 {
     o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    o.Authority = "https://localhost:5001";
-    o.ClientId = "sc1024";
-    o.ClientSecret = "perfect_harmony_18";
+    o.Authority = builder.Configuration["idpConnection:idpHost"]; //"https://localhost:5001";
+    o.ClientId = builder.Configuration["idpConnection:clientId"]; //. "sc1024";
+    o.ClientSecret = builder.Configuration["idpConnection:clientSecret"]; //"perfect_harmony_18";
     o.ResponseType = "code";
     /*o.Scope.Add("openid");
     o.Scope.Add("profile");

@@ -26,7 +26,8 @@ public static class Config
             //Tie the API resources together with the API scopes. When client 
             //request this scope [accountapi.info], the audience will become
             //"accountapi" because of this association. 
-            Scopes = { "accountapi.info", "accountapi.transact" }
+            Scopes = { "accountapi.info", "accountapi.transact" },
+            ApiSecrets = {new Secret("Ihavenosecret".Sha256()) }
         }
     };
 
@@ -42,6 +43,7 @@ public static class Config
                     ClientName = "small_client",
                     ClientId= "sc1024",
                     AllowedGrantTypes = GrantTypes.Code,
+                    AccessTokenType = AccessTokenType.Reference,
                     AllowOfflineAccess= true,   //by allowing offline access, the "offline_access" scope is added for request 
                                                 //which is required for refresh token.
                     //AbsoluteRefreshTokenLifetime - these two values allow us to control the life time of the refresh token
