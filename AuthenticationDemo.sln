@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternalAuth.UI", "Internal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationLibrary", "AuthorizationLibrary\AuthorizationLibrary.csproj", "{31ECEE47-D265-4F58-9E2C-7061435CFB94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptDemo", "EncryptDemo\EncryptDemo.csproj", "{4F27B356-B4D5-4BE9-8269-77BDC7F4128E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31ECEE47-D265-4F58-9E2C-7061435CFB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F27B356-B4D5-4BE9-8269-77BDC7F4128E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F27B356-B4D5-4BE9-8269-77BDC7F4128E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F27B356-B4D5-4BE9-8269-77BDC7F4128E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F27B356-B4D5-4BE9-8269-77BDC7F4128E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
