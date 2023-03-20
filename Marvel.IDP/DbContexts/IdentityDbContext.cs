@@ -1,7 +1,7 @@
-﻿using Marvin.IDP.Entities;
+﻿using Marvel.IDP.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Marvin.IDP.DbContexts
+namespace Marvel.IDP.DbContexts
 {
     public class IdentityDbContext : DbContext
     {

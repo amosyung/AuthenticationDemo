@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Marvin.IDP.Entities
+namespace Marvel.IDP.Entities
 {
     public class UserClaim : IConcurrencyAware
     {

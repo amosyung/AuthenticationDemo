@@ -1,3 +1,6 @@
+using Marvel.IDP.DbContexts;
+using Marvel.IDP.Services;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Marvel.IDP;
@@ -8,19 +11,22 @@ internal static class HostingExtensions
     {
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
+        builder.Services.AddDbContext<IdentityDbContext>(o =>
+        {
+            o.UseSqlServer(builder.Configuration.GetConnectionString("identityStore"));
+        });
+        builder.Services.AddScoped<ILocalUserService, LocalUserService>();
 
         builder.Services.AddIdentityServer(options =>
             {
                 // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
                 options.EmitStaticAudienceClaim = true;
             })
+            .AddProfileService<LocalUserProfileService>()
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources) //add the ApiResources
-            .AddInMemoryClients(Config.Clients)
-            
-            .AddTestUsers(TestUsers.Users);
-
+            .AddInMemoryClients(Config.Clients);
 
         return builder.Build();
     }

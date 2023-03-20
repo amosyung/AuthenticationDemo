@@ -1,6 +1,6 @@
-﻿using Marvin.IDP.Entities;
+﻿using Marvel.IDP.Entities;
 
-namespace Marvin.IDP.Services
+namespace Marvel.IDP.Services
 {
     public interface ILocalUserService
     {
