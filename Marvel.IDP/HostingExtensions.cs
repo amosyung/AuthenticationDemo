@@ -1,3 +1,4 @@
+using Duende.IdentityServer;
 using Marvel.IDP.DbContexts;
 using Marvel.IDP.Services;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,24 @@ internal static class HostingExtensions
             .AddInMemoryApiResources(Config.ApiResources) //add the ApiResources
             .AddInMemoryClients(Config.Clients);
 
+        builder.Services.AddAuthentication()
+            .AddOpenIdConnect("AAD", "Azure Active Directory", options =>
+            {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                options.Authority = builder.Configuration["azure.active.directory:authority"]; //issuer from the meta data document
+                options.ClientId = builder.Configuration["azure.active.directory:client_id"];
+                options.ClientSecret = builder.Configuration["azure.active.directory:client_sceret"];
+                options.ResponseType = "code";
+                options.CallbackPath = new PathString("/signin-aad");
+                options.SignedOutCallbackPath = new PathString("/signout-aad");
+                options.Scope.Add("email");
+                options.Scope.Add("offline_access");
+                options.SaveTokens = true;
+            });
+
         return builder.Build();
     }
+
     
     public static WebApplication ConfigurePipeline(this WebApplication app)
     { 

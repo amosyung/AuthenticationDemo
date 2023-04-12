@@ -1,4 +1,5 @@
-﻿using Marvel.IDP;
+﻿using Duende.IdentityServer.Test;
+using Marvel.IDP;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -15,7 +16,7 @@ try
         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
-
+    builder.Services.AddSingleton<TestUserStore>(TestUsers.CreateTestUserStore());
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();

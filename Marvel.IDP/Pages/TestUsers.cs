@@ -31,6 +31,8 @@ public class TestUsers
                     SubjectId = "mx001",
                     Username = "alice",
                     Password = "alice",
+                    ProviderName = "AAD",
+                    ProviderSubjectId = "3QpPcpy8e6AgExZkiSembDW5U_ITlo8raKLLLZzbsVE",
                     Claims =
                     {
                         new Claim(JwtClaimTypes.Name, "Alice Smith"),
@@ -118,5 +120,12 @@ public class TestUsers
                 }
             };
         }
+    }
+
+    public static TestUserStore CreateTestUserStore()
+    {
+        TestUserStore store = new TestUserStore(TestUsers.Users);
+
+        return store;
     }
 }
