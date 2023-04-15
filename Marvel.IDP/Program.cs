@@ -16,7 +16,6 @@ try
         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
-    builder.Services.AddSingleton<TestUserStore>(TestUsers.CreateTestUserStore());
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
@@ -26,6 +25,10 @@ try
 catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException")
 {
     Log.Fatal(ex, "Unhandled exception");
+}
+catch
+{
+
 }
 finally
 {

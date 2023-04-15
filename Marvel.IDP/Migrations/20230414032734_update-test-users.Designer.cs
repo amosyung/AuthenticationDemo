@@ -4,6 +4,7 @@ using Marvel.IDP.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Marvel.IDP.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    partial class IdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230414032734_update-test-users")]
+    partial class updatetestusers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,16 +53,6 @@ namespace Marvel.IDP.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ExternalLogins");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("22190394-366c-498d-adc3-968c45a49514"),
-                            ConcurrencyStamp = "c8209abb-dfe4-42d0-9f59-ed17c138c8bd",
-                            ProviderName = "AAD",
-                            ProviderSubjectId = "3QpPcpy8e6AgExZkiSembDW5U_ITlo8raKLLLZzbsVE",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972")
-                        });
                 });
 
             modelBuilder.Entity("Marvel.IDP.Entities.User", b =>
@@ -104,7 +97,7 @@ namespace Marvel.IDP.Migrations
                         {
                             Id = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Active = true,
-                            ConcurrencyStamp = "0ec4f208-96c7-464c-9980-bccdc1b114f6",
+                            ConcurrencyStamp = "04351399-1b19-4933-a260-82c187a14d92",
                             Password = "password",
                             Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
                             UserName = "David"
@@ -113,7 +106,7 @@ namespace Marvel.IDP.Migrations
                         {
                             Id = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                             Active = true,
-                            ConcurrencyStamp = "f31afc85-193b-4020-bcbb-901df93cd733",
+                            ConcurrencyStamp = "5600f81c-f6cc-4ca2-bdd3-985217667452",
                             Password = "password",
                             Subject = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
                             UserName = "Emma"
@@ -122,7 +115,7 @@ namespace Marvel.IDP.Migrations
                         {
                             Id = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
                             Active = true,
-                            ConcurrencyStamp = "d5652652-0c72-4cf8-bbf7-c75be9f1b684",
+                            ConcurrencyStamp = "86b33926-72a8-41fa-978f-0b0a1368aac1",
                             Password = "",
                             Subject = "mx001",
                             UserName = "alice"
@@ -131,7 +124,7 @@ namespace Marvel.IDP.Migrations
                         {
                             Id = new Guid("33229d33-99e0-41b3-b18d-4f72127e3973"),
                             Active = true,
-                            ConcurrencyStamp = "8d5f4e6c-1220-45da-8285-bad259a2f357",
+                            ConcurrencyStamp = "852367e5-34a5-423b-92d5-adc915322410",
                             Password = "",
                             Subject = "mx002",
                             UserName = "bob"
@@ -140,7 +133,7 @@ namespace Marvel.IDP.Migrations
                         {
                             Id = new Guid("43229d33-99e0-41b3-b18d-4f72127e3974"),
                             Active = true,
-                            ConcurrencyStamp = "b974de26-8a9f-4d28-a213-a8e304d32cb2",
+                            ConcurrencyStamp = "186b0d81-ce36-44bf-bf6d-a7b3a63efee3",
                             Password = "",
                             Subject = "mx003",
                             UserName = "dave"
@@ -149,7 +142,7 @@ namespace Marvel.IDP.Migrations
                         {
                             Id = new Guid("53229d33-99e0-41b3-b18d-4f72127e3975"),
                             Active = true,
-                            ConcurrencyStamp = "684a0b66-2b91-4bd5-9d71-2ae969ee2f4f",
+                            ConcurrencyStamp = "8df05d1b-72f2-4eec-a39f-b1a513781152",
                             Password = "",
                             Subject = "mx004",
                             UserName = "amos"
@@ -188,186 +181,74 @@ namespace Marvel.IDP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("398d7691-d1a3-4790-b45b-a1736ab5bf3f"),
-                            ConcurrencyStamp = "a6d41d80-2004-44d6-88af-9fc3e96bdb42",
+                            Id = new Guid("53b01c7d-d1b1-47a2-b58d-8fe9b77c5bd6"),
+                            ConcurrencyStamp = "99110d24-b57f-4e2a-bec0-c7dd54a76963",
                             Type = "given_name",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "David"
                         },
                         new
                         {
-                            Id = new Guid("520a3f12-21f4-41b9-a406-b4e4e379360b"),
-                            ConcurrencyStamp = "a0e87dbb-6dd5-4437-8eb1-76d14941fc50",
+                            Id = new Guid("89792456-0488-4ac8-9750-4e6ff4a5ccda"),
+                            ConcurrencyStamp = "cfabb397-97e6-42d8-8124-c886eb2c2022",
                             Type = "family_name",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "Flagg"
                         },
                         new
                         {
-                            Id = new Guid("171330a1-1a7c-4686-8a7b-3a4ee76aa876"),
-                            ConcurrencyStamp = "b50d7bb4-3135-48e5-b260-6d66fadc5c89",
+                            Id = new Guid("4bc93cda-0e28-4ed1-8aa5-414d470100aa"),
+                            ConcurrencyStamp = "39708d4d-d1de-44f2-9353-0889268e9366",
                             Type = "country",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "nl"
                         },
                         new
                         {
-                            Id = new Guid("a03ddc4e-75ed-42a9-b44d-1e7d6623e13a"),
-                            ConcurrencyStamp = "8350f1cf-7994-4a46-b207-e11007f903c9",
+                            Id = new Guid("e12d32b7-1aa2-4cc5-8b62-54dac819e688"),
+                            ConcurrencyStamp = "21518834-290f-4efc-80bf-d9121fecec76",
                             Type = "role",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "FreeUser"
                         },
                         new
                         {
-                            Id = new Guid("fe231468-c846-473a-abfa-138826fa7937"),
-                            ConcurrencyStamp = "95a645a1-2de7-4bd1-8c80-62d6986258d8",
+                            Id = new Guid("0b28af70-aa59-4fa1-9e7c-eef38f60712f"),
+                            ConcurrencyStamp = "1eeb33d0-e50e-4bae-9eaf-8f2cd101cc26",
                             Type = "given_name",
                             UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                             Value = "Emma"
                         },
                         new
                         {
-                            Id = new Guid("7d2823fa-9020-4e5c-8186-c756f156f094"),
-                            ConcurrencyStamp = "3bcf3646-bcae-461d-abb1-a55b10714650",
+                            Id = new Guid("14178f66-75b1-4a79-89a8-ac2e3f227d91"),
+                            ConcurrencyStamp = "eaea0d4a-39ab-4648-9709-4a08abc54280",
                             Type = "family_name",
                             UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                             Value = "Flagg"
                         },
                         new
                         {
-                            Id = new Guid("7268e08c-a854-46b1-82ed-58c63f70ef60"),
-                            ConcurrencyStamp = "0b373025-fa17-4e91-ad5a-7078daba35b9",
+                            Id = new Guid("fbcc0e6d-0fad-4bfd-9ca4-6a21f0b64331"),
+                            ConcurrencyStamp = "75afcc20-ecb4-497f-9e35-a48ab5eb2f1b",
                             Type = "country",
                             UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                             Value = "be"
                         },
                         new
                         {
-                            Id = new Guid("e8b51ef0-d063-4df2-9eee-246bf18c4907"),
-                            ConcurrencyStamp = "945491c2-8204-4480-a935-2d94318eb308",
+                            Id = new Guid("4e929b49-2134-4ed3-bd04-46305f0646e2"),
+                            ConcurrencyStamp = "b061662c-dab6-4987-b333-a861092b8f3a",
                             Type = "role",
                             UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                             Value = "PayingUser"
-                        },
-                        new
-                        {
-                            Id = new Guid("5d3b0137-8029-43cb-b10a-e7323f3096f7"),
-                            ConcurrencyStamp = "7f37a200-88ae-4805-9201-eff742b31453",
-                            Type = "name",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "Alice Smith"
-                        },
-                        new
-                        {
-                            Id = new Guid("6a0b074f-7250-4264-bfa1-5d46ad1c7281"),
-                            ConcurrencyStamp = "7d53be55-2aa8-4e48-b00b-90fc98d3deaa",
-                            Type = "given_name",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "Alice"
-                        },
-                        new
-                        {
-                            Id = new Guid("8237c50e-e05e-45af-9ea2-4320437c35ba"),
-                            ConcurrencyStamp = "004d0260-9593-45e1-8a9d-88b0d29c4cf5",
-                            Type = "family_name",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "Smith"
-                        },
-                        new
-                        {
-                            Id = new Guid("564d7f9c-4e2f-4be3-8eb6-c6de6be3b649"),
-                            ConcurrencyStamp = "7b50129e-e8ba-4461-a72c-4b20c0256f75",
-                            Type = "email",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "AliceSmith@email.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("1d3e6a78-0219-4b74-aca1-cf09d1e37ab1"),
-                            ConcurrencyStamp = "0ffee977-d5b8-4cf6-9f0a-b47c819347a1",
-                            Type = "email_verified",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "true"
-                        },
-                        new
-                        {
-                            Id = new Guid("dbfadbbf-315c-453e-9e1d-80dda4ec1b90"),
-                            ConcurrencyStamp = "c9786bfe-86c4-433e-ae82-575e3ce7ee07",
-                            Type = "website",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "http://alice.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("348f9038-ddad-4242-aad6-4668e273fe45"),
-                            ConcurrencyStamp = "f0665579-80d0-4894-a58e-ceb6457789ff",
-                            Type = "address",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("c0fd2dd8-dcfd-4064-abb9-0cc659a201cc"),
-                            ConcurrencyStamp = "23026ecb-ea3d-48a0-bd68-166c6f2760ac",
-                            Type = "employee_classification",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "B10"
-                        },
-                        new
-                        {
-                            Id = new Guid("e2d82940-9ebd-41cb-abe2-fe34c4d9c182"),
-                            ConcurrencyStamp = "1e484bcd-1bdd-440f-8c6d-243d8cb92103",
-                            Type = "birthdate",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "1988-10-14"
-                        },
-                        new
-                        {
-                            Id = new Guid("f8f23e92-51a0-42a6-a194-bbf70ed59123"),
-                            ConcurrencyStamp = "822f3b78-02f7-42d4-a8ea-ec287bbcc075",
-                            Type = "nationality",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "British"
-                        },
-                        new
-                        {
-                            Id = new Guid("a0bf57d8-3d4a-4b0b-8548-0dccd143afaf"),
-                            ConcurrencyStamp = "ce12e99f-d788-4671-932c-88beae9d6ddb",
-                            Type = "acl",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "toronto_au"
-                        },
-                        new
-                        {
-                            Id = new Guid("d4c2a104-74a5-4bf5-ad7b-1b7bf7e59622"),
-                            ConcurrencyStamp = "6863a322-938e-499a-9c9d-93291e04fef2",
-                            Type = "acl",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "public_market"
-                        },
-                        new
-                        {
-                            Id = new Guid("a52918ed-7d6c-4439-8640-dbd4c9732638"),
-                            ConcurrencyStamp = "56050713-f2b4-49f1-83a7-076c3c1a19a2",
-                            Type = "acl",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "auth_demo_dev"
-                        },
-                        new
-                        {
-                            Id = new Guid("5c3ef3ad-4312-42af-8c70-ab362c56ec1d"),
-                            ConcurrencyStamp = "060c4ee3-0a60-477d-be79-8bcb7ea8026b",
-                            Type = "acl",
-                            UserId = new Guid("23229d33-99e0-41b3-b18d-4f72127e3972"),
-                            Value = "auth_demo_tester"
                         });
                 });
 
             modelBuilder.Entity("Marvel.IDP.Entities.ExternalLogin", b =>
                 {
                     b.HasOne("Marvel.IDP.Entities.User", "User")
-                        .WithMany("ExternalLogin")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -389,8 +270,6 @@ namespace Marvel.IDP.Migrations
             modelBuilder.Entity("Marvel.IDP.Entities.User", b =>
                 {
                     b.Navigation("Claims");
-
-                    b.Navigation("ExternalLogin");
                 });
 #pragma warning restore 612, 618
         }

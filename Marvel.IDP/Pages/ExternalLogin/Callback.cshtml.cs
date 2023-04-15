@@ -4,10 +4,13 @@ using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Test;
 using IdentityModel;
+using Marvel.IDP.DbContexts;
+using Marvel.IDP.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Marvel.IDP.Pages.ExternalLogin;
 
@@ -19,19 +22,25 @@ public class Callback : PageModel
     private readonly IIdentityServerInteractionService _interaction;
     private readonly ILogger<Callback> _logger;
     private readonly IEventService _events;
+    private readonly IdentityDbContext _userDb;
 
     public Callback(
         IIdentityServerInteractionService interaction,
         IEventService events,
         ILogger<Callback> logger,
+        IdentityDbContext userDb,
         TestUserStore users = null)
     {
+        if (users == null)
+            users = CreateTestUserStore(userDb);
         // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
+
         _users = users ?? throw new Exception("Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
 
         _interaction = interaction;
         _logger = logger;
         _events = events;
+        _userDb = userDb;
     }
         
     public async Task<IActionResult> OnGet()
@@ -64,6 +73,7 @@ public class Callback : PageModel
 
         // find external user
         var user = _users.FindByExternalProvider(provider, providerUserId);
+        //var user = 
         if (user == null)
         {
             // this might be where you might initiate a custom workflow for user registration
@@ -134,5 +144,47 @@ public class Callback : PageModel
         {
             localSignInProps.StoreTokens(new[] { new AuthenticationToken { Name = "id_token", Value = idToken } });
         }
+    }
+
+    private List<TestUser> CreateTestUserInstance(User user )
+    {
+        Func<User, string, string, TestUser> createTestUser = (user, providerName, providerSubjectId) =>
+        {
+            TestUser testUser = new TestUser()
+            {
+                SubjectId = user.Subject,
+                Username = user.UserName,
+                Password = user.Password,
+                ProviderName = providerName,
+                ProviderSubjectId = providerSubjectId,
+                Claims = user.Claims.Select(c => new Claim(c.Type, c.Value)).ToList()
+            };
+            return testUser;
+        };
+        List<TestUser> result = new List<TestUser>();
+        if (user.ExternalLogin == null || user.ExternalLogin.Count == 0)
+        {
+            result.Add(createTestUser(user, null, null));
+        }
+        else
+        {
+            foreach(Marvel.IDP.Entities.ExternalLogin item in user.ExternalLogin)
+            {
+                result.Add(createTestUser(user, item.ProviderName, item.ProviderSubjectId));
+            }
+        }
+        return result;
+    }
+
+    private TestUserStore CreateTestUserStore(IdentityDbContext context)
+    {
+        List<User> users = context.Users.Include(u => u.ExternalLogin).ToList();
+        List<TestUser> testUsers = new List<TestUser>();
+        foreach(User user in users)
+        {
+            testUsers.AddRange(CreateTestUserInstance(user));
+        }
+        TestUserStore store = new TestUserStore(testUsers);
+        return store;
     }
 }

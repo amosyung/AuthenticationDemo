@@ -7,7 +7,9 @@ namespace Marvel.IDP.DbContexts
     {
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserClaim> UserClaims { get; set; }         
+        public DbSet<UserClaim> UserClaims { get; set; }     
+        
+        public DbSet<ExternalLogin> ExternalLogins { get; set; }
 
         public IdentityDbContext(
           DbContextOptions<IdentityDbContext> options)
@@ -44,6 +46,8 @@ namespace Marvel.IDP.DbContexts
                     UserName = "Emma",
                     Active = true
                 });
+
+            SampleUserHelper.GetSampleUsers().ForEach(u => modelBuilder.Entity<User>().HasData(u));
 
             modelBuilder.Entity<UserClaim>().HasData(
              new UserClaim()
@@ -102,6 +106,8 @@ namespace Marvel.IDP.DbContexts
                  Type = "role",
                  Value = "PayingUser"
              });
+            SampleUserHelper.GetSampleUserClaims().ForEach(c => modelBuilder.Entity<UserClaim>().HasData(c));
+            SampleUserHelper.GetSampleExternalLogins().ForEach(c => modelBuilder.Entity<ExternalLogin>().HasData(c));
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

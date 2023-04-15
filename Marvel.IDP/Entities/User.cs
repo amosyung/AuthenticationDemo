@@ -25,6 +25,8 @@ namespace Marvel.IDP.Entities
 
         public ICollection<UserClaim> Claims { get; set; } = new List<UserClaim>();
 
+        public ICollection<ExternalLogin> ExternalLogin { get; set; } = new List<ExternalLogin>();  
+
     }
 
 }

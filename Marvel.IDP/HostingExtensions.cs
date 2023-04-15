@@ -1,7 +1,9 @@
 using Duende.IdentityServer;
+using Duende.IdentityServer.Test;
 using Marvel.IDP.DbContexts;
 using Marvel.IDP.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace Marvel.IDP;
@@ -17,6 +19,7 @@ internal static class HostingExtensions
             o.UseSqlServer(builder.Configuration.GetConnectionString("identityStore"));
         });
         builder.Services.AddScoped<ILocalUserService, LocalUserService>();
+        //builder.Services.AddSingleton<TestUserStore>(TestUsers.CreateTestUserStore());
 
         builder.Services.AddIdentityServer(options =>
             {
@@ -28,7 +31,7 @@ internal static class HostingExtensions
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources) //add the ApiResources
             .AddInMemoryClients(Config.Clients);
-
+        
         builder.Services.AddAuthentication()
             .AddOpenIdConnect("AAD", "Azure Active Directory", options =>
             {
@@ -43,7 +46,7 @@ internal static class HostingExtensions
                 options.Scope.Add("offline_access");
                 options.SaveTokens = true;
             });
-
+        
         return builder.Build();
     }
 
