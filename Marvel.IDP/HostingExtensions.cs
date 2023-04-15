@@ -31,7 +31,13 @@ internal static class HostingExtensions
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources) //add the ApiResources
             .AddInMemoryClients(Config.Clients);
-        
+        builder.Services.AddAuthentication()
+            .AddFacebook("Facebook", options =>
+            {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                options.AppId = builder.Configuration["facebook.authentication:client_id"];
+                options.AppSecret = builder.Configuration["facebook.authentication:client_sceret"];
+            });        
         builder.Services.AddAuthentication()
             .AddOpenIdConnect("AAD", "Azure Active Directory", options =>
             {

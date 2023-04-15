@@ -87,6 +87,13 @@ namespace Marvel.IDP.DbContexts
                     UserId = new Guid( "23229d33-99e0-41b3-b18d-4f72127e3972"),
                     ProviderName = "AAD",
                     ProviderSubjectId = "3QpPcpy8e6AgExZkiSembDW5U_ITlo8raKLLLZzbsVE"
+                },
+                new ExternalLogin()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = new Guid( "23229d33-99e0-41b3-b18d-4f72127e3972"),
+                    ProviderName = "Facebook",
+                    ProviderSubjectId = "4254533717911644"
                 }
             };
         }
