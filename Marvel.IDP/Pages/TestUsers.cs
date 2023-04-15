@@ -12,6 +12,7 @@ namespace Marvel.IDP;
 
 public class TestUsers
 {
+    /*
     public static List<TestUser> Users
     {
         get
@@ -127,5 +128,5 @@ public class TestUsers
         TestUserStore store = new TestUserStore(TestUsers.Users);
 
         return store;
-    }
+    }*/
 }
