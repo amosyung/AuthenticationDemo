@@ -1,0 +1,1579 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>MPCE</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="referrer" content="origin">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.main.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="css/custom.wizard.css">
+	<link rel="stylesheet" type="text/css" href="css/cookieConsent.css">
+	<link rel="stylesheet" media="print" type="text/css" href="css/custom.print.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/fontawesome-woff.min.css" media="print" onload="if(media!=='all')media='all'">
+	<link rel="stylesheet" type="text/css" href="css/ProximaNova-font/ProximaNova-font.css" media="print" onload="if(media!=='all')media='all'">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<!-- Begin Matomo Code --> <script type="text/javascript">
+		// TODO: For client sites and official demos, replace 105 below with corresponding Matomo site id, then remove this reminder.
+		var _paq = window._paq || [], _mm = window.mpceMatomo = { url: "https://matomo.us-east-1.prod.ext.mercer.com/", siteId: 105 };
+		(function () { var l = window.location, h = l.href, n = l.hostname, off = false, debug = false;
+			if (off || /^file:/.test(h) || ((/^localhost\.?/.test(n) || /\.dev$/.test(n)) && !debug)) { _mm.url = null; return; }
+			var d = document, r = d.referrer, e1 = /scenario=[^&]*[&]?/, e2 = /[?&]$/;
+			h = h.replace(e1, "").replace(e2, ""); // Important: exclude "scenario" parameter from analytics.
+			if (r.indexOf(l.protocol + "//" + l.host) === 0) { r = r.replace(e1, "").replace(e2, ""); }
+			_paq.push(['setCustomUrl', h], ['setReferrerUrl', r], ['trackPageView']);
+			_paq.push(['setTrackerUrl', _mm.url + 'p.dyd'], ['setSiteId', _mm.siteId.toString()]);
+			var g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript';
+			g.async = true; g.defer = true; g.src = _mm.url + 'p.js'; s.parentNode.insertBefore(g, s);
+		})();
+	</script> <!-- End Matomo Code -->
+</head>
+<body id="mainToolPage" class="mainToolPage">
+
+<!--===========================================================================================
+	 MAIN VISIBLE UI SECTION.
+	===========================================================================================
+-->
+<div class="topmost container-fluid">
+
+	<!-- #pageHeader -->
+	<header id="pageHeader" class="row hiddenUntilInitialized">
+		<div id="headerBox1" class="headerBox col-auto px-lg-4 py-lg-3 p-md-3 p-2">
+			<img id="logo" src="img/logo.png" alt="Logo">
+		</div>
+		<div id="headerBox2" class="headerBox col px-lg-4 py-lg-3 p-md-3 p-2">
+			<div class="mainTitle toolName">Medical Plan Cost Estimator</div>
+			<div class="subTitle notInUse">[subtitle if needed]</div>
+		</div>
+		<div id="headerBox3" class="headerBox col-auto px-lg-4 py-lg-3 p-md-3 p-2 notInUse">
+			<img id="logo2" src="img/logo.png" alt="Logo"> <!-- Potential extra right side logo -->
+		</div>
+		<!-- To force topMenu onto its own separate row, set below to class="topMenu ownRow hiddenUntilInitialized" -->
+		<nav id="topMenu" class="col-md p-lg-3 p-md-2 p-1 topMenu hiddenUntilInitialized">
+			<a href="home.htm" class="startOverLink"><span>Start over</span> <i class="fa fa-undo"></i></a>
+			<button class="printButton"><span>Print</span> <i class="fa fa-print"></i></button>
+			<button class="saveScenarioButton" title="Save the current scenario"><span>Save</span> <i class="fa fa-bookmark"></i></button>
+			<button class="clearScenarioButton" title="Reset to defaults (clear current scenario)"><span>Reset</span> <i class="fa fa-undo"></i></button>
+			<button class="mainHelpButton" title="Help" data-bs-target="#modal_MainHelp" data-bs-toggle="modal"><span>Help</span> <i class="fa fa-info-circle"></i></button>
+			<button class="videoLibraryButton" title="Videos" data-bs-target="#modal_VideoLibrary" data-bs-toggle="modal"><span>Videos</span> <i class="far fa-play-circle"></i></button>
+			<button class="useFullToolButton clickGoesToFullTool hiddenInTaxView wizardEnabledOnly"
+					title="Switch to the full tool"><span>Full Tool</span> <i class="fas fa-cog"></i></button>
+			<button class="useWizardButton clickGoesToWizard hiddenInTaxView wizardEnabledOnly"
+					title="Switch to the Guide Me Q&A feature"><span>Guide Me</span> <i class="fas fa-lightbulb"></i></button>
+		</nav>
+		<nav id="topMenuPersonas" class="col-md p-lg-3 p-md-2 p-1 topMenu hideInFullTool">
+			<button onclick="location.reload();" class="startOverLink"><span>Start over</span> <i class="fa fa-undo"></i></button>
+			<button class="useFullToolButton clickGoesToFullTool"
+					title="Go to calculator"><span>Go to calculator</span> <i class="fa fa-chevron-double-right"></i></button>
+		</nav>
+	</header>
+
+	<!-- #pageBody -->
+	<main id="pageBody">
+
+		<!-- ============================== loadingToolSection ============================== -->
+		<section id="loadingToolSection" class="hiddenOnceInitialized">
+			<p>
+				Please wait &mdash; loading
+				<span class="scenarioLoadingMessage hiddenNotApplicable"> a saved scenario</span>
+				<span class="presetLoadingMessage hiddenNotApplicable"> a preset scenario</span>
+				<span class="scenarioLoadingErrorMessage hiddenNotApplicable"> &mdash; invalid scenario code ignored</span>
+				<span class="loadWaitIndicator"></span>
+			</p>
+		</section>
+
+		<!-- ============================== error ============================== -->
+		<section id="error" class="hiddenNotApplicable">
+			Sorry &mdash; an error has occurred:
+			<p class="detail"><code id="errorDetail" class="hiddenNotApplicable"></code><code id="additionalErrorDetail" class="hiddenNotApplicable"></code></p>
+		</section>
+
+		<!-- ============================== wizardSection ============================== -->
+		<section id="wizardSection" class="wizard hiddenUntilInitialized wizardEnabledOnly">
+			<!-- This section will contain the wizard feature's user interface. Add class "notInUse" to those above if you wish to disable
+				the wizard. When disabled, the wizard's content and script modules won't be loaded. -->
+		</section>
+
+		<!-- ****************************** nonWizardSections ****************************** -->
+		<section id="nonWizardSections">
+
+			<!-- ===== toolIntroSection ===== -->
+			<section id="toolIntroSection" class="hiddenUntilInitialized notInUse">
+				<div class="sectionBody">
+					<p id="greeting" style="display: none;"></p><!-- Example dynamic text -->
+					<p>Use this tool to estimate your annual costs and make an informed decision about which health plan to choose.</p>
+				</div>
+			</section>
+
+			<!-- ===== personalSection ===== -->
+			<section id="personalSection" class="hiddenUntilInitialized">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fas fa-comment sectionHeaderIcon"></i> <span class="sectionHeaderTitle">Tell us about you</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<!-- Dropdowns -->
+					<div class="row noPrint">
+						<!-- Could re-order/re-position these elements, if desired. -->
+						<div class="col-lg-4 col-md-6 dropdownDiv partnerStatusDropdown"><div data-action="personalFormItems|partnerStatusDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 dropdownDiv numberOfChildrenDropdown"><div data-action="personalFormItems|numberOfChildrenDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 coverageLevelIndicator">
+							<div class="labelForReadOnlyValue">Coverage level selected:</div>
+							<div class="form-control readOnlyValue"><span class="coverageLevel"></span></div>
+						</div>
+						<div class="col-lg-4 col-md-6 dropdownDiv subconfigDropdown"><div data-action="personalFormItems|subconfigDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 dropdownDiv regionDropdown"><div data-action="personalFormItems|regionDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 dropdownDiv statusDropdown"><div data-action="personalFormItems|statusDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 dropdownDiv wellnessDropdown"><div data-action="personalFormItems|wellnessDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 dropdownDiv tobaccoSurchargeDropdown"><div data-action="personalFormItems|tobaccoSurchargeDropdown"></div></div>
+						<div class="col-lg-4 col-md-6 dropdownDiv spouseSurchargeDropdown"><div data-action="personalFormItems|spouseSurchargeDropdown"></div></div>
+						<!-- Could define more dropdowns in mainConfig.personalFormItems and place here, if needed. -->
+					</div>
+					<div class="row printOnly">
+						<table id="personalSectionPrintTable" class="col-md-12">
+							<!-- Using combined class selectors, the print view values, below, get filled automatically. -->
+							<tr class="partnerStatusDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="numberOfChildrenDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="coverageLevelIndicator print"><td class="name">Coverage level selected:</td><td class="value coverageLevel"></td></tr>
+							<tr class="subconfigDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="regionDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="statusDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="wellnessDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="tobaccoSurchargeDropdown print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="spouseSurchargeDropdown print"><td class="name"></td><td class="value"></td></tr>
+						</table>
+					</div>
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="personalSection" -->
+
+			<!-- ===== prioritiesSection ===== -->
+			<section id="prioritiesSection" class="hiddenUntilInitialized">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-check-circle sectionHeaderIcon"></i> <span class="sectionHeaderTitle">Tell us what's most important to you about a health care plan</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<div class="row">
+						<p class="col-md-12 noPrint">
+							Choosing a health care plan can be a balancing act. Some people may prefer plans with lower premiums, while others
+							may prefer plans with lower anticipated total costs. Another factor that might matter is whether a plan offers an
+							associated savings account. What matters most to you?
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-lg-5 mb-1 radioButtonsDiv planPriorityRadioButtonsContainer">
+							<div data-action="personalFormItems|planPriorityRadioButtons"></div>
+						</div>
+						<div class="col-lg-6 mt-1 planPriorityDescriptionContainer">
+							<div class="planPriorityDescription alert alert-secondary">
+								<p class="planPrioritySpecific none">
+									In the results, the tool will not highlight any specific plan.
+								</p>
+								<p class="planPrioritySpecific lowerPremiums">
+									In the results, the tool will highlight the plan with the lowest employee annual premiums.
+								</p>
+								<p class="planPrioritySpecific lowerOutOfPocketCosts">
+									In the results, the tool will highlight the plan with the lowest estimated out-of-pocket costs.
+								</p>
+								<p class="planPrioritySpecific lowerTotalCosts">
+									In the results, the tool will highlight the plan with the lowest estimated employee total costs (i.e.
+									including an estimate for anticipated out-of-pocket costs.)
+								</p>
+								<p class="planPrioritySpecific lowerWorstCaseCosts">
+									In the results, the tool will highlight the plan with the lowest estimated employee worst case total costs
+									(i.e. including an estimate for potential worst case out-of-pocket costs.)
+								</p>
+								<p class="planPrioritySpecific HSA">
+									In the results, the tool will highlight the plan with access to a Health Savings Account (HSA)
+									that has the lowest estimated employee total costs.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="prioritiesSection" -->
+
+			<!-- ===== adjustSection ===== -->
+			<section id="adjustSection" class="hiddenUntilInitialized">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-check-circle sectionHeaderIcon"></i> <span class="sectionHeaderTitle">Enter your expected plan usage</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<div class="row">
+						<p class="col-md-12 noPrint">
+							<span>
+								Think about the amount of health care that you and any covered family members may need
+								in the coming year. Use the menu(s) below to select from a variety of "quick scenarios".
+							</span>
+							<span class="usageCategories medical drugs">
+								For definitions of the different usage levels, please see the
+								<button data-bs-target="#modal_UsageCategoryHelp_Medical" data-bs-toggle="modal">medical usage assumptions</button> and the
+								<button data-bs-target="#modal_UsageCategoryHelp_Drugs" data-bs-toggle="modal">prescription usage assumptions</button>.
+							</span>
+							<span class="detailedModelingEnabledOnly">
+								Or, you can create your own scenario under the "My own scenario" tab by customizing the frequency of
+								each type of service.
+							</span>
+							<span>
+								You can also view the <button data-bs-target="#modal_CostAssumptionsHelp" data-bs-toggle="modal">cost assumptions for each service</button>.
+							</span>
+						</p>
+						<div class="col-md-12 showWhenModelingModeIsDetailed d-lg-none noPrint alert alert-info alert-dismissible" role="alert">
+							<b>Tip:</b> Creating your own scenario works best on wider screens. If you&apos;re on a mobile device,
+							consider rotating your device to landscape mode while using the modeling interface.
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						<div class="modellerPaneTabsWrapper col-md-12 noPrint bothModelingModesEnabledOnly">
+							<ul class="modellerPaneTabs nav nav-tabs">
+								<li class="simplifiedModelingPaneTabLi nav-item">
+									<button class="simplifiedModelingButton nav-link">Quick scenarios</button>
+								</li>
+								<li class="detailedModelingPaneTabLi nav-item">
+									<button class="detailedModelingButton nav-link">My own scenario</button>
+								</li>
+								<li class="chronicConditionModelingPaneTabLi nav-item">
+									<button class="chronicConditionModelingButton nav-link">Chronic conditions scenario</button>
+								</li>
+							</ul>
+							<!-- The hidden select below supports wizard modeling mode button sync. Do not remove it. -->
+							<select class="modelingModeDropdown d-none" title="Modeling mode">
+								<option value="simplified"></option>
+								<option value="detailed"></option>
+								<option value="chronicConditioned"></option>
+							</select>
+						</div>
+						<div class="col-md-12 tab-content">
+							<div class="simplifiedModelingPane tab-pane">
+								<div class="modelingContents simplifiedModelingContents"></div>
+							</div>
+							<div class="detailedModelingPane tab-pane">
+								<div class="modelingContents detailedModelingContents"></div>
+							</div>
+							<div class="chronicConditionModelingPane tab-pane">
+								<div class="modelingContents chronicConditionModelingContents">Hello world!</div>
+							</div>
+						</div>
+						<div class="usageCategoryHelpForPrint showWhenModelingModeIsSimplified printOnly">
+							<!-- Filled at runtime with a copy of the content from the usageCategoryHelpSource help modals -->
+						</div>
+					</div>
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="adjustSection" -->
+
+			<!-- ===== mpceSection ===== -->
+			<section id="mpceSection" class="hiddenUntilInitialized">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-dollar-sign sectionHeaderIcon"></i> <span class="sectionHeaderTitle">Compare how much you'll spend</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<div class="row">
+
+						<div id="mainChartOuter" class="col-xl-6 col-lg-7 chartArea">
+							<div class="chartOptions">
+								<div class="showWorstCaseCostsItem form-check form-check-inline">
+									<input type="checkbox" id="showWorstCaseCosts1" class="showWorstCaseCosts form-check-input" value="showWorstCaseCosts">
+									<label class="form-check-label" for="showWorstCaseCosts1">Show employee worst case costs in the chart</label>
+								</div>
+								<div class="showTotalCostsItem form-check form-check-inline">
+									<input type="checkbox" id="showTotalCosts1" class="showTotalCosts form-check-input" value="showTotalCosts">
+									<label class="form-check-label" for="showTotalCosts1">Include company and plan costs in the chart</label>
+								</div>
+							</div>
+							<div class="mpceChartTitle d-table w-100">
+								<span class="coverageLevelHeading d-table-cell pe-2">Coverage level: <span class="coverageLevel"></span></span>
+								<span class="planProvisionsFeature noPrint d-table-cell text-end align-bottom pe-1">
+									<button class="planProvisionsButton" data-bs-target="#modal_PlanProvisions" data-bs-toggle="modal">
+										<i class="fal fa-table"></i>See plan provisions
+									</button>
+								</span>
+							</div>
+							<div class="mainChartTopNotes">
+								<div class="warningHasFundsThatCouldHaveBeenApplied hiddenNotApplicable finalResultsVersion alert alert-warning mt-2">
+									One or more plans below is excluding funding that would reduce the cost of care.
+								</div>
+							</div>
+							<div id="mainChart" class="hchart mpceChart"></div>
+							<!-- Tip: If making mainChartOuter and thus mainChart wider than the default of col-md-7, e.g. for implementations
+							     not using the savings account area at right, then it is advisable to class mainChart as noPrint and uncomment
+							     the chart below for print purposes, otherwise mainChart may be cut off at right when printing. -->
+							<!-- <div id="mainChartPrint" class="hchart mpceChart printOnly" style="width: 630px; height: 600px;"></div> -->
+							<div class="mainChartFootnotes">
+								<!-- More paragraphs here for chart footnotes, if required -->
+							</div>
+							<h3 class="printOnly" style="page-break-before: always;">Compare how much you'll spend (continued)</h3>
+							<div class="mainChartTableDiv table-responsive printOnly"></div> <!-- Could remove "printOnly" to show on screen if desired. -->
+						</div> <!-- class="col-xl-6 col-lg-7 chartArea" -->
+
+						<div class="anyContributionsFeature col-lg-5 offset-xl-1 savingsArea">
+							<h2>See the impact of using your HSA or FSA</h2>
+							<p>
+								A Health Savings Account (HSA) or Flexible Spending Account (FSA) can help you
+								save on taxes when paying for care and planning ahead for future expenses.
+								<span class="savingsAccountLearnMore noPrint">
+									<button data-bs-target="#modal_SavingsAccountOptions" data-bs-toggle="modal">Learn more about your savings account options</button>.
+								</span>
+							</p>
+							<p class="hsaContributionsFeature over55Row noPrint form-check">
+								<input type="checkbox" id="over55" name="over55" class="over55 form-check-input" value="over55" title="Over age 55">
+								<label class="form-check-label noPrint" for="over55">
+									The maximum you can contribute is limited by the IRS. Check the box if
+									you are 55 or older to allow up to $1,000 more to an HSA.
+								</label>
+							</p>
+							<div class="hsaContributionsFeature over55Row printOnly">
+								<p class="checkedDescription">I am age 55 or older and qualify for the increased HSA contribution limit.</p>
+							</div>
+							<div class="hsaContributionsFeature hsaSliderRow savingsAccountSliderRow">
+								<span class="savingsAccountSliderLabel float-start">HSA:</span>
+								<div class="sliderMinimum hsaSliderMinimum"></div>
+								<div class="slider hsaSlider"></div>
+								<div class="sliderMaximum hsaSliderMaximum"></div>
+								<input type="text" class="sliderTextInput hsaSliderTextInput" title="Desired HSA contribution amount" maxlength="7">
+								<div class="hsaSliderPrint printOnly">My desired HSA contribution: <span class="value"></span>.</div>
+								<div class="sliderChangedTip">
+									HSA contribution changed. Scroll up to see updated chart.
+								</div>
+							</div>
+							<div class="fsaContributionsFeature fsaSliderRow savingsAccountSliderRow">
+								<span class="savingsAccountSliderLabel float-start">FSA:</span>
+								<div class="sliderMinimum fsaSliderMinimum"></div>
+								<div class="slider fsaSlider"></div>
+								<div class="sliderMaximum fsaSliderMaximum"></div>
+								<input type="text" class="sliderTextInput fsaSliderTextInput" title="Desired FSA contribution amount" maxlength="7">
+								<div class="fsaSliderPrint printOnly">My desired FSA contribution: <span class="value"></span>.</div>
+								<div class="sliderChangedTip">
+									FSA contribution changed. Scroll up to see updated chart.
+								</div>
+							</div>
+							<p class="hsaOrFsaContributionsFeature small noPrint pt-2">
+								Slide the bars above to see how savings account contributions can
+								help you cover your out-of-pocket health care costs.
+							</p>
+							<div class="carryoverAmountFeature carryoverSliderRow savingsAccountSliderRow">
+								<div class="noPrint">Unused account funds you could carry over from 2023, if any:</div>
+								<div class="sliderMinimum carryoverSliderMinimum"></div>
+								<div class="slider carryoverSlider"></div>
+								<div class="sliderMaximum carryoverSliderMaximum"></div>
+								<input type="text" class="sliderTextInput carryoverSliderTextInput" title="Funds carried over" maxlength="7">
+								<div class="carryoverSliderPrint printOnly">Unused account funds carried over from 2023: <span class="value"></span>.</div>
+								<div class="sliderChangedTip">
+									Carryover amount changed. Scroll up to see updated chart.
+								</div>
+							</div>
+							<div class="anyContributionsFeature applyFundsToCostOfCareDropdown">
+								<p class="noPrint"><span data-action="personalFormItems|applyFundsToCostOfCareDropdown"></span></p>
+								<p class="printOnly">
+									<span class="applyFundsToCostOfCareDropdown print"><span class="name"></span>&nbsp;<span class="value"></span>.</span>
+								</p>
+							</div>
+							<div>
+								<!-- Table cells for each plan to be included in the results table are dynamically generated except where a
+								     row is classed "noDynamicCells". Additionally, the contents of mainResultsTableDiv are copied to any divs
+								     in the wizard classed "mainResultsTableDivCopy", if the wizard is enabled and contains any such divs. -->
+								<div class="table-responsive mainResultsTableDiv">
+									<table class="resultsTable printTableFormat">
+										<caption class="notInUse">Savings account funding</caption>
+										<tr class="descriptionTable notInUse">
+											<th>Cost of care</th>
+										</tr>
+										<tr class="totalMedicalAndDrugCosts negated notInUse">
+											<td class="resultName">Before claims</td>
+										</tr>
+										<tr class="totalFundAmountOffset notInUse">
+											<td class="resultName">Claim reimbursements</td>
+										</tr>
+										<tr class="totalMedicalAndDrugCostsLessFundOffset negated summaryRow notInUse">
+											<td class="resultName">After claims</td>
+										</tr>
+										<tr class="descriptionTable">
+											<th class="resultName">&nbsp;</th>
+										</tr>
+										<tr class="planFundAmount">
+											<td class="resultName">Company funding</td>
+										</tr>
+										<tr class="voluntaryFundContributionAmount finalResultsVersion">
+											<td class="resultName">Employee funding*</td>
+										</tr>
+										<tr class="voluntaryFundContributionAmount intermediateResultsVersion noDynamicCells">
+											<!-- Version only for use in wizard's intermediate results slide copy of the results table -->
+											<td class="resultName">Employee funding*</td>
+											<td class="spansAllPlans tbd">(to be determined next)</td>
+										</tr>
+										<tr class="voluntaryFundContributionLimit notInUse">
+											<td class="resultName">Contribution limit</td>
+										</tr>
+										<tr class="planFundAdditionalMatchAmount">
+											<td class="resultName">Company match</td>
+										</tr>
+										<tr class="planFundAndMatchTotal notInUse">
+											<!-- Could use instead of separate planFundAmount and planFundAdditionalMatchAmount -->
+											<td class="resultName">Company funding</td>
+										</tr>
+										<tr class="incomingFundRolloverAmount finalResultsVersion">
+											<td class="resultName">Carried over from 2023</td>
+										</tr>
+										<tr class="incomingFundRolloverAmount intermediateResultsVersion noDynamicCells">
+											<!-- Version only for use in wizard's intermediate results slide copy of the results table -->
+											<td class="resultName">Carried over from 2023</td>
+											<td class="spansAllPlans tbd">(to be determined next)</td>
+										</tr>
+										<tr class="totalFundAmount notInUse">
+											<td class="resultName">Total funding</td>
+										</tr>
+										<tr class="totalFundAmountOffset negated">
+											<td class="resultName">
+												Applied to cost of care<span class="finalResultsVersion applyFundsDetail" data-option="default">
+													:
+													<br><span class="applyFundsDescription"></span>
+												</span>
+											</td>
+										</tr>
+										<tr class="forfeitedPotentialRollover negated">
+											<td class="resultName">Forfeited excess rollover</td>
+										</tr>
+										<tr class="limitedPotentialRollover summaryRow">
+											<td class="resultName">
+												<span data-bs-toggle="tooltip" data-placement="top" class="textWithTooltip" tabindex="0"
+													  title="This is the amount that could roll over in the account if your expected health care usage does not exceed total funding.">
+													<i class="fa fa-question-circle noPrint"></i> Potential rollover amount
+												</span>
+											</td>
+										</tr>
+										<tfoot>
+											<tr class="noDynamicCells">
+												<td class="spansAllCells"><i>*Subject to applicable plan limits.</i></td>
+											</tr>
+										</tfoot>
+									</table>
+								</div> <!-- class="table-responsive" -->
+								<!-- Example of a custom resultsTable containing custom results for plan premiums by pay period.-->
+								<div class="table-responsive notInUse">
+									<table class="resultsTable premiumsByPayPeriodTable printTableFormat">
+										<caption>Employee plan premiums by pay period:</caption>
+										<tr class="descriptionTable"><th class="resultName">&nbsp;</th></tr>
+										<tr class="totalWeeklyPayrollContributions"><td class="resultName">Paid weekly</td></tr>
+										<tr class="totalMonthlyPayrollContributions"><td class="resultName">Paid monthly</td></tr>
+									</table>
+								</div> <!-- class="table-responsive" -->
+							</div>
+						</div> <!-- class="col-lg-5 offset-xl-1 savingsArea" -->
+						<div class="planRecommendationEnabledOnly col-md-12">
+							<div class="planRecommendationResult alert alert-success mt-2 mb-0">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<img class="bestMatchIcon" src="img/icons/icon-bestmatch.svg" alt="Best Match badge icon">
+										</td>
+										<td>
+											Based on your inputs and what you indicated matters most to you, the plan with
+											<span class="planPrioritySpecific lowerPremiums">the lowest employee annual premiums is the</span>
+											<span class="planPrioritySpecific lowerOutOfPocketCosts">the lowest estimated out-of-pocket costs is the</span>
+											<span class="planPrioritySpecific lowerTotalCosts">the lowest estimated employee total costs is the</span>
+											<span class="planPrioritySpecific lowerWorstCaseCosts">lowest estimated employee worst case total costs is the</span>
+											<span class="planPrioritySpecific HSA">access to an HSA with the lowest estimated employee total costs is the</span>
+											<span class="planPrioritySpecific FSA">access to an FSA with the lowest estimated employee total costs is the</span>
+											<span class="recommendedPlanName alert-link"></span>.
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="planRecommendationResultNone alert alert-danger">
+								No plan matched your specified criteria.
+							</div>
+						</div>
+					</div> <!-- class="row" -->
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="mpceSection" -->
+
+			<!-- ===== feedbackSection ===== -->
+			<section id="feedbackSection" class="hiddenUntilInitialized simpleFeedback noPrint">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fas fa-thumbs-up sectionHeaderIcon"></i> <span class="sectionHeaderTitle">Give us your feedback</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<div class="row">
+						<div class="col-md-12">
+							<p>
+								<strong>We&apos;d love to know if this tool was helpful.</strong> Feedback is optional and anonymous.
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="dropdownDiv yourMatchingPlanDropdown"><div data-action="personalFormItems|yourMatchingPlanDropdown"></div></div>
+						</div>
+						<div class="col-md-6">
+							<div class="dropdownDiv yourMatchRatingDropdown"><div data-action="personalFormItems|yourMatchRatingDropdown"></div></div>
+						</div>
+					</div>
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="feedbackSection" -->
+
+			<!-- ===== taxIntroSection ===== -->
+			<section id="taxIntroSection" class="hiddenUntilInitialized noPrint">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fas fa-calculator sectionHeaderIcon"></i> <span class="sectionHeaderTitle">View your potential tax savings</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<div class="row">
+						<div class="col-md-12">
+							<p>Use this tax calculator to see the benefits of contributing to a plan's tax-advantaged savings account.</p>
+							<p>Select a plan in the dropdown menu below and then click "Show the tax calculator".</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 pe-0">
+							<select class="taxCalcPlanSelect form-control form-select" title="Select a plan"></select>
+						</div>
+						<div class="col-md-7">
+							<button class="btnSwitchToTaxView btn btn-primary">Show the tax calculator</button>
+						</div>
+					</div>
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="taxIntroSection" -->
+
+			<!-- ===== taxCalcSection ===== -->
+			<section id="taxCalcSection" class="hiddenUntilInitialized">
+				<div class="sectionHeader">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-calculator sectionHeaderIcon"></i> <span id="taxCalcHeadline" class="sectionHeaderTitle">Tax Calculator</span>
+						</div>
+					</div>
+				</div>
+				<div class="sectionBody">
+					<div class="row">
+						<div class="col-md-12 taxCalcTopNotes notInUse">
+							<!-- Paragraphs here for tax calculator notes, if required -->
+						</div>
+						<div class="col-md-12" id="taxCalcSourcePlanDiv">
+							Plan: <span id="taxCalcSourcePlanName">Plan Name</span>
+						</div>
+						<!-- Tax calculator chart and legend at left -->
+						<div id="taxChartOuter" class="col-md-6 chartArea">
+							<div id="taxChart" class="hchart taxChart"></div>
+							<div class="taxChartFootnotes">
+								<p class="planSpecific HSA HSA_LPFSA HSA_MATCHED"> <!-- Can use either plan ids or account type ids here. -->
+									<i>* The maximum contribution you may make has been reduced by the company's funding amount.</i>
+								</p>
+								<!-- More paragraphs here for chart footnotes, if required -->
+							</div>
+							<h3 class="printOnly" style="page-break-before: always;">Tax Calculator (continued)</h3>
+							<div class="taxChartTableDiv table-responsive printOnly"></div> <!-- Could remove "printOnly" to show on screen if desired. -->
+						</div>
+						<!-- Tax calculator inputs at right -->
+						<div id="taxCalcInputs" class="col-md-6 noPrint">
+							<div id="taxFilingStatus" class="row">
+								<label for="taxFilingStatusSelect" class="col-md-4" >Income tax filing status:</label>
+								<select id="taxFilingStatusSelect" class="col-auto form-control form-select" title="Income tax filing status">
+									<option selected value="single">Single</option>
+									<option value="marriedFilingJoint">Married Filing Joint</option>
+									<option value="marriedFilingSeparate">Married Filing Separate</option>
+									<option value="headOfHousehold">Head of Household</option>
+								</select>
+							</div>
+							<div id="taxNumDependents" class="row">
+								<label for="taxNumDependentsSelect" class="col-md-4">Number of dependents:</label>
+								<select id="taxNumDependentsSelect" class="col-auto form-control form-select" title="Number of dependents">
+									<option selected value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+								</select>
+								<div class="col-auto ps-1 d-flex align-items-center">
+									<span class="small">(Exclude you and your spouse)</span>
+								</div>
+							</div>
+							<!-- Tax calculator sliders -->
+							<div id="taxCalcSliders">
+								<div class="sliderDiv primaryAnnualIncomeSlider" data-action="taxCalculatorFormItems|primaryAnnualIncomeSlider"></div>
+								<div class="sliderDiv spouseAnnualIncomeSlider" data-action="taxCalculatorFormItems|spouseAnnualIncomeSlider"></div>
+								<div class="sliderDiv hsaEligibleExpensesSlider" data-action="taxCalculatorFormItems|hsaEligibleExpensesSlider"></div>
+								<div class="sliderDiv visionExpensesSlider" data-action="taxCalculatorFormItems|visionExpensesSlider"></div>
+								<div class="sliderDiv dentalExpensesSlider" data-action="taxCalculatorFormItems|dentalExpensesSlider"></div>
+								<div class="sliderDiv otherExpensesSlider" data-action="taxCalculatorFormItems|otherExpensesSlider"></div>
+								<div id="taxCalcSlidersHelp" class="alert alert-secondary mt-3">
+									Use the sliders above to estimate your eligible out&#8209;of&#8209;pocket health care expenses for
+									the upcoming plan year.
+								</div>
+							</div>
+							<div class="text-center">
+								<button class="btnSwitchToMpceView btn btn-primary">Return to the <span class="toolName">Medical Plan Cost Estimator</span></button>
+							</div>
+						</div> <!--id="taxCalcInputs" -->
+						<table class="col-md-12 taxCalcPrintTable printTableFormat printOnly">
+							<!-- Using combined class selectors, the print view values, below, get filled automatically. -->
+							<tr class="taxFilingStatusSelect print"><td class="name">Income tax filing status:</td><td class="value"></td></tr>
+							<tr class="taxNumDependentsSelect print"><td class="name">Number of dependents:</td><td class="value"></td></tr>
+							<tr class="primaryAnnualIncomeSlider print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="spouseAnnualIncomeSlider print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="hsaEligibleExpensesSlider print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="visionExpensesSlider print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="dentalExpensesSlider print"><td class="name"></td><td class="value"></td></tr>
+							<tr class="otherExpensesSlider print"><td class="name"></td><td class="value"></td></tr>
+						</table>
+					</div> <!-- class="row" -->
+				</div> <!-- class="sectionBody" -->
+			</section> <!-- id="taxCalcSection" class="hiddenUntilInitialized" -->
+
+		</section> <!-- id="nonWizardSections" -->
+
+	</main> <!-- id="pageBody" -->
+
+	<!-- #pageBodyDisagree -->
+	<main id="pageBodyDisagree" hidden>
+		<div class="row">
+			<div class="col-md-12">
+				<p>
+					You must accept the terms of use to access this tool.<br><br>
+					Please click on <em><strong>Try again</strong></em> below to access the terms of use again.
+				</p>
+				<button id="tryAgainButton" onclick="location.reload()" class="btn btn-primary">Try again</button>
+			</div>
+		</div>
+	</main> <!-- id="pageBodyDisagree" -->
+
+	<!-- #pageBodyUnsupportedBrowser -->
+	<main id="pageBodyUnsupportedBrowser" hidden>
+		<p>
+			Sorry, but this tool will not work in Internet Explorer.<br><br>
+			Please access the tool again using a modern browser.
+		</p>
+	</main> <!-- id="pageBodyUnsupportedBrowser" -->
+
+	<!-- #pageFooter -->
+	<footer id="pageFooter" class="row">
+		<div class="col leftSide">
+			<div class="copyrightNotice">&copy; 2023 Mercer LLC, All Rights Reserved.</div>
+		</div>
+		<div class="col-auto rightSide">
+			<img src="img/PoweredByMercer.png" alt="Powered by Mercer">
+		</div>
+	</footer>
+
+	<!-- Trustarc cookie consent code -->
+	<div style="text-align: center">
+		<div id="consent-banner"></div>
+		<div id="teconsent">
+		<script type="text/javascript" async="async" src="https://consent.trustarc.com/v2/notice/jnsdko"></script>
+		</div>
+	</div>
+
+</div> <!-- class="topmost container-fluid" -->
+
+<!--===========================================================================================
+	 ADDITIONAL CONTENT TEMPLATES SECTION.
+	 Template elements must include class "template" so they'll be found by the app, and be
+	 hidden. The app clones and fills these elements in appropriate contexts when necessary.
+	===========================================================================================
+-->
+
+<!-- Template for Vue component help-modal defined in js/appCore/components/HelpModal.js. -->
+<div v-bind:id="modalId" class="help-modal template modal fade" v-bind:class="extraClasses" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div v-show="!hideHeader" class="modal-header">
+				<slot name="modal-header-contents">
+					<h3 class="modal-title">
+						<i v-show="titleFaIconClasses" v-bind:class="titleFaIconClasses" style="margin-right: 0.125rem;"></i>
+						{{ title }}
+					</h3>
+					<div class="buttons">
+						<button v-show="!hidePrint" onclick="window.print();" class="noPrint nakedButton">
+							<i class="fa fa-print" style="font-size: 1rem;"></i>
+						</button>&nbsp;
+						<button v-show="!hideClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+				</slot>
+			</div>
+			<div class="modal-body">
+				<slot></slot>
+			</div>
+			<div class="modal-footer">
+				<slot name="modal-footer-contents">
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+				</slot>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Template for main chart tooltips. -->
+<div class="template chartTooltip mainChartTooltip">
+	<div class="planName"></div>
+	<span class="seriesName"></span>: <span class="value"></span>
+	<div class="details"></div>
+</div>
+
+<!-- Template for main chart tooltip detail for out-of-pocket costs. These details are only displayed
+	 when the feature is enabled via mainConfig.mainChartSection.showOopCostsDetails. -->
+<table class="template chartSeriesDetails oopCostsDetails">
+	<tr>
+		<td>
+			<table>
+				<tr class="totalCopays"><td class="name">Copays</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="totalDeductibles"><td class="name">Deductibles</td><td class="sign">+</td><td class="value"></td></tr>
+				<tr class="totalCoinsurance"><td class="name">Coinsurance</td><td class="sign">+</td><td class="value"></td></tr>
+				<tr class="totalExpensesNotCovered"><td class="name">Not covered</td><td class="sign">+</td><td class="value"></td></tr>
+				<tr class="totalMedicalAndDrugCosts"><td class="name">&nbsp;</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="totalFundAmountOffset"><td class="name">Funds used</td><td class="sign">&ndash;</td><td class="value"></td></tr>
+				<tr class="totalMedicalAndDrugCostsLessFundOffset"><td class="name">&nbsp;</td><td class="sign"></td><td class="value"></td></tr>
+			</table>
+		</td>
+		<td class="notes notInUse">
+			<div class="header">Notes:</div>
+			<ul>
+				<li class="ifDeductibleNotMet">No deductible limit has been met</li>
+				<li class="ifDeductibleMet">At least one deductible limit <span class="highlight">has been met</span></li>
+				<li class="ifOopMaxNotReached">No out-of-pocket maximum has been reached</li>
+				<li class="ifOopMaxReached">At least one out-of-pocket maximum <span class="highlight">has been reached</span></li>
+				<li class="applyERFundsOnly applyERCoreFundsOnly">Only company funds applied.</li>
+				<li class="applyEEFundsOnly">Only employee funds applied.</li>
+				<li class="applyNoFunds">No funds applied.</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
+<!-- Template for main chart tooltip detail for employee premiums. These details are only displayed
+	 when the feature is enabled via mainConfig.mainChartSection.showEmployeePremiumsDetails. In order
+	 for individual adjustment amounts to show here, the rows should be classed using adjustment ids
+	 matching those defined in the config's adjustments object. -->
+<table class="template chartSeriesDetails employeePremiumsDetails">
+	<tr>
+		<td>
+			<table>
+				<tr class="totalAnnualPayrollContributionsExcludingAdjustment"><td class="name">Employee's base annual premiums</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="adjustmentAmount tobaccoSurcharges"><td class="name">Tobacco use surcharge</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="adjustmentAmount spouseSurcharges"><td class="name">Spouse/partner surcharge</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="adjustmentAmount wellnessPremiumIncentives"><td class="name">Company wellness rewards</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="totalAnnualPayrollContributions"><td class="name">Employee's net annual premiums</td><td class="sign"></td><td class="value"></td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<!-- Template for main chart tooltip detail for employer premiums. These details are only displayed
+	 when the feature is enabled via mainConfig.mainChartSection.showEmployerPremiumsDetails. In order
+	 for individual adjustment amounts to show here, the rows should be classed using adjustment ids
+	 matching those defined in the config's adjustments object. -->
+<table class="template chartSeriesDetails employerPremiumsDetails">
+	<tr>
+		<td>
+			<table>
+				<tr class="employerPlanPremiumExcludingAdjustment"><td class="name">Company's base annual premiums</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="adjustmentAmount wellnessPremiumIncentives"><td class="name">Company wellness rewards</td><td class="sign"></td><td class="value"></td></tr>
+				<tr class="employerPlanPremium"><td class="name">Company's net annual premiums</td><td class="sign"></td><td class="value"></td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<!-- Template for tax calculator chart tooltips. -->
+<div class="template chartTooltip taxChartTooltip">
+	<span class="seriesName"></span>: <span class="value"></span>
+</div>
+
+<!--===========================================================================================
+	 MODAL DIALOGS SECTION.
+	 The dialogs defined by these custom elements are not visible until displayed by the app.
+I 	===========================================================================================
+-->
+<div id="vueAppHelpModals">
+
+	<!-- User Agreement modal. Displayed when tool launched; must be accepted by user to continue. -->
+	<help-modal v-cloak v-once modal-id="modal_UserAgreement" title="User Agreement" hide-print="true" hide-close="true">
+		<p>
+			<b>Welcome to the <span class="toolName">Medical Plan Cost Estimator</span>.</b> The purpose of this tool
+			is to assist you in choosing a health plan and understanding the advantages of tax-free accounts by helping
+			you estimate your annual health care expenses.
+		</p>
+		<p>
+			<b>We respect your privacy.</b> None of the information you use to calculate your out-of-pocket costs is
+			collected or tracked, including your expected annual health care expenses. When you navigate away from this
+			tool, your information is automatically discarded. You can print your selections and criteria from this tool.
+			Please keep your printouts secure and use caution when printing to shared printers.
+		</p>
+		<p>
+			<em>By using this tool, you are agreeing that you understand and accept the following:</em>
+		</p>
+		<p>
+			<em>
+				Estimates are based on national average service costs. Because costs vary by provider and not all
+				service details are included, actual costs may differ from what is shown in this tool. Actual costs
+				may also vary based on the order in which services are incurred and by the specific family member
+				using a service (if applicable). In the event of any contradiction between the information contained
+				in this tool and the Plan Documents, the Plan Documents shall govern in all cases.
+			</em>
+		</p>
+
+		<template v-slot:modal-footer-contents>
+			<div class="px-0 container text-center">
+				<p>If you do not accept these terms, you will not be able to access the site.</p>
+				<div>
+					<button id="modal_UserAgreement_AgreeButton" type="button" class="btn btn-primary me-2">I accept</button>
+					<button id="modal_UserAgreement_DisagreeButton" type="button" class="btn btn-light">I do not accept</button>
+				</div>
+			</div>
+		</template>
+	</help-modal> <!-- modal-id="modal_UserAgreement" -->
+
+	<help-modal v-cloak v-once modal-id="modal_MainHelp" title="Help">
+		<p>This tool is designed to help you choose the health plan that is right for you in two easy steps:</p>
+		<ul>
+			<li>The first is to tell us about you by selecting your level of coverage.</li>
+			<li>
+				The second is to tell us about your and your family's expected health care needs for the coming year by
+				selecting whether you expect medical needs to be low, moderate or high for each family member.
+			</li>
+		</ul>
+		<p>
+			Then, you'll be able to see an estimate of what you'll spend annually for the upcoming year under each
+			health plan option. You can also use the savings account section to consider how much you should
+			contribute on a before-tax basis to cover your expected health care expenses.
+		</p>
+		<div>
+			<h4>Optimal Viewing</h4>
+			<p>
+				<em>
+					This tool is designed for optimal performance in recent versions of Google Chrome, Mozilla Firefox,
+					Microsoft Edge, and Apple Safari. If you are using an earlier version or a web browser not listed, you
+					may experience errors or be unable to use the tool. In this case, please access the tool again using
+					one of the listed web browsers. For best viewing, set the screen resolution to 1024 x 768 or higher.
+				</em>
+			</p>
+		</div>
+	</help-modal> <!-- modal-id="modal_MainHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_SaveScenario" title="Save current scenario" hide-print="true">
+		<p>
+			<b>This tool does not store your personal information nor your expected health care usage in any database.</b>
+			Such information is automatically discarded when you navigate away from this tool.
+		</p>
+		<p>
+			You can preserve your modeled scenario for later use by bookmarking the URL shown below. Your selections are
+			encoded in this URL, so do not share it with others if you wish to keep private any details in your scenario.
+		</p>
+		<p style="line-height: 0.875rem;">
+			<!-- href below and anchor text will be set at runtime -->
+			<a class="saveScenarioUrlLink" href="" style="overflow-wrap: break-word; word-wrap: break-word; font-size: 0.875rem;"></a>
+		</p>
+		<p>
+			Here's a text version if you would prefer to copy and paste the URL:<br>
+			<!-- value below will be set at runtime -->
+			<input type="text" class="saveScenarioUrlText mt-1" readonly onclick="this.select();"
+				   style="width: 100%; padding: 2px 4px; font-size: 0.8125rem;" value="" title="Modeled scenario URL">
+		</p>
+		<p>
+			This scenario URL might not be valid in a future version of this tool, so consider also printing
+			your results using the "Print" link found within the tool. Please keep your printouts secure and use
+			caution when sending to shared printers.
+		</p>
+	</help-modal> <!-- modal-id="modal_SaveScenario" -->
+
+	<help-modal v-cloak v-once modal-id="modal_CostAssumptionsHelp" title="Cost Assumptions">
+		<div class="dynamicCostsAssumptions">
+			<!-- Within a div classed "dynamicCostsAssumptions", suitable costs assumptions content is filled in at runtime for
+				 the active config and selected region. To work, this div must contain a "service template" classed element to be
+				 cloned per service, and within, elements classed for each of "description" and "cost". Optional headings per
+				 category can be included with a "category template" classed element to be cloned, containing a "description"
+				 classed element describing the services to follow. An optional "region description" classed element can display
+				 the region name. -->
+			<p>
+				The following health care cost assumptions are used in the tool:
+				<!-- Optional: for location <i class="region description" style="white-space: nowrap;"></i> -->
+			</p>
+			<table class="costsAssumptionsTable table table-striped">
+				<!-- Optional: <tr class="category template table-secondary"><th colspan="2" class="description"></th></tr> -->
+				<tr class="service template">
+					<td class="description"></td>
+					<td class="cost doNotIncludeCents"></td> <!-- Can also use includeCents, or neither -->
+				</tr>
+			</table>
+		</div>
+		<div class="alert alert-warning">
+			<p>Please note that the estimates are based on average health care costs.</p>
+			<p>
+				<b>
+					Because costs can vary by provider and by region, your actual costs
+					may differ from the national averages used by this tool.
+				</b>
+			</p>
+			<p>
+				Unit costs above represent the average allowed charge for each service. The allowed
+				charge is the amount of submitted charges eligible for payment for all claims according
+				to health plan documents/contracts.  Specifically, it is the amount eligible after
+				applying pricing guidelines, but before deducting third party, copayment, coinsurance,
+				or deductible amounts. The allowed charge represents the amount a plan will consider
+				for adjudication for a covered service. The unit costs above include network and
+				non-network services.
+			</p>
+			<p>
+				In the event of any discrepancy between the information contained in this
+				tool and official plan documents, the latter shall govern in all cases.
+			</p>
+		</div>
+	</help-modal> <!-- modal-id="modal_CostAssumptionsHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_SubconfigHelp" title="Employee type">
+		<p>Please select the group that applies to you.</p>
+	</help-modal> <!-- modal-id="modal_SubconfigHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_PartnerStatusHelp" title="Are you covering a spouse/partner?">
+		<p>
+			Indicate whether you would like to include coverage for yourself, or for yourself and a spouse or partner.
+		</p>
+	</help-modal> <!-- modal-id="modal_PartnerStatusHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_NumberOfChildrenHelp" title="How many children are you covering?">
+		<p>If you have more than five children, consider combining expenses for children to estimate your total family costs.</p>
+	</help-modal> <!-- modal-id="modal_NumberOfChildrenHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_RegionHelp" title="Region">
+		<p>
+			Please select the region that best represents where you live. While costs vary somewhat from region to
+			region, the differences are generally not significant and may not affect your overall results.
+		</p>
+	</help-modal> <!-- modal-id="modal_RegionHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_StatusHelp" title="Salary band">
+		<p>Please indicate your annual salary band. Annual employee premiums will vary based on your selection.</p>
+	</help-modal> <!-- modal-id="modal_StatusHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_WellnessRewardsHelp" title="Wellness rewards">
+		<p>To qualify for reduced premiums, each individual indicated must have:</p>
+		<ul>
+			<li>completed a well-being assessment by the deadline, and</li>
+			<li>completed a health screening by the deadline.</li>
+		</ul>
+	</help-modal> <!-- modal-id="modal_WellnessRewardsHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_TobaccoUsageHelp" title="Tobacco usage">
+		<p>
+			A premium surcharge may apply if a covered individual is a tobacco user and
+			has not participated in a smoking-cessation program.
+		</p>
+	</help-modal> <!-- modal-id="modal_TobaccoUsageHelp" -->
+
+	<help-modal v-cloak v-once modal-id="modal_SpouseSurchargeHelp" title="Spouse/partner surcharge">
+		<p>
+			A premium surcharge may apply if your spouse/partner is offered medical coverage through
+		their employer but you choose to cover them instead.
+		</p>
+		<p>
+			Select <b>"No"</b> if your spouse/partner does not work or is not eligible for medical coverage through
+			his or her employer. The surcharge would not apply.
+		</p>
+		<p>
+			Select <b>"Yes"</b> if your spouse/partner is eligible for medical coverage through his/her employer and
+			<b>is not enrolled</b> in his or her employer&apos;s plan. The surcharge would apply.
+		</p>
+	</help-modal> <!-- modal-id="modal_SpouseSurchargeHelp" -->
+
+	<!-- Medical Usage Assumptions modal. Displayed when the user clicks the "medical usage" link. The
+		 class "usageCategoryHelpSource" on the outer div also indicates this modal is a source for header
+		 and content used in the simplified modeling print output for the corresponding usage category. -->
+	<help-modal v-cloak v-once modal-id="modal_UsageCategoryHelp_Medical" extra-classes="usageCategoryHelpSource medical"
+				title="Medical Usage Assumptions">
+		<div class="dynamicUsageCategoryAssumptions medical">
+			<!-- Within a div classed "dynamicUsageCategoryAssumptions", suitable usage category assumptions content is filled in at
+				 runtime for the active configuration. To work, this div must contain elements classed "[low|moderate|high] contents"
+				 (substituting the usage category ids actually configured and for display; e.g. exclude "zero") and within each, an
+				 element classed "service template" to be cloned per service, and within, elements classed for each of "count" and
+				 "description". Optional "[low|moderate|high] description" classed elements can display usage category names. -->
+			<div class="usageCategoryOption low">
+				<p>
+					<b><span class="low description"></span> medical usage</b> means that you and your family typically only use
+					your medical coverage for preventive care (e.g. some lab tests) and one or two doctor visits a year.
+				</p>
+				<ul class="low contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption lowModerate">
+				<!-- lowModerate is currently only used for the personas model -->
+				<p>
+					<b><span class="lowModerate description"></span> medical usage</b>
+				</p>
+				<ul class="lowModerate contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption moderate medium">
+				<p>
+					<b><span class="moderate medium description"></span> medical usage</b> means that you and your family see the doctor a
+					few times a year for an illness, an injury or a chronic condition.
+				</p>
+				<ul class="moderate medium contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption moderateHigh">
+				<!-- moderateHigh is currently only used for the personas model -->
+				<p>
+					<b><span class="moderateHigh description"></span> medical usage</b>
+				</p>
+				<ul class="moderateHigh contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption high">
+				<p>
+					<b><span class="high description"></span> medical usage</b> means that you and your family use your medical
+					coverage to manage a complex condition, injury or procedure that requires a number of doctors' visits and perhaps
+					an inpatient hospital stay.
+				</p>
+				<ul class="high contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+		</div>
+	</help-modal> <!-- modal-id="modal_UsageCategoryHelp_Medical" -->
+
+	<!-- Prescription Usage Assumptions modal. Displayed when the user clicks the "prescription usage" link.
+		 The class "usageCategoryHelpSource" on the outer div also indicates this modal is a source for header
+		 and content used in the simplified modeling print output for the corresponding usage category. -->
+	<help-modal v-cloak v-once modal-id="modal_UsageCategoryHelp_Drugs" extra-classes="usageCategoryHelpSource drugs"
+				title="Prescription Usage Assumptions">
+		<div class="dynamicUsageCategoryAssumptions drugs">
+			<!-- Within a div classed "dynamicUsageCategoryAssumptions", suitable usage category assumptions content is filled in at
+				 runtime for the active configuration. To work, this div must contain elements classed "[low|moderate|high] contents"
+				 (substituting the usage category ids actually configured and for display; e.g. exclude "zero") and within each, an
+				 element classed "service template" to be cloned per service, and within, elements classed for each of "count" and
+				 "description". Optional "[low|moderate|high] description" classed elements can display usage category names. -->
+			<div class="usageCategoryOption low">
+				<p>
+					<b><span class="low description"></span> prescription usage</b>
+				</p>
+				<ul class="low contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption lowModerate">
+				<!-- lowModerate is currently only used for the personas model -->
+				<p>
+					<b><span class="lowModerate description"></span> prescription usage</b>
+				</p>
+				<ul class="lowModerate contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption moderate medium">
+				<p>
+					<b><span class="moderate medium description"></span> prescription usage</b>
+				</p>
+				<ul class="moderate medium contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption moderateHigh">
+				<!-- moderateHigh is currently only used for the personas model -->
+				<p>
+					<b><span class="moderateHigh description"></span> prescription usage</b>
+				</p>
+				<ul class="moderateHigh contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+			<div class="usageCategoryOption high">
+				<p>
+					<b><span class="high description"></span> prescription usage</b>
+				</p>
+				<ul class="high contents">
+					<li class="service template"><span class="service count"></span> <span class="service description"></span></li>
+				</ul>
+			</div>
+		</div>
+	</help-modal> <!-- modal-id="modal_UsageCategoryHelp_Drugs" -->
+
+	<help-modal v-cloak v-once modal-id="modal_SavingsAccountOptions" title="About your savings account options">
+		<p>
+			Each of the plans offers an associated savings account: either a <b>Health Savings Account (HSA)</b>, or a
+			<b>Flexible Spending Account (FSA)</b>. You can fund these accounts with pre-tax earnings, and then use the
+			funds during the plan year for reimbursing some of your out-of-pocket costs (deductibles, copays, and
+			coinsurance) and other eligible medical, vision, and dental expenses. This could help you save on taxes.
+		</p>
+		<h3>Health Savings Account (HSA)</h3>
+		<ul>
+			<li>
+				For the HSA, funds that you don't use during the plan year remain yours and are carried over. HSA funds
+				can be invested, and your money grows tax-free, similar to a retirement account. You can use the funds to
+				pay for eligible health care expenses now or in retirement. To contribute to an HSA, you must be covered
+				under a high-deductible health plan (HDHP).
+			</li>
+		</ul>
+		<h3>Flexible Spending Account (FSA)</h3>
+		<ul>
+			<li>
+				For the FSA, funds are subject to a "use it or lose it" rule. For this reason, you should estimate your
+				FSA contribution carefully. Any FSA balance not spent at the end of the plan year is forfeited. In some
+				cases, a limited amount of unused FSA funds may be carried over. Be sure to check the specific rules.
+			</li>
+		</ul>
+		<div class="videoLibraryEnabledOnly">
+			<h3>See also</h3>
+			<ul>
+				<li>
+					"What is an HSA?" and "What is an FSA?" in the
+					<button class="videoLibraryButton" data-bs-target="#modal_VideoLibrary" data-bs-dismiss="modal" data-bs-toggle="modal">
+						Educational Video Library
+					</button>.
+				</li>
+			</ul>
+		</div>
+	</help-modal>
+
+	<help-modal v-cloak v-once modal-id="modal_PlanProvisions" extra-classes="planProvisionsHelpSource" title="Plan Provisions Comparison">
+		<ul id="planProvisionsTabList" class="planProvisionsTabList col-md-12 nav nav-pills noPrint" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button id="medicalPlanProvisionsTab" class="nav-link active" data-bs-toggle="tab" data-bs-target="#medicalPlanProvisions"
+						type="button" role="tab" aria-controls="medicalPlanProvisions" aria-selected="true">Medical Plans</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button id="dentalPlanProvisionsTab" class="nav-link" data-bs-toggle="tab" data-bs-target="#dentalPlanProvisions"
+						type="button" role="tab" aria-controls="dentalPlanProvisions" aria-selected="false">Dental Plans</button>
+			</li>
+		</ul>
+		<div class="col-md-12 tab-content">
+
+			<!-- Medical plan provisions tab pane -->
+			<div id="medicalPlanProvisions" class="tab-pane fade show active" role="tabpanel" aria-labelledby="medicalPlansTab">
+				<div class="dynamicPlanProvisions">
+					<div class="preamble">
+						<h4 class="planProvisionsCategoryHeader mt-0">Medical Plans</h4>
+						<p>
+							To estimate the cost of care ("out-of-pocket costs") and other amounts displayed in the plan comparison
+							chart, this tool applies certain plan provisions to your selected health care usage assumptions and the
+							<button data-bs-target="#modal_CostAssumptionsHelp" data-bs-dismiss="modal" data-bs-toggle="modal">cost assumptions for each service</button>
+							contained in the tool. For your convenience, the table below describes the plan provisions modeled by this tool.
+						</p>
+						<div class="alert alert-warning">
+							<b>This table describes only the subset of plan provisions and services that are modeled in this tool</b> and
+							is not a substitute for plan documents. For complete terms and conditions, refer to official plan documents.
+							In the event of any discrepancy between information contained in this tool and official plan documents, the
+							latter shall govern in all cases.
+						</div>
+					</div>
+					<table class="planProvisionsTable medicalPlanProvisionsTable">
+						<!-- medicalPlanProvisionsTable content is filled at runtime -->
+					</table>
+				</div> <!-- class="dynamicPlanProvisions" -->
+			</div> <!-- id="medicalPlanProvisions" -->
+
+			<!-- Dental plan provisions tab pane -->
+			<div id="dentalPlanProvisions" class="tab-pane fade" role="tabpanel" aria-labelledby="dentalPlansTab">
+				<div class="preamble">
+					<h4 class="planProvisionsCategoryHeader mt-0">Dental Plans</h4>
+				</div>
+				<table class="planProvisionsTable dentalPlanProvisionsTable">
+					<!-- dentalPlanProvisionsTable is static content -->
+					<tr>
+						<th>
+							&nbsp;
+						</th>
+						<th>
+							Carefirst BCBS
+						</th>
+						<th>
+							UnitedConcordia PLUS DHMO
+						</th>
+						<th>
+							Cigna
+						</th>
+					</tr>
+					<tr>
+						<td>
+							Calendar Year Deductible (you pay)
+						</td>
+						<td>
+							<i>In-Network:</i><br>
+							$0<br><br>
+							<i>Out-Of-Network:</i><br>
+							$50
+						</td>
+						<td>
+							N/A (No deductibles)
+						</td>
+						<td>
+							<i>In-Network:</i><br>
+							$0<br><br>
+							<i>Out-of-Network:</i><br>
+							$50 individual /<br>
+							$100 family
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Class I: Diagnostic and Preventive (cleanings, X-rays, office visits)
+						</td>
+						<td>
+							100% of allowable charges
+						</td>
+						<td>
+							Based on fixed copayment fee schedule.<br>
+							Exams/evaluations are a $5.00 copay.<br>
+							Most other Class 1 services are provided with a $0 copay
+						</td>
+						<td>
+							100% of contracted rate
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Class II: Basic Services (fillings, root canals, periodontics, oral surgery)
+						</td>
+						<td>
+							<i>In-Network:</i><br>
+							75% of allowable charges<br><br>
+							<i>Out-of-Network:</i><br>
+							75% of allowable charges;<br>subject to deductible
+						</td>
+						<td>
+							Based on fixed copayment fee schedule.<br>Subject to plan Exclusions and Limitations.
+						</td>
+						<td>
+							<i>In-Network:</i><br>
+							75% of contracted rate<br><br>
+							<i>Out-of-Network:</i><br>
+							75% of reasonable &amp; customary;<br>subject to deductible
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Class III: Major Services (dentures, crowns, bridges)
+						</td>
+						<td>
+							<i>In-Network:</i><br>
+							50% of allowable charges<br><br>
+							<i>Out-of-Network:</i><br>
+							50% of allowable charges;<br>subject to deductible
+						</td>
+						<td>
+							Based on fixed copayment fee schedule.<br>Subject to plan Exclusions and Limitations.
+						</td>
+						<td>
+							<i>In-Network:</i><br>
+							50% of contracted rate<br><br>
+							<i>Out-of-Network:</i><br>
+							50% of reasonable &amp; customary;<br>subject to deductible
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Class I, II, &amp; III, Calendar Year Maximum Benefit
+						</td>
+						<td>
+							$1,500 combined
+						</td>
+						<td>
+							Annual maximums do not apply
+						</td>
+						<td>
+							$1,500 combined
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Orthodontia
+						</td>
+						<td>
+							50% of allowable charges
+						</td>
+						<td>
+							You pay up to $2,900 (2-year case)
+						</td>
+						<td>
+							50% of contacted rate
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Lifetime Maximum Benefit for Orthodontia
+						</td>
+						<td>
+							$1,500 total for in and out-of-network orthodontia services
+						</td>
+						<td>
+							Annual maximums do not apply
+						</td>
+						<td>
+							$1,500 total for in and out-of-network orthodontia services
+						</td>
+					</tr>
+				</table>
+			</div> <!-- id="dentalPlanProvisions" -->
+		</div>
+	</help-modal>
+
+	<help-modal v-cloak v-once modal-id="modal_VideoLibrary" title="Educational Video Library" title-fa-icon-classes="far fa-play-circle" hide-print="true">
+		<p>
+			Want a better understanding of your health benefits? All it takes is a minute or two! These short videos
+			explain key terms and concepts.
+		</p>
+		<!-- IMPORTANT: Instead of video iframe "src" attributes having initial values set below, for performance and
+			efficiency reasons the values are set in the "data-deferred-src" attributes. When the video library feature
+			is enabled, the first time hovering over, giving keyboard focus to, and/or clicking the video library button
+			causes the "src" attributes to be assigned and the iframes to initialize. This avoids loading all sorts of
+			resources from Vimeo that may never actually be needed. -->
+		<div class="videoLibraryGrid row">
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="Which medical plan should I choose?"
+							data-deferred-src="https://player.vimeo.com/video/460342552"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is an HDHP?"
+							data-deferred-src="https://player.vimeo.com/video/460340115"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is an HSA?"
+							data-deferred-src="https://player.vimeo.com/video/460340920"></iframe>
+					<!-- Alternate: <iframe loading="lazy" allowfullscreen title="What is an HSA? (with Employer Contribution)"
+							data-deferred-src="https://player.vimeo.com/video/460340678"></iframe> -->
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is an FSA?"
+							data-deferred-src="https://player.vimeo.com/video/460340023"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is a premium?"
+							data-deferred-src="https://player.vimeo.com/video/460339258"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is a copay?"
+							data-deferred-src="https://player.vimeo.com/video/460338432"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is coinsurance?"
+							data-deferred-src="https://player.vimeo.com/video/460341362"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is a deductible?"
+							data-deferred-src="https://player.vimeo.com/video/460338623"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="What is an out-of-pocket maximum?"
+							data-deferred-src="https://player.vimeo.com/video/460341187"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="How can I save money on health care?"
+							data-deferred-src="https://player.vimeo.com/video/460337240"></iframe>
+				</div>
+			</div>
+			<div class="p-2 col-md-4">
+				<div class="ratio ratio-16x9">
+					<iframe loading="lazy" allowfullscreen title="Where should I go for care?"
+							data-deferred-src="https://player.vimeo.com/video/460342230"></iframe>
+				</div>
+			</div>
+		</div>
+	</help-modal>
+
+	<help-modal v-cloak v-once modal-id="modal_SpecificVideo_HSA"
+				title="What is an HSA?" title-fa-icon-classes="far fa-play-circle" hide-print="true">
+		<div class="ratio ratio-16x9">
+			<iframe loading="lazy" allowfullscreen title="What is an HSA?"
+					data-deferred-src="https://player.vimeo.com/video/460340920"></iframe>
+			<!-- Alternate: <iframe loading="lazy" allowfullscreen title="What is an HSA? (with Employer Contribution)"
+					data-deferred-src="https://player.vimeo.com/video/460340678"></iframe> -->
+		</div>
+		<ul class="mt-4 ps-4">
+			<li>
+				Learn more about health benefit terms and concepts in the
+				<button class="videoLibraryButton" data-bs-target="#modal_VideoLibrary"
+						data-bs-dismiss="modal" data-bs-toggle="modal">
+					Video Library
+				</button>.
+			</li>
+		</ul>
+	</help-modal>
+
+	<help-modal v-cloak v-once modal-id="modal_SpecificVideo_FSA"
+				title="What is an FSA?" title-fa-icon-classes="far fa-play-circle" hide-print="true">
+		<div class="ratio ratio-16x9">
+			<iframe loading="lazy" allowfullscreen title="What is an FSA?"
+					data-deferred-src="https://player.vimeo.com/video/460340023"></iframe>
+		</div>
+		<ul class="mt-4 ps-4">
+			<li>
+				Learn more about health benefit terms and concepts in the
+				<button class="videoLibraryButton" data-bs-target="#modal_VideoLibrary"
+						data-bs-dismiss="modal" data-bs-toggle="modal">
+					Video Library
+				</button>.
+			</li>
+		</ul>
+	</help-modal>
+
+</div> <!-- id="vueAppHelpModals" -->
+
+<div id="vueAppExtraHelpModalsForWizard">
+	<!-- Filled at runtime from wizard config -->
+</div> <!-- id="vueAppHelpModalsForWizard" -->
+
+<!--===========================================================================================
+	APPLICATION SCRIPT MODULES SECTION.
+
+	NOTE: RequireJS is managing the application's script modules and dependencies.
+	See js/_requireConfig.js for detail about other scripts.
+	===========================================================================================
+-->
+
+<!--[if gte IE 10]><!-->
+<script src="js/vendor/require.min.js"></script>
+<script src="js/_requireConfig.js"></script>
+<script>
+
+	// noinspection JSUnresolvedVariable document.documentMode
+	var isIE10 = navigator.appVersion.indexOf("MSIE 10") !== -1, isIE11 = Boolean(window.MSInputMethodContext) && Boolean(document.documentMode);
+	if (isIE10 || isIE11) {
+		// Internet Explorer is no longer supported.
+		document.querySelector("#pageHeader").setAttribute("hidden", "true");
+		document.querySelector("#pageBody").setAttribute("hidden", "true");
+		document.querySelector("#pageFooter").setAttribute("hidden", "true");
+		document.querySelector("#pageBodyUnsupportedBrowser").removeAttribute("hidden");
+	} else {
+		// The browser version is supported. Continue with tool setup.
+
+		var originalRequireJsLoad = requirejs.load;
+		requirejs.load = function maybeCacheBustScriptLoad(context, moduleId, url) {
+			var isVendorScript = url.indexOf("js/vendor") !== -1;
+			if (!isVendorScript) { url += "?" + Math.round((new Date()).getTime() / 250).toString(16).slice(-6); }
+			originalRequireJsLoad(context, moduleId, url);
+		};
+
+		function displayUnhandledError(formatted) {
+			var errorDetailElement = document.querySelector("#errorDetail");
+			if (errorDetailElement.textContent.length === 0) {
+				// Fill in error details only if the application hasn't already done so.
+				document.querySelector("#loadingToolSection").classList.add("notInUse");
+				document.querySelector("#error").classList.remove("hiddenNotApplicable");
+				errorDetailElement.classList.remove("hiddenNotApplicable");
+				errorDetailElement.textContent = formatted;
+			}
+		}
+
+		window.onerror = function (message, url, lineNumber) {
+			displayUnhandledError(message + "\n\n" + url + " line " + lineNumber);
+		};
+
+		window.onunhandledrejection = function (event) {
+			displayUnhandledError("Unhandled rejection: " + event.type + "\n\n " + event.reason);
+		};
+
+		require(["jquery"], function ($) {
+			// Note: All of this nesting of multiple require() calls is more complicated than strictly necessary to get the application
+			// loaded, but it does facilitate indication of some loading progress as each set of scripts gets requested from the server.
+
+			$(function onDocumentReady() {
+				var $window = $(window), $body = $("body"), isLegacyEdge = Boolean(navigator.userAgent.match(/Edge\//));
+				if (isLegacyEdge) { $body.addClass("isLegacyEdge"); }
+
+				var $indicator = $(".loadWaitIndicator"), last = (new Date()).getTime();
+				var tick = function tick(x) {
+					let now = (new Date()).getTime(), difference = now - last; last = now;
+					if (difference > 3) { $indicator.text($indicator.text() + "."); }
+				};
+				tick();
+
+				require(["corejs", "trace"], function (corejs, trace) {
+					tick();
+
+					// Note: To enable the trace facility to log to the console, uncomment the following lines. You can customize
+					// categoriesFilter to suppress unwanted categories, and categoriesHighlightColor for colors (Chrome, Firefox).
+					// trace.categoriesFilter = { "*": false, appCharts: false, appData: false, appDefault: true,
+					// 	appEngine: false, appMain: true, appStage: false, appTaxChart: false, appText: false, appWizard: true,
+					// 	clientCustom: true, components: true, fsae: false, mpce: false }; // or = { "*": true } for everything
+					// trace.categoriesHighlightColor = { "*": "#CCC", appCharts: "#F92", appData: "#1B6", appDefault: "#922",
+					// 	appEngine: "#777", appMain: "#A93", appStage: "#D2D", appTaxChart: "#F92", appText: "#333", appWizard: "#1AB",
+					// 	clientCustom: "#22E", components: "#E00", fsae: "#828", mpce: "#070" };
+					// trace.enableConsoleLogging();
+
+					if (!("mpce" in window)) { window.mpce = {}; }
+					window.mpce.tick = tick;
+					window.mpce.trace = trace;
+					require(["jqueryUI", "bootstrap"], function () {
+						tick();
+						require(["highcharts/highcharts"], function () {
+							tick();
+							trace.categoryWriteLine("appMain", "about to require appMain and dependency modules");
+							// IMPORTANT: Here's where it all begins.
+							require(["appMain"], function (appMain) {
+								trace.categoryWriteLine("appMain", "appMain module and dependencies finished loading");
+								appMain.begin();
+							});
+						}); // end require highcharts
+					}); // end require jqueryUI and bootstrap
+				}); // end require corejs, trace
+			}); // end function onDocumentReady()
+		}); // end require jquery
+
+	} // end else block for supported browser version
+</script>
+<!--<![endif]-->
+
+<!--[if lt IE 10 ]>
+<script>
+	document.querySelector("#pageHeader").setAttribute("hidden", "true");
+	document.querySelector("#pageBody").setAttribute("hidden", "true");
+	document.querySelector("#pageFooter").setAttribute("hidden", "true");
+	document.querySelector("#pageBodyUnsupportedBrowser").removeAttribute("hidden");
+</script>
+<![endif]-->
+
+<!-- Divs for use by script to check current size class -->
+<div class="xs d-block d-sm-none"></div>
+<div class="sm d-none d-sm-block d-md-none"></div>
+<div class="md d-none d-md-block d-lg-none"></div>
+<div class="lg d-none d-lg-block d-xl-none"></div>
+<div class="xl d-none d-xl-block"></div>
+</body>
+</html>

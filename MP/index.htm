@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>MPCE Launch Page</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="referrer" content="origin">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.main.css">
+	<link rel="stylesheet" type="text/css" href="css/launchPage.css">
+	<link rel="stylesheet" type="text/css" href="css/cookieConsent.css">
+	<link rel="stylesheet" media="print" type="text/css" href="css/custom.print.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="preload" as="font" href="css/font-awesome/webfonts/fa-light-300.woff" crossorigin>
+	<link rel="preload" as="font" href="css/font-awesome/webfonts/fa-regular-400.woff" crossorigin>
+	<link rel="preload" as="font" href="css/font-awesome/webfonts/fa-solid-900.woff" crossorigin>
+	<link rel="preload" as="font" href="css/font-awesome/webfonts/fa-duotone-900.woff" crossorigin>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/fontawesome-woff.min.css" media="print" onload="if(media!=='all')media='all'">
+	<link rel="stylesheet" type="text/css" href="css/ProximaNova-font/ProximaNova-font.css" media="print" onload="if(media!=='all')media='all'">
+	<!-- Begin Matomo Code --> <script type="text/javascript">
+		// TODO: For client sites and official demos, replace 105 below with corresponding Matomo site id, then remove this reminder.
+		var _paq = window._paq || [], _mm = window.mpceMatomo = { url: "https://matomo.us-east-1.prod.ext.mercer.com/", siteId: 105 };
+		(function () { var l = window.location, h = l.href, n = l.hostname, off = false, debug = false;
+			if (off || /^file:/.test(h) || ((/^localhost\.?/.test(n) || /\.dev$/.test(n)) && !debug)) { _mm.url = null; return; }
+			var d = document, r = d.referrer, e1 = /scenario=[^&]*[&]?/, e2 = /[?&]$/;
+			h = h.replace(e1, "").replace(e2, ""); // Important: exclude "scenario" parameter from analytics.
+			if (r.indexOf(l.protocol + "//" + l.host) === 0) { r = r.replace(e1, "").replace(e2, ""); }
+			_paq.push(['setCustomUrl', h], ['setReferrerUrl', r], ['trackPageView']);
+			_paq.push(['setTrackerUrl', _mm.url + 'p.dyd'], ['setSiteId', _mm.siteId.toString()]);
+			var g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript';
+			g.async = true; g.defer = true; g.src = _mm.url + 'p.js'; s.parentNode.insertBefore(g, s);
+		})();
+	</script> <!-- End Matomo Code -->
+</head>
+<body id="launchPage" class="launchPage">
+<div class="topmost container-fluid">
+
+	<!-- #pageHeader -->
+	<header id="pageHeader" class="row hiddenUntilInitialized">
+		<div id="headerBox1" class="headerBox col-auto px-lg-4 py-lg-3 p-md-3 p-2">
+			<img id="logo" src="img/logo.png" alt="Logo">
+		</div>
+		<div id="headerBox2" class="headerBox col px-lg-4 py-lg-3 p-md-3 p-2">
+			<div class="mainTitle toolName">Medical Plan Cost Estimator</div>
+			<div class="subTitle notInUse">[subtitle if needed]</div>
+		</div>
+		<div id="headerBox3" class="headerBox col-auto px-lg-4 py-lg-3 p-md-3 p-2 notInUse">
+			<img id="logo2" src="img/logo.png" alt="Logo"> <!-- Potential extra right side logo -->
+		</div>
+	</header>
+
+	<!-- #pageBody -->
+	<main id="pageBody" class="row background m-0" style="display: none;"> <!-- script handles display -->
+		<div class="col-sm d-none d-sm-block"></div>
+		<div class="pageBodyContent col-xl-7 col-lg-8 col-md-9 col-sm-10 px-0 text-center">
+
+			<!-- Optional area for video. Used only when vimeoVideoPlayerUrl is assigned non-null value in script below. -->
+			<div class="videoArea" style="display: none;">
+				<h1 class="font-weight-bold">Want help choosing a health plan?</h1>
+				<!-- Optional: <p class="personasContent mb-3">
+					The Health Plan Cost Estimator tool shows you annual cost estimates for each health plan option in scenarios
+					that may be similar to your own. Then, use the interactive calculator to adjust the estimate generated from
+					your "best match" scenario, or create your own personalized estimate.
+				</p> -->
+				<div class="ratio ratio-16x9" style="max-width: 720px; margin: auto;">
+					<iframe id="videoFrame" allowfullscreen></iframe> <!-- src attribute assigned by script -->
+				</div>
+				<button class="nakedButton arrow downArrow"><i class="fad fa-chevron-circle-down"></i><br>Get Started</button>
+			</div> <!-- class="videoArea" -->
+
+			<div class="getStartedArea" style="display: none;">
+				<button class="nakedButton arrow upArrow"><i class="fad fa-chevron-circle-up"></i><br>Watch Video</button>
+
+				<div class="fullToolOnlyContent">
+					<!-- Content shown when only the full tool is enabled. -->
+					<h1>Which plan is right for me?</h1>
+					<p>
+						Use this tool to compare your estimated out-of-pocket expenses under each medical
+						plan option, so you can choose the one that best meets your needs.
+					</p>
+					<div class="buttons text-center"><a href="home.htm" class="btn btn-lg btn-primary">Compare now</a></div>
+				</div> <!-- class="fullToolOnlyContent" -->
+
+				<div class="guideMeContent">
+					<!-- Content shown for wizardConfigGuideMe and the full tool is also enabled. -->
+					<h1>Which plan is right for me?</h1>
+					<p>
+						Use this tool to compare your estimated out-of-pocket expenses under each medical
+						plan option, so you can choose the one that best meets your needs.
+					</p>
+					<div class="buttons row">
+						<div class="col-sm text-md-end px-0"><a href="home.htm#guided" class="btn btn-lg btn-primary">Guide me through</a></div>
+						<div class="col-sm text-md-start px-0"><a href="home.htm#fullTool" class="btn btn-lg btn-primary">Go to the full tool</a></div>
+					</div>
+				</div> <!-- class="guideMeContent" -->
+
+				<div class="guideMeOnlyContent">
+					<!-- Content shown for wizardConfigGuideMe and the full tool is NOT enabled. -->
+					<h1>Which plan is right for me?</h1>
+					<p>
+						Use this tool to compare your estimated out-of-pocket expenses under each medical
+						plan option, so you can choose the one that best meets your needs.
+					</p>
+					<div class="buttons text-center">
+						<a href="home.htm#guided" class="btn btn-lg btn-primary">Guide me through</a>
+					</div>
+				</div> <!-- class="guideMeOnlyContent" -->
+
+				<div class="personasContent">
+					<!-- Content shown for wizardConfigPersonas. -->
+					<h1 class="showOnlyIfNoVideo">Want help choosing a health plan?</h1>
+					<div class="row equal">
+						<div class="box box1 col-sm-6">
+							<div class="inner">
+								<img loading="lazy" src="img/icons/hpce21-icon-start-circle-01.svg" alt="Icon for similar scenario">
+								<p>
+									<span class="highlight">First, we'll guide you to a scenario</span>
+									that's most similar to your own situation so you can see which plan may be your best match.
+								</p>
+							</div>
+						</div>
+						<div class="box box2 col-sm-6">
+							<div class="inner">
+								<img loading="lazy" src="img/icons/hpce21-icon-start-circle-02.svg" alt="Icon for personalized cost estimate">
+								<p>
+									<span class="highlight">Then, you can create your own personalized cost estimate</span>
+									using the interactive calculator.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<div><a href="home.htm#guided" class="btn btn-primary btn-lg">LET'S GO! <i class="fas fa-chevron-right"></i></a></div>
+						<div class="pt-3"><a href="home.htm#fullTool">Skip to calculator</a></div>
+					</div>
+				</div> <!-- class="personasContent" -->
+
+			</div> <!-- class="getStartedArea" -->
+		</div>
+		<div class="col-sm d-none d-sm-block"></div>
+	</main>
+
+	<!-- #pageBodyUnsupportedBrowser -->
+	<main id="pageBodyUnsupportedBrowser" hidden>
+		<p>
+			Sorry, but this tool will not work in Internet Explorer.<br><br>
+			Please access the tool again using a modern browser.
+		</p>
+	</main> <!-- id="pageBodyUnsupportedBrowser" -->
+
+	<!-- #pageFooter -->
+	<footer id="pageFooter" class="row" style="display: none;">
+		<div class="col leftSide">
+			<div class="copyrightNotice">&copy; 2023 Mercer LLC, All Rights Reserved.</div>
+		</div>
+		<div class="col-auto rightSide">
+			<img src="img/PoweredByMercer.png" alt="Powered by Mercer">
+		</div>
+	</footer>
+
+	<!-- Trustarc cookie consent code -->
+	<div style="text-align: center">
+		<div id="consent-banner"></div>
+		<div id="teconsent">
+		<script type="text/javascript" async="async" src="https://consent.trustarc.com/v2/notice/jnsdko"></script>
+		</div>
+	</div>
+
+</div> <!-- class="topmost container-fluid" -->
+
+<!--===========================================================================================
+	APPLICATION SCRIPT MODULES SECTION.
+
+	NOTE: RequireJS is managing the application's script modules and dependencies.
+	See js/_requireConfig.js for detail about other scripts.
+	===========================================================================================
+-->
+
+<!--[if gte IE 10]><!-->
+<script src="js/vendor/require.min.js"></script>
+<script src="js/_requireConfig.js"></script>
+<script>
+
+	// noinspection JSUnresolvedVariable document.documentMode
+	var isIE10 = navigator.appVersion.indexOf("MSIE 10") !== -1, isIE11 = Boolean(window.MSInputMethodContext) && Boolean(document.documentMode);
+	if (isIE10 || isIE11) {
+		// Internet Explorer is no longer supported.
+		document.querySelector("#pageHeader").setAttribute("hidden", "true");
+		document.querySelector("#pageBody").setAttribute("hidden", "true");
+		document.querySelector("#pageFooter").setAttribute("hidden", "true");
+		document.querySelector("#pageBodyUnsupportedBrowser").removeAttribute("hidden");
+	} else {
+		// The browser version is supported. Continue with tool setup.
+
+		var originalRequireJsLoad = requirejs.load;
+		requirejs.load = function maybeCacheBustScriptLoad(context, moduleId, url) {
+			var isVendorScript = url.indexOf("js/vendor") !== -1;
+			if (!isVendorScript) { url += "?" + Math.round((new Date()).getTime() / 250).toString(16).slice(-6); }
+			originalRequireJsLoad(context, moduleId, url);
+		};
+
+		window.onerror = function (message, url, lineNumber) {
+			var formatted = "ERROR: " + message + "\n\n " + url + " line " + lineNumber;
+			alert(formatted);
+		};
+
+		window.onunhandledrejection = function (event) {
+			var formatted = "ERROR: Unhandled rejection: " + event.type + "\n\n " + event.reason;
+			alert(formatted);
+		};
+
+		require(["jquery", "jqueryUI", "bootstrap", "mainConfig"], function ($, jqueryUI, bootstrap, mainConfig) {
+			$(function onDocumentReady() {
+				var $window = $(window), $body = $("body"), $pageHeader = $("#pageHeader"), $pageBody = $("#pageBody");
+				var general = mainConfig.general, isLegacyEdge = Boolean(navigator.userAgent.match(/Edge\//));
+
+				if (isLegacyEdge) { $body.addClass("isLegacyEdge"); }
+
+				// Adjust displayed content according to current tool configuration.
+
+				if (!general.wizardEnabled) {
+					$body.addClass("fullToolOnlyContent");
+				} else if (general.wizardConfigName === "wizardConfigGuideMe" && general.fullToolEnabled) {
+					$body.addClass("guideMeContent");
+				} else if (general.wizardConfigName === "wizardConfigGuideMe" && !general.fullToolEnabled) {
+					$body.addClass("guideMeOnlyContent");
+				} else if (general.wizardConfigName === "wizardConfigPersonas") {
+					$("div.pageBodyContent").prepend($pageHeader.addClass("transparent"));
+					$body.addClass("personasContent");
+				}
+
+				var videoUrl = general.launchPageVimeoVideoPlayerUrl;
+				if (videoUrl && videoUrl.length > 0) {
+					$body.addClass("videoEnabled");
+					$("#videoFrame").attr("src", videoUrl);
+					$(".downArrow").click(function() {
+						document.getElementById("videoFrame").contentWindow.postMessage('{"method":"pause"}', '*');
+						$(".videoArea").hide(); $(".getStartedArea").fadeIn(1200);
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+					});
+					$(".upArrow").click(function() {
+						document.getElementById("videoFrame").contentWindow.postMessage('{"method":"play"}', '*');
+						$(".getStartedArea").hide(); $(".videoArea").fadeIn(1200);
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+					});
+					setTimeout(function delayed() { $(".videoArea").fadeIn(1200); }, 200);
+				} else {
+					$(".videoArea, .upArrow").hide();
+					$(".getStartedArea h1").show();
+					setTimeout(function delayed() { $(".getStartedArea").fadeIn(1200); }, 200);
+				}
+
+				$pageHeader.removeClass("hiddenUntilInitialized");
+				$pageBody.show();
+
+			}); // end function onDocumentReady()
+		}); // end require jquery, jqueryUI, bootstrap, mainConfig
+	} // end else block for supported browser version
+</script>
+<!--<![endif]-->
+
+<!--[if lt IE 10 ]>
+<script>
+	document.querySelector("#pageHeader").setAttribute("hidden", "true");
+	document.querySelector("#pageBody").setAttribute("hidden", "true");
+	document.querySelector("#pageFooter").setAttribute("hidden", "true");
+	document.querySelector("#pageBodyUnsupportedBrowser").removeAttribute("hidden");
+</script>
+<![endif]-->
+
+</body>
+</html>

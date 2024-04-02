@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Cookie Test Harness</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="referrer" content="origin">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.main.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<style>
+		h3 { font-size: 1.25rem; font-weight: bold; padding: 0; margin: 1.5rem 0 0.5rem 0; }
+		label { display: block; padding-top: 0.5rem; }
+		.sectionBody { margin: 1.25rem 0 0 0; padding: 0 1.5rem 1.5rem 1.5rem; }
+	</style>
+</head>
+<body id="cookieTestHarnessPage" class="cookieTestHarnessPage">
+<div class="topmost container">
+
+	<!-- #pageBody -->
+	<main id="pageBody" class="sectionBody" style="background-color: white;">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Set the "tool_setup" Cookie</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<label for="in_name">Name</label>
+				<input name="in_name" id="in_name" class="form-control" value="Sample User Name" maxlength="40">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<div>
+					<label for="in_value1">Select 1st value</label>
+					<select name="in_value1" id="in_value1" class="form-control form-select">
+						<option selected value="">(select one)</option>
+						<!-- The values below are samples. Replace with desired values, per client, if applicable. -->
+						<option value="B1">Brand 1</option>
+						<option value="B2">Brand 2</option>
+						<option value="B3">Brand 3</option>
+						<option value="B4">Brand 4</option>
+						<option value="B5">Brand 5</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div>
+					<label for="in_value2">Select 2nd value</label>
+					<select name="in_value2" id="in_value2" class="form-control form-select">
+						<option selected value="">(select one)</option>
+						<!-- The values below are samples. Replace with desired values, per client, if applicable. -->
+						<option value="CA">California</option>
+						<option value="NV">Nevada</option>
+						<option value="OR">Oregon</option>
+						<option value="TX">Texas</option>
+						<option value="UT">Utah</option>
+						<option value="WA">Washington</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div>
+					<label for="in_value3">Select 3rd value</label>
+					<select name="in_value3" id="in_value3" class="form-control form-select">
+						<option selected value="">(select one)</option>
+						<!-- The values below are samples. Replace with desired values, per client, if applicable. -->
+						<option value="NU">Non-Union</option>
+						<option value="U1">Union 1</option>
+						<option value="U2">Union 2</option>
+						<option value="U3">Union 3</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div>
+					<label for="in_value4">Select 4th value</label>
+					<select name="in_value4" id="in_value4" class="form-control form-select">
+						<option selected value="">(select one)</option>
+						<!-- The values below are samples. Replace with desired values, per client, if applicable. -->
+						<option value="PT">Part-time</option>
+						<option value="FT1">Full-time 1</option>
+						<option value="FT2">Full-time 2</option>
+						<option value="FT3">Full-time 3</option>
+						<option value="FT4">Full-time 4</option>
+						<option value="FT5">Full-time 5</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" style="padding-top: 10px;">
+				<button class="setCookieButton btn btn-success">Set cookie</button>&nbsp;
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Current Cookies</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p id="cookieValue" style="font-family: monospace; background-color: white; padding: 12px 10px; border: solid 1px #FFDDDD;">&nbsp;</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<button class="btn btn-danger" id="removeHpceSetupCookie">Delete tool_setup</button>
+				<button class="btn btn-danger" id="removeCookies">Delete all</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Navigation</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="home.htm" class="btn btn-primary">Go to the tool</a>
+				&nbsp; <i>(n.b. Before you click, be sure to "Set cookie" if you changed any values.)</i>
+			</div>
+		</div>
+
+	</main>
+
+	<!-- #pageFooter -->
+	<footer id="pageFooter" class="row noPrint">
+		<div class="col-md-12">
+			<span class="copyrightNotice">&copy; 2023 Mercer LLC, All Rights Reserved.</span>
+		</div>
+	</footer>
+
+</div> <!-- class="topmost container" -->
+
+<script src="js/vendor/require.min.js"></script>
+<script src="js/_requireConfig.js"></script>
+<script>
+
+	// For testing, this may be helpful to surface the errors if you are using Google Chrome:
+	window.onerror = function (message, url, lineNumber) {
+		let formatted = "ERROR: " + message + "\n\n " + url + " line " + lineNumber;
+		alert(formatted);
+	};
+
+	require(["jquery", "utility"], function ($, utility) {
+
+		let Local = {};
+
+		Local.HpceCookieName = "tool_setup";
+
+		Local.showCookies = function showCookies() {
+			let $cookieValue = $("#cookieValue");
+			if (document.cookie && document.cookie.length > 0) {
+				$cookieValue.text(document.cookie);
+			} else {
+				$cookieValue.text("[NO COOKIES SET]");
+			}
+			$cookieValue.css({ color: "#CC3333", opacity: 0.66 });
+			$cookieValue.animate({ color: "#333333", opacity: 1.0 }, 750);
+		};
+
+		Local.parseCookie = function parseCookie() {
+			let cookieValue = utility.getCookie(Local.HpceCookieName);
+			if (null !== cookieValue) {
+				let components = cookieValue.split("|");
+				if (components.length > 0) { $("#in_name").val(components[0]); }
+				if (components.length > 1) { $("#in_value1").val(components[1]); }
+				if (components.length > 2) { $("#in_value2").val(components[2]); }
+				if (components.length > 3) { $("#in_value3").val(components[3]); }
+				if (components.length > 4) { $("#in_value4").val(components[4]); }
+			}
+		};
+
+		// IMPORTANT: Here's where it all begins.
+        $(function onDocumentReady() {
+			Local.showCookies();
+			Local.parseCookie();
+			$(".setCookieButton").on("click", function setCookieButtonClicked(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				let name = $("#in_name").val();
+				let valueA = $("#in_value1").val();
+				let valueB = $("#in_value2").val();
+				let valueC = $("#in_value3").val();
+				let valueD = $("#in_value4").val();
+				let cookie = name + "|" + valueA + "|" + valueB + "|" + valueC + "|" + valueD;
+				utility.setSessionCookie(Local.HpceCookieName, cookie, true); // true = raw
+				Local.showCookies();
+			});
+
+			$("#removeHpceSetupCookie").on("click", function removeHpceSetupCookieClicked() {
+				utility.clearCookie(Local.HpceCookieName);
+				Local.showCookies();
+				Local.parseCookie();
+			});
+
+			$("#removeCookies").on("click", function removeCookiesClicked() {
+				utility.clearAllCookies();
+				Local.showCookies();
+				Local.parseCookie();
+			});
+		});
+	});
+</script>
+
+</body>
+</html>

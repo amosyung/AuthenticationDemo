@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 145.03">
+	<defs>
+		<style>
+			.cls-1 { fill: none; }
+			.cls-2 { fill: #00ac41; }
+			.cls-3 { clip-path: url(#clip-path); }
+		</style>
+		<clipPath id="clip-path">
+			<rect class="cls-1" width="200" height="145.03"/>
+		</clipPath>
+	</defs>
+	<title>hpce21-icon-Asset 42icon</title>
+	<g id="Layer_2" data-name="Layer 2">
+		<g id="Layer_29" data-name="Layer 29">
+			<path class="cls-2" d="M5.4,36.73H194.6V139.46H5.4ZM0,145H200V31.17H0Z"/>
+			<g class="cls-3">
+				<path class="cls-2"
+					  d="M100,62.07c-13.93,0-25.26,11.68-25.26,26s11.33,26,25.26,26,25.27-11.67,25.27-26-11.34-26-25.27-26m0,57.62c-16.91,0-30.67-14.17-30.67-31.59S83.09,56.51,100,56.51s30.67,14.17,30.67,31.59S116.91,119.69,100,119.69"/>
+				<path class="cls-2" d="M184.87,84.93h-5.41v-22a11.86,11.86,0,0,0-11.66-12h-6V45.32h6A17.35,17.35,0,0,1,184.87,62.9Z"/>
+				<path class="cls-2"
+					  d="M32.2,50.88a11.86,11.86,0,0,0-11.67,12v50.17a11.86,11.86,0,0,0,11.67,12H167.8a11.86,11.86,0,0,0,11.66-12V62.89a11.85,11.85,0,0,0-11.66-12Zm135.6,79.76H32.2a17.35,17.35,0,0,1-17.07-17.58V62.89A17.35,17.35,0,0,1,32.2,45.32H167.8a17.35,17.35,0,0,1,17.07,17.57v50.17a17.35,17.35,0,0,1-17.07,17.58"/>
+			</g>
+			<rect class="cls-2" x="150.17" y="85.09" width="7.56" height="5.57"/>
+			<rect class="cls-2" x="42.26" y="85.09" width="7.57" height="5.57"/>
+			<rect class="cls-2" x="97.3" y="67.95" width="5.4" height="7.79"/>
+			<rect class="cls-2" x="97.3" y="100.45" width="5.4" height="7.79"/>
+			<g class="cls-3">
+				<path class="cls-2" d="M100,103.23a9.13,9.13,0,0,1-9.29-9h5.4A3.93,3.93,0,1,0,100,90.88V85.32a9,9,0,1,1,0,17.91"/>
+				<path class="cls-2" d="M100,90.88a9,9,0,1,1,9.29-9h-5.4a3.93,3.93,0,1,0-3.89,3.4Z"/>
+			</g>
+			<rect class="cls-2" x="10.27" y="15.58" width="179.46" height="5.57"/>
+			<rect class="cls-2" x="25.4" width="149.2" height="5.57"/>
+		</g>
+	</g>
+</svg>

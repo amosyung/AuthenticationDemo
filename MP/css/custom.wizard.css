@@ -1,0 +1,1968 @@
+/*=========================================================================================================
+	Styles specific to the wizard feature. Selectors defined in this file must start either with class
+	body.duringWizard for when an element to style lies outside of the wizard section, or #wizardSection,
+	or .wizard, when an element to style lies within the wizard section.
+  =========================================================================================================*/
+
+/* Variables for those style properties that are most likely to vary by client. */
+:root {
+	/* Use prefix "--wizard" to avoid conflict with main stylesheet vars. */
+	--wizard-color-background: #FFFFFF;
+	--wizard-color-sectionMap-unvisited-background: #BBBBBB;
+	--wizard-color-sectionMap-unvisited-icon: #FFFFFF;
+	--wizard-color-sectionMap-unvisited-text: #949494;
+	--wizard-color-sectionMap-visited-background: #006B90;
+	--wizard-color-sectionMap-visited-icon: #FFFFFF;
+	--wizard-color-sectionMap-visited-text: #949494;
+	--wizard-color-sectionMap-current-background: #002C77;
+	--wizard-color-sectionMap-current-icon: #FFFFFF;
+	--wizard-color-sectionMap-current-text: #000000;
+	--wizard-color-sectionMap-hover-background: #005680;
+	--wizard-color-sectionMap-hover-icon: #FFFFFF;
+	--wizard-color-sectionMap-hover-text: #888888;
+	--wizard-color-sectionMap-spacer: #FFFFFF;
+	--wizard-color-summary-background: #F2F3F4;
+	--wizard-color-summary-header: #006B90;
+	--wizard-color-summary-headerMini: #006B90;
+	--wizard-color-summary-text: #555555;
+	--wizard-color-summary-label-background: #FFFFFF;
+	--wizard-color-summary-label-text: #555555;
+	--wizard-color-slide-prompt: #00AC41;
+	--wizard-color-slide-keyInfo: #00AC41;
+	--wizard-color-slide-keyInfo-pulse-text: #288DE0;
+	--wizard-color-slide-keyInfo-pulse-background: #D4E9F9;
+	--wizard-color-slide-warning: #C6303E;
+	--wizard-color-slide-nav-arrows: #A4A4A4;
+	--wizard-color-slide-nav-arrows-inner: #FFFFFF;
+	--wizard-color-slide-nav-arrows-background: #FFFFFF;
+	--wizard-color-slide-nav-arrows-hover: #006B90;
+	--wizard-color-slide-nav-arrows-hover-inner: #FFFFFF;
+	--wizard-color-slide-nav-arrows-hover-background: #F2F3F4;
+	/* Non-selected answer buttons */
+	--wizard-color-answer-btn: #FFFFFF;
+	--wizard-color-answer-btn-border: #D2D2D2;
+	--wizard-color-answer-btn-text: #111111;
+	--wizard-color-answer-btn-focus: #E2E2E2;
+	--wizard-color-answer-btn-focus-text: #111111;
+	--wizard-color-answer-btn-hover: #D2D2D2;
+	--wizard-color-answer-btn-hover-text: #111111;
+	--wizard-color-answer-btn-active: #B2B2B2;
+	--wizard-color-answer-btn-active-text: #000000;
+	--wizard-boxshadow-answer-btn-focus: 0 0 0 0.2rem #BFC1C3;
+	/* Icon variant of non-selected answer buttons */
+	--wizard-color-answer-icon: #BBBBBB;
+	--wizard-color-answer-icon-hover: #AAAAAA;
+	--wizard-color-answer-icon-hover-background: #F8F8F8;
+	--wizard-boxshadow-answer-icon: 0 0 0.2rem 0.2rem #EEEEEE;
+	--wizard-boxshadow-answer-icon-focus: 0 0 0.4rem 0.4rem #BFC1C3;
+	--wizard-boxshadow-answer-icon-hover: 0 0 0.4rem 0.4rem #BFC1C3;
+	/* Selected answer buttons */
+	--wizard-color-selected-answer-checkmark: #28A745;
+	--wizard-color-selected-answer-btn: #5EB56E;
+	--wizard-color-selected-answer-btn-text: #FFFFFF;
+	--wizard-boxshadow-selected-answer-btn-focus: 0 0 0 0.2rem #9AE2A1;
+	/* Icon variant of selected answer buttons */
+	--wizard-color-selected-answer-icon-border: #B2D9BA;
+	--wizard-boxshadow-selected-answer-icon: 0 0 0.2rem 0.2rem #B2D9BA;
+	--wizard-boxshadow-selected-answer-icon-focus: 0 0 0.4rem 0.4rem #9AE2A1;
+}
+
+/*=========================================================================================================
+	Styles for .wizard (#wizardSection)
+  =========================================================================================================*/
+
+.wizard {
+	background-color: var(--wizard-color-background);
+}
+
+.wizard .hiddenBySlideId,
+.wizard .hiddenBySectionId {
+	display: none !important;
+}
+
+.wizard .configWarningsRow {
+	margin: 0;
+	padding: 0;
+}
+
+.wizard .configWarningsDiv {
+	margin: 0.5rem 0;
+	padding: 0.25rem 0.5rem;
+}
+
+/* ----- The section map just below the page header. ----- */
+
+.wizard .sectionMapRow {
+	padding: 0;
+	margin: 0;
+}
+
+.wizard .sectionMapTable {
+	margin: 0 auto;
+	padding: 0;
+}
+
+.wizard .sectionMapTable tr td {
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+	text-align: center;
+	width: 11.1%; /* this is dependent on the number of sections (9 sections / 100% = 11.1%) */
+	font-size: 0.9375rem;
+	line-height: 1;
+}
+
+.wizard .sectionMapTable tr td div.icon {
+	background-color: var(--wizard-color-sectionMap-unvisited-background);
+/*	color: var(--wizard-color-sectionMap-unvisited-icon); */
+/*	height: 4.125rem;
+	max-height: 4.125rem; */
+	height: 1.425rem;
+	max-height: 1.425rem;
+	padding-top: 0.75rem;
+	font-size: 3rem;
+	cursor: pointer;
+}
+
+.wizard .sectionMapTable tr td div.title {
+/*	background-color: var(--wizard-color-sectionMap-unvisited-background); */
+	color: var(--wizard-color-sectionMap-unvisited-text);
+	min-height: 2.375rem;
+	padding: 0.325rem 0.125rem 0.25rem 0.125rem;
+	vertical-align: top;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+body:not(.wizardConfigPersonas) .wizard .sectionMapTable tr td:not(.sectionPotentialTaxSavings) {
+/*	border-right: solid 2px var(--wizard-color-sectionMap-spacer); */
+	border-right: solid 0px var(--wizard-color-sectionMap-spacer);
+}
+
+.wizard .sectionMapTable tr td.visited div.icon {
+	background-color: var(--wizard-color-sectionMap-visited-background);
+	color: var(--wizard-color-sectionMap-visited-icon);
+}
+
+.wizard .sectionMapTable tr td.visited div.title {
+/*	background-color: var(--wizard-color-sectionMap-visited-background); */
+	color: var(--wizard-color-sectionMap-visited-text);
+}
+
+.wizard .sectionMapTable tr td.visited:not(.current):hover div.icon {
+	background-color: var(--wizard-color-sectionMap-hover-background);
+	color: var(--wizard-color-sectionMap-hover-icon);
+}
+
+.wizard .sectionMapTable tr td.visited:not(.current):hover div.title {
+/*	background-color: var(--wizard-color-sectionMap-hover-background); */
+	color: var(--wizard-color-sectionMap-hover-text);
+	text-decoration: underline;
+}
+
+.wizard .sectionMapTable tr td.current div.icon {
+	background-color: var(--wizard-color-sectionMap-current-background);
+	color: var(--wizard-color-sectionMap-current-icon);
+}
+
+.wizard .sectionMapTable tr td.current div.title {
+/*	background-color: var(--wizard-color-sectionMap-current-background); */
+	color: var(--wizard-color-sectionMap-current-text);
+	font-weight: bold;
+}
+
+/* Varying opacities for the section map icons. */
+
+.wizard .sectionMapTable .fa,
+.wizard .sectionMapTable .fad:before,
+.wizard .sectionMapTable .fal,
+.wizard .sectionMapTable .far,
+.wizard .sectionMapTable .fas {
+	opacity: 0.95;
+}
+
+.wizard .sectionMapTable .fad:after {
+	opacity: 0.60;
+}
+
+.wizard .sectionMapTable tr td.visited:hover .fa,
+.wizard .sectionMapTable tr td.visited:hover .fad:before,
+.wizard .sectionMapTable tr td.visited:hover .fal,
+.wizard .sectionMapTable tr td.visited:hover .far,
+.wizard .sectionMapTable tr td.visited:hover .fas {
+	opacity: 1.00;
+}
+
+.wizard .sectionMapTable tr td.visited:hover .fad:after {
+	opacity: 0.65;
+}
+
+.wizard .sectionMapTable tr td.current .fa,
+.wizard .sectionMapTable tr td.current .fad:before,
+.wizard .sectionMapTable tr td.current .fal,
+.wizard .sectionMapTable tr td.current .far,
+.wizard .sectionMapTable tr td.current .fas {
+	opacity: 1.00;
+}
+
+.wizard .sectionMapTable tr td.current .fad:after {
+	opacity: 0.65;
+}
+
+/* ----- The slide area below the section map. Contains the potential summary panel, the slides, and the bottom buttons. ----- */
+
+.wizard .mainRow {
+	margin: 0;
+	padding: 0;
+}
+
+.wizard .mainRow .previousArea,
+.wizard .mainRow .nextArea {
+	display: inline-flex;
+	align-items: flex-start;
+	border: none;
+	padding: 0;
+	background: var(--wizard-color-slide-nav-arrows-background);
+	color: var(--wizard-color-slide-nav-arrows);
+	font-size: 2.75rem;
+	text-align: center;
+	width: 60px;
+}
+
+.wizard .mainRow .previousArea .buttonContainer,
+.wizard .mainRow .nextArea .buttonContainer {
+	line-height: 360px;
+	height: 360px;
+	text-align: center;
+	width: 60px;
+}
+
+.wizard .mainRow .previousArea:not(.disabled):focus,
+.wizard .mainRow .nextArea:not(.disabled):focus {
+	outline: dotted 2px #CCCCCC;
+}
+
+.wizard .mainRow .previousArea.disabled:focus,
+.wizard .mainRow .nextArea.disabled:focus {
+	outline: none;
+}
+
+.wizard .mainRow .previousArea:not(.disabled):hover,
+.wizard .mainRow .nextArea:not(.disabled):hover {
+	background-color: var(--wizard-color-slide-nav-arrows-hover-background);
+	color: var(--wizard-color-slide-nav-arrows-hover);
+	cursor: pointer;
+}
+
+.wizard .mainRow .previousArea.disabled,
+.wizard .mainRow .previousArea.noEarlierSlideCanDisplay {
+	opacity: 0;
+}
+
+.wizard .mainRow .nextArea.disabled {
+	opacity: 0.33;
+}
+
+.wizard .mainRow .nextArea.noLaterSlideCanDisplay {
+	opacity: 0;
+}
+
+.wizard .mainRow .previousArea:hover .fad:before,
+.wizard .mainRow .nextArea:hover .fad:before {
+	color: var(--wizard-color-slide-nav-arrows-hover-inner);
+	opacity: 1;
+}
+
+.wizard .mainRow .previousArea .fad:before,
+.wizard .mainRow .nextArea .fad:before {
+	color: var(--wizard-color-slide-nav-arrows-inner);
+	opacity: 1;
+}
+
+.wizard .mainRow .previousArea .fad:after,
+.wizard .mainRow .nextArea .fad:after {
+	color: inherit;
+	opacity: 1;
+}
+
+/* Pulse animation for the right area next button, but only on the first slide */
+@keyframes shadow-pulse {
+	0% { box-shadow: 0 0 0 0 rgba(128, 128, 128, 0.5); }
+	100% { box-shadow: 0 0 0 11px rgba(0, 0, 0, 0); }
+}
+
+.wizard.slideIntro .mainRow .nextArea.nextButton i {
+	border-radius: 50%;
+}
+
+.wizard.slideIntro .mainRow .nextArea.nextButton i {
+	animation: shadow-pulse 1s infinite;
+}
+
+.wizard .slideArea {
+	padding: 0 0 0.75rem 0;
+	vertical-align: top;
+}
+
+/* ----- The summary that appears floated at top right of many slides. ----- */
+
+.wizard .summary {
+	width: 22rem;
+	float: right;
+	vertical-align: top;
+	background-color: var(--wizard-color-summary-background);
+	color: var(--wizard-color-summary-text);
+	font-size: 0.8125rem;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.1;
+	padding: 0.5rem 0.8125rem;
+	margin: 1.25rem 1.125rem 1.25rem 1rem;
+}
+
+.wizard .summary .row > div {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+.wizard .summary .col-1,
+.wizard .summary .col-2,
+.wizard .summary .col-3,
+.wizard .summary .col-4,
+.wizard .summary .col-5,
+.wizard .summary .col-6,
+.wizard .summary .col-7,
+.wizard .summary .col-8,
+.wizard .summary .col-9,
+.wizard .summary .col-10,
+.wizard .summary .col-11,
+.wizard .summary .col-12 {
+	white-space: nowrap;
+}
+
+.wizard .summary .header,
+.wizard .summary .mainHeader {
+	font-size: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.125rem;
+	font-weight: bold;
+	color: var(--wizard-color-summary-header);
+}
+
+.wizard .summary .mainHeader {
+	font-size: 1.125rem;
+	margin-top: 0;
+}
+
+.wizard .summary .headerMini {
+	font-weight: bold;
+	font-size: 0.9375rem;
+	margin-top: 0.5rem;
+	color: var(--wizard-color-summary-headerMini);
+}
+
+.wizard .summary .label {
+	color: var(--wizard-color-summary-label-text);
+	background-color: var(--wizard-color-summary-label-background);
+	padding: 2px 5px 2px 5px;
+	border-radius: 2px;
+}
+
+.wizard .summary .label.value.unknown {
+	opacity: 0.67;
+}
+
+/* ----- The slides which appear in the slide area. Only one is visible at a time. ----- */
+
+/* First, styles/elements common to many slides. */
+
+.wizard .slide {
+	position: relative;
+	display: none;
+	padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+	color: var(--color-plain-text);
+	font-size: 1.125rem;
+}
+
+.wizard .slide.slideVisible {
+	display: block;
+}
+
+.wizard .slide p.small {
+	font-size: 1rem;
+	line-height: 1.125rem;
+}
+
+.wizard .slide .prompt {
+	color: var(--wizard-color-slide-prompt);
+	font-weight: bold;
+}
+
+.wizard .slide .keyInfo {
+	color: var(--wizard-color-slide-keyInfo);
+	font-weight: bold;
+}
+
+.wizard .slide .warning {
+	color: var(--wizard-color-slide-warning);
+}
+
+.wizard .slide button.nakedButton,
+.wizard .slide button:not(.btn)[data-bs-toggle="modal"] {
+	font-size: inherit;
+	font-weight: bold;
+}
+
+.wizard .slide select:not(.usageCategorySelect):not(.serviceCountSelect):not(.taxCalcPlanSelect) {
+	width: auto;
+	min-width: 12rem;
+	margin: 0.125rem 0.125rem 1.25rem 0;
+}
+
+/* Standard unordered list of answer buttons (stacked vertically) */
+
+.wizard .slide ul.answers {
+	color: var(--color-plain-text);
+	padding-left: 2rem;
+	line-height: 2.75rem;
+	list-style-type: none;
+	margin: 0.75rem 0 1rem 0;
+}
+
+.wizard .slide ul.answers li {
+	margin: 0;
+	line-height: 2.75rem;
+	vertical-align: middle;
+}
+
+/* Non-selected answer buttons */
+
+.wizard .slide ul.answers .btn {
+	color: var(--wizard-color-answer-btn-text);
+	background-color: var(--wizard-color-answer-btn);
+	border: solid 1px var(--wizard-color-answer-btn-border);
+}
+
+.wizard .slide ul.answers .btn:hover,
+.wizard .slide ul.answers .btn:hover:focus {
+	color: var(--wizard-color-answer-btn-hover-text);
+	background-color: var(--wizard-color-answer-btn-hover);
+	border: solid 1px transparent;
+}
+
+.wizard .slide ul.answers .btn:focus,
+.wizard .slide ul.answers .btn.focus {
+	color: var(--wizard-color-answer-btn-focus-text);
+	background-color: var(--wizard-color-answer-btn-focus);
+	box-shadow: var(--wizard-boxshadow-answer-btn-focus);
+	border: solid 1px transparent;
+}
+
+.wizard .slide ul.answers .btn.disabled,
+.wizard .slide ul.answers .btn:disabled {
+	color: var(--wizard-color-answer-btn-text);
+	background-color: var(--wizard-color-answer-btn);
+}
+
+.wizard .slide ul.answers .btn:not(:disabled):not(.disabled):active,
+.wizard .slide ul.answers .btn:not(:disabled):not(.disabled).active,
+.show > .wizard .slide ul.answers .btn.dropdown-toggle {
+	color: var(--wizard-color-answer-btn-active-text);
+	background-color: var(--wizard-color-answer-btn-active);
+	border: solid 1px transparent;
+}
+
+.wizard .slide ul.answers .btn:not(:disabled):not(.disabled):active:focus,
+.wizard .slide ul.answers .btn:not(:disabled):not(.disabled).active:focus,
+.show > .wizard .slide ul.answers .btn.dropdown-toggle:focus {
+	box-shadow: var(--wizard-boxshadow-answer-btn-focus);
+	border: solid 1px transparent;
+}
+
+/* Selected answer buttons */
+
+.wizard .slide ul.answers div.check {
+	width: 2.125rem;
+	height: 2.5rem;
+	float: left;
+	display: none;
+}
+
+.wizard .slide ul.answers li.selectedAnswer div.check {
+	display: block;
+}
+
+.wizard .slide ul.answers div.check .fa-check-square {
+	color: var(--wizard-color-selected-answer-checkmark);
+	padding-top: 0.375rem;
+	font-size: 2rem;
+}
+
+.wizard .slide ul.answers .selectedAnswer .btn {
+	border: solid 1px var(--wizard-color-selected-answer-btn);
+}
+.wizard .slide ul.answers .selectedAnswer .btn {
+	color: var(--wizard-color-selected-answer-btn-text);
+	background-color: var(--wizard-color-selected-answer-btn);
+}
+
+.wizard .slide ul.answers .selectedAnswer .btn:hover,
+.wizard .slide ul.answers .selectedAnswer .btn:hover:focus {
+	color: var(--wizard-color-selected-answer-btn-text);
+	background-color: var(--wizard-color-selected-answer-btn);
+}
+
+.wizard .slide ul.answers .selectedAnswer .btn:focus,
+.wizard .slide ul.answers .selectedAnswer .btn.focus {
+	color: var(--wizard-color-selected-answer-btn-text);
+	background-color: var(--wizard-color-selected-answer-btn);
+	box-shadow: var(--wizard-boxshadow-selected-answer-btn-focus);
+}
+
+.wizard .slide ul.answers .selectedAnswer .btn.disabled,
+.wizard .slide ul.answers .selectedAnswer .btn:disabled {
+	color: var(--wizard-color-selected-answer-btn-text);
+	background-color: var(--wizard-color-selected-answer-btn);
+}
+
+.wizard .slide ul.answers .selectedAnswer .btn:not(:disabled):not(.disabled):active,
+.wizard .slide ul.answers .selectedAnswer .btn:not(:disabled):not(.disabled).active,
+.show > .wizard .slide ul.answers .selectedAnswer .btn.dropdown-toggle {
+	color: var(--wizard-color-selected-answer-btn-text);
+	background-color: var(--wizard-color-selected-answer-btn);
+}
+
+.wizard .slide ul.answers .selectedAnswer .btn:not(:disabled):not(.disabled):active:focus,
+.wizard .slide ul.answers .selectedAnswer .btn:not(:disabled):not(.disabled).active:focus,
+.show > .wizard .slide ul.answers .selectedAnswer .btn.dropdown-toggle:focus {
+	box-shadow: var(--wizard-boxshadow-selected-answer-btn-focus);
+}
+
+/* Inline list of small answer buttons (with text only) */
+
+.wizard .slide ul.answers.list-inline {
+	display: inline;
+	padding: 0;
+}
+
+.wizard .slide ul.answers.list-inline li {
+	display: inline-block;
+	padding: 0 0.25rem 0 0;
+}
+
+/* Inline list of large answer buttons (large icon with text) */
+
+.wizard .slide ul.answers.list-inline.with-icons {
+	margin: 0;
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li {
+	margin: 1rem;
+	padding: 0;
+	line-height: initial;
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn {
+	width: 15rem;
+	background-color: var(--wizard-color-answer-btn);
+	color: var(--wizard-color-answer-icon);
+	box-shadow: var(--wizard-boxshadow-answer-icon);
+	padding: 0;
+	margin: 0;
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn:active {
+	color: var(--wizard-color-answer-icon);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn:focus,
+.wizard .slide ul.answers.list-inline.with-icons li .btn:focus:hover {
+	box-shadow: var(--wizard-boxshadow-answer-icon-focus);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn:hover,
+.wizard .slide ul.answers.list-inline.with-icons li .btn:active:hover {
+	background-color: var(--wizard-color-answer-icon-hover-background);
+	color: var(--wizard-color-answer-icon-hover);
+	box-shadow: var(--wizard-boxshadow-answer-icon-hover);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn,
+.wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn:active {
+	background-color: var(--wizard-color-answer-btn);
+	color: var(--wizard-color-selected-answer-btn);
+	box-shadow: var(--wizard-boxshadow-selected-answer-icon);
+	border: solid 1px var(--wizard-color-selected-answer-icon-border);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn:active {
+	color: var(--wizard-color-selected-answer-btn);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn:focus {
+	box-shadow: var(--wizard-boxshadow-selected-answer-icon-focus);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn .fa,
+.wizard .slide ul.answers.list-inline.with-icons li .btn .fad,
+.wizard .slide ul.answers.list-inline.with-icons li .btn .fal,
+.wizard .slide ul.answers.list-inline.with-icons li .btn .far,
+.wizard .slide ul.answers.list-inline.with-icons li .btn .fas {
+	font-size: 7rem;
+	padding: 1.5rem 1rem;
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn div.text {
+	min-height: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.125rem;
+	line-height: 1;
+	margin: 0 0.5rem 0.5rem 0.5rem;
+	padding: 0.4375rem 0.375rem;
+	background-color: var(--wizard-color-answer-icon);
+	color: var(--wizard-color-answer-btn);
+	font-weight: bold;
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li .btn:hover div.text {
+	background-color: var(--wizard-color-answer-icon-hover);
+	color: var(--wizard-color-answer-icon-hover-background);
+}
+
+.wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn div.text {
+	background-color: var(--wizard-color-selected-answer-btn);
+	color: var(--wizard-color-answer-btn);
+}
+
+.wizard .slideSavings .savingsAccountSliderRow .slider,
+.wizard .slideSavings .carryoverSliderRow .slider {
+	width: 60%;
+}
+
+.wizard .slide .checkboxCell {
+	vertical-align: middle;
+}
+
+.wizard .slide .answerRequired {
+	color: var(--wizard-color-slide-warning);
+}
+
+.wizard .slide .answerRequiredEmphasis {
+	font-weight: bold;
+}
+
+.wizard .slide select.form-control.required {
+	background-color: var(--color-neutral-background);
+	color: var(--color-neutral-text);
+	font-weight: bold;
+}
+
+/* Specific customizations for individual slides and slide elements. */
+
+/* --- slideIntro --- */
+
+.wizard .slide.slideIntro p {
+	font-size: 1.25rem;
+	line-height: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+
+/* --- slideStatus --- */
+
+.wizard .slideStatus .answers button {
+	min-width: 10rem;
+}
+
+/* --- slideSpouse --- */
+
+.wizard .slideSpouse .answers button {
+	min-width: 5rem;
+}
+
+/* --- slideChildren --- */
+
+.wizard .slideChildren .answers button {
+	min-width: 12rem;
+}
+
+/* --- slideSimplifiedModeling --- */
+
+#wizardSection.slideSimplifiedModeling .summary {
+	margin-bottom: 9rem; /* so that the rows of buttons don't wrap weird when there are a lot of individuals */
+}
+
+.wizard .slideSimplifiedModeling h1 {
+	font-size: 1.75rem; /* so the title doesn't wrap to the next line */
+}
+
+.wizard .slideSimplifiedModeling .utilizationAnswers {
+	padding: 0.125rem 0 0.125rem 0;
+	max-width: 640px;
+}
+
+.wizard .slideSimplifiedModeling ul.answers {
+	line-height: inherit;
+}
+
+.wizard .slideSimplifiedModeling ul.answers li {
+	line-height: inherit;
+}
+
+.wizard .slideSimplifiedModeling .utilizationAnswers .col-md-4 span,
+.wizard .slideSimplifiedModeling .utilizationAnswers .col-md-6 span {
+	font-size: 0.875rem;
+}
+
+.wizard .slideSimplifiedModeling .answers .btn {
+	font-size: 0.9375rem;
+	margin: 0 0 0.125rem 0;
+	padding: 0.25rem 0.5rem;
+}
+
+.wizard .slideSimplifiedModeling .utilizationAnswers .header {
+}
+
+.wizard .slideSimplifiedModeling .utilizationAnswers .header .usageCategory {
+}
+
+.wizard .slideSimplifiedModeling .utilizationAnswers .header button {
+	font-size: 1rem;
+}
+
+.wizard .slideSimplifiedModeling .utilizationAnswers select {
+	min-width: 6rem;
+	font-size: 0.9375rem;
+	margin: 0 0.25rem 0.125rem 0.25rem;
+}
+
+.wizard .slideSimplifiedModeling .individual {
+	margin-top: 0.5rem;
+}
+
+.wizard .slideSimplifiedModeling .individual .personLabel,
+.wizard .slideSimplifiedModeling .individual .categoryLabel {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	font-size: 0.9375rem;
+	line-height: 1;
+}
+
+/* --- slideDetailedModeling --- */
+
+.wizard .slideDetailedModeling .alert p {
+	font-size: 1rem;
+	line-height: 1.2;
+}
+
+.wizard .slideDetailedModeling .detailedModelingContents {
+	background-color: var(--color-adjustSection-modeling-pane);
+	color: var(--color-adjustSection-modeling-pane-text);
+	font-size: 1rem;
+	padding: 0 0.5rem;
+	margin: 0;
+}
+
+.wizard .slideDetailedModeling .detailedModelingContents::after {
+	display: block;
+	clear: both;
+	content: "";
+}
+.wizard .slideDetailedModeling .detailedModelingContents button {
+	color: var(--color-adjustSection-modeling-pane-link-hover);
+}
+
+.wizard .slideDetailedModeling .detailedModelingContents select {
+	font-size: inherit;
+}
+
+/* --- slidePriorities --- */
+
+.wizard .slidePriorities .planPriorityDescription {
+	max-width: 768px;
+	padding-bottom: 0;
+}
+
+/* --- slideSavings --- */
+
+.wizard .slideSavings .sliderMaximumNote {
+	color: var(--color-lighter-text);
+	font-size: 0.9375rem;
+    font-style: italic;
+	margin-top: 0.8125rem;
+	white-space: nowrap;
+}
+
+.wizard .slideSavings .savingsAccountSliderRow,
+.wizard .slideSavings .carryoverSliderRow {
+	width: 100%;
+}
+
+.wizard .slideSavings tr.over55Row td {
+	padding: 0.5rem 0.375rem 0 0;
+	font-size: 1rem;
+}
+
+.wizard .slideSavings tr.applyFundsToCostOfCareDropdown td {
+	padding: 0.625rem 0.5rem 0 0;
+}
+
+.wizard .slideSavings select.applyFundsToCostOfCareDropdown {
+	display: inline-block;
+	margin: 0.25rem 0 0 0;
+}
+
+.wizard .slideSavings tr.applyFundsToCostOfCareDropdown label {
+	display: none; /* not displayed since there's a longer description in the wizard markup */
+}
+
+/* --- slideFinalResults --- */
+
+.wizard .slideFinalResults .resultTips {
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	padding: 0.625rem 0.75rem 0.375rem 0.75rem;
+	margin-top: 1rem;
+}
+
+.wizard .slideFinalResults .resultTips p,
+.wizard .slideFinalResults .resultTips ul {
+	margin-bottom: 0.1875rem;
+}
+
+.wizard .slideFinalResults .resultTips ul {
+	padding-left: 25px;
+}
+
+.wizard .mpceChart,
+.wizard .mpceChartNoEmployeeFunding {
+	height: 525px;
+}
+
+.wizard .slideFinalResults button.planProvisionsButton,
+.wizard .slideFinalResults div.mainResultsTableDivCopy button {
+	font-weight: normal;
+}
+
+/* --- slideYourMatch --- */
+
+.wizard .slideYourMatch .simpleFeedback {
+	display: none;
+}
+
+.wizard .slideYourMatch button.planProvisionsButton,
+.wizard .slideYourMatch div.mainResultsTableDivCopy button {
+	font-weight: normal;
+}
+
+.wizard .slideYourMatch .planRecommendationResult,
+.wizard .slideYourMatch .planRecommendationResultNone {
+	display: none;
+}
+
+.wizard .slideYourMatch div.bestMatchPlan table tr td.icon img {
+	width: 80px;
+	padding-right: 20px;
+}
+
+/* ----- The buttons that appear below each slide. ----- */
+
+.wizard .buttonsAboveSlide {
+	display: none; /* buttons above the slide are only used by the personas config */
+}
+
+.wizard .buttonsBelowSlide {
+	text-align: right;
+	padding: 0 1rem 0.75rem 0;
+	vertical-align: middle;
+	position: absolute;
+	bottom: 0;
+	right: 1.25rem;
+	display: none; /* buttonsBelowSlide only used for narrower screens (see further below) */
+}
+
+.wizard .contentAboutButtonsBelowSlide {
+	display: none; /* content referring to buttonsBelowSlide also only used for narrower screens */
+}
+
+.wizard .buttonsBelowSlide .previousButton,
+.wizard .buttonsBelowSlide .nextButton,
+.wizard .buttonsBelowSlide .finalFullToolButton {
+	min-width: 8rem;
+	margin: 0.25rem 0 0.5rem 0.25rem;
+	padding: 0.25rem 0;
+}
+
+.wizard .buttonsBelowSlide .nextButton.disabled {
+	pointer-events: initial; /* Overrides Bootstrap; we want to display a message if disabled "Next" is clicked. */
+}
+
+.wizard .buttonsBelowSlide .nextButton.noLaterSlideCanDisplay {
+	display: none;
+}
+
+.wizard .buttonsBelowSlide .previousButton.disabled,
+.wizard .buttonsBelowSlide .previousButton.noEarlierSlideCanDisplay {
+	display: none;
+}
+
+.wizard:not(.slideFinalResults) .buttonsBelowSlide .finalFullToolButton {
+	display: none;
+}
+
+/*=========================================================================================================
+	Responsive adjustments for specific mobile screen resolutions (tablets, phones, etc.)
+  =========================================================================================================*/
+
+@media screen and (max-width: 1200px) {
+	.wizard .summary {
+		width: 18rem;
+		font-size: 0.75rem;
+		padding: 0.375rem 0.5rem;
+		margin: 1.5rem 0.75rem 0.75rem 0.75rem;
+	}
+
+	.wizard .summary .headerMini {
+		font-size: 0.8125rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn {
+		width: 12rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fa,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fad,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fal,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .far,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fas {
+		font-size: 6rem;
+		padding: 1rem 0.5rem;
+	}
+
+	.wizard .slideSimplifiedModeling .utilizationAnswers {
+		max-width: 500px;
+	}
+
+	.wizard .slideSimplifiedModeling .answers .btn {
+		padding: 0.1875rem 0.375rem;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	/* At 1023px and narrower, the previous and next areas at left and right disappear, and the bottom buttons appear. */
+
+	.wizard .contentAboutArrowsBesideSlide,
+	.wizard .mainRow .previousArea,
+	.wizard .mainRow .nextArea {
+		display: none;
+	}
+
+	.wizard .contentAboutButtonsBelowSlide,
+	.wizard .buttonsBelowSlide {
+		display: block;
+	}
+
+	.wizard .slideArea {
+		padding-bottom: 3rem; /* Prevent previous/next buttons at bottom from overlapping with slide content */
+	}
+
+	.wizard .slide {
+		/* More padding now that left and right areas are hidden */
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.wizard .slide ul.answers.list-inline.with-icons li .btn {
+		width: 9rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fa,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fad,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fal,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .far,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fas {
+		font-size: 4rem;
+		padding: 1rem 0.5rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn div.text {
+		font-size: 1rem;
+		padding: 0.375rem;
+	}
+
+	.wizard .slideSimplifiedModeling .utilizationAnswers {
+		max-width: 450px;
+	}
+
+	.wizard .slideSimplifiedModeling .utilizationAnswers .col-md-2,
+	.wizard .slideSimplifiedModeling .utilizationAnswers .col-md-4,
+	.wizard .slideSimplifiedModeling .utilizationAnswers .col-md-6 {
+		line-height: inherit;
+		min-height: inherit;
+	}
+
+	.wizard .slideSimplifiedModeling ul.answers {
+		line-height: 2rem;
+	}
+
+	.wizard .slideSimplifiedModeling .answers .btn {
+		padding: 0.1875rem 0.3125rem;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.wizard .slide {
+		padding: 1rem;
+	}
+
+	.wizard .slide h1 {
+		font-size: 1.75rem;
+		line-height: 1.75rem;
+		margin: 0 0 1rem 0;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	/* At 767px or narrower, the icons in the section map disappear, but the titles remain. */
+
+	.wizard .sectionMapRow {
+		display: none;
+	}
+
+	.wizard .sectionMapTable tr td div.icon {
+		display: none;
+	}
+
+	.wizard .sectionMapTable tr td div.title {
+		min-height: 3.5rem;
+		padding: 0.5rem 0.125rem 0.125rem 0.125rem;
+		font-size: 0.8125rem;
+		line-height: 1;
+	}
+
+	.wizard .slideArea {
+		width: 100%;
+		float: inherit;
+		vertical-align: inherit;
+		line-height: inherit;
+		padding-bottom: 0;
+	}
+
+	/* At 767px or narrower, the summary disappears. Only slide content remains. */
+	.wizard .summary {
+		display: none;
+	}
+
+	.wizard .slide {
+		padding: 1rem 1rem 0.75rem 1rem;
+	}
+
+	.wizard .slide ul.answers {
+		padding-left: 1.25rem;
+	}
+
+	.wizard .slideSimplifiedModeling .utilizationAnswers {
+		max-width: initial;
+	}
+
+	.wizard .slideSimplifiedModeling .individual .personLabel {
+		text-decoration: underline;
+		font-weight: bold;
+		font-size: 1rem;
+	}
+
+	.wizard .slideSavings select {
+		display: block;
+	}
+
+	.wizard .buttonsBelowSlide {
+		position: unset;
+	}
+}
+
+@media screen and (max-width: 479px) {
+	body.duringWizard #pageHeader #topMenu {
+		border-bottom: solid 2px #DDDDDD;
+	}
+
+	/* At 479px or narrower, the entire section map disappears */
+	.wizard .sectionMapRow {
+		display: none;
+	}
+
+	.wizard .slide {
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+
+	.wizard .slide h1 {
+		font-size: 1.625rem !important;
+		line-height: 1;
+	}
+
+	.wizard .slide h2 {
+		font-size: 1.1875rem !important;
+		line-height: 1;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li {
+		margin: 0.5rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn {
+		width: 8.375rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fa,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fad,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fal,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .far,
+	.wizard .slide ul.answers.list-inline.with-icons li .btn .fas {
+		font-size: 3.625rem;
+		padding: 0.75rem 0.25rem 0.625rem 0.25rem;
+	}
+
+	.wizard .slide ul.answers.list-inline.with-icons li .btn div.text {
+		font-size: 0.9375rem;
+		font-weight: normal;
+		padding: 0.25rem;
+	}
+
+	.wizard .slide.slideIntro p {
+		font-size: revert;
+	}
+
+	.wizard .slideSimplifiedModeling .utilizationAnswers .col-4,
+	.wizard .slideSimplifiedModeling .utilizationAnswers .col-8 {
+		margin-bottom: 0.5625rem;
+	}
+
+	.wizard .slideSimplifiedModeling .answers .btn {
+		padding: 0.25rem 0.625rem;
+	}
+
+	.wizard .slideSavings .savingsAccountSliderRow .slider,
+	.wizard .slideSavings .carryoverSliderRow .slider {
+		width: 58%;
+	}
+
+	.wizard .slideSavings .sliderMaximumNote {
+		display: none;
+	}
+
+	.wizard .coverageLevelHeading {
+		font-size: 1rem;
+	}
+
+	.wizard .buttonsBelowSlide {
+		padding-bottom: 0.125rem;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.wizard .slideSimplifiedModeling .individual .personLabel {
+		margin-bottom: 0.25rem;
+	}
+
+	.wizard .slideSimplifiedModeling .individual .categoryLabel {
+		font-size: 0.875rem;
+	}
+
+	.wizard .slideSimplifiedModeling .answers .btn {
+		font-size: 0.8125rem;
+		padding: 0.375rem 0.5rem 0.3125rem 0.5rem;
+	}
+}
+
+@media screen and (max-height: 599px) {
+	/* At under 600px high, the section map icons and summary disappear, if they hadn't already due to insufficient width */
+
+	body.duringWizard #pageHeader #topMenu {
+		border-bottom: solid 2px #DDDDDD;
+	}
+
+	.wizard .sectionMapRow {
+		display: none;
+	}
+
+	.wizard p {
+		margin-bottom: 0.5rem;
+	}
+
+	.wizard .slide h1 {
+		font-size: 1.625rem !important;
+		line-height: 1.1;
+	}
+
+	.wizard .slide h2 {
+		font-size: 1.1875rem !important;
+		line-height: 1.1;
+	}
+
+	.wizard .summary {
+		display: none;
+	}
+
+	.wizard .slide {
+		padding-top: 0.625rem;
+		padding-bottom: 0.5rem;
+	}
+
+	.wizard .slide.slideIntro p {
+		font-size: revert;
+	}
+
+	.wizard .slideSimplifiedModeling .utilizationAnswers {
+		max-width: initial;
+	}
+
+	.wizard .buttonsBelowSlide {
+		padding-bottom: 0.125rem;
+	}
+}
+
+@media screen and (min-width: 768px) and (min-height: 320px) { .wizard .mainRow, .wizard .slideArea { min-height: 82px; } }
+@media screen and (min-width: 768px) and (min-height: 370px) { .wizard .mainRow, .wizard .slideArea { min-height: 94px; } }
+@media screen and (min-width: 768px) and (min-height: 460px) { .wizard .mainRow, .wizard .slideArea { min-height: 188px; } }
+@media screen and (min-width: 768px) and (min-height: 480px) { .wizard .mainRow, .wizard .slideArea { min-height: 200px; } }
+@media screen and (min-width: 768px) and (min-height: 559px) { .wizard .mainRow, .wizard .slideArea { min-height: 287px; } }
+@media screen and (min-width: 768px) and (min-height: 568px) { .wizard .mainRow, .wizard .slideArea { min-height: 290px; } }
+@media screen and (min-width: 768px) and (min-height: 628px) { .wizard .mainRow, .wizard .slideArea { min-height: 355px; } }
+@media screen and (min-width: 768px) and (min-height: 660px) { .wizard .mainRow, .wizard .slideArea { min-height: 382px; } }
+@media screen and (min-width: 768px) and (min-height: 672px) { .wizard .mainRow, .wizard .slideArea { min-height: 396px; } }
+@media screen and (min-width: 768px) and (min-height: 720px) { .wizard .mainRow, .wizard .slideArea { min-height: 464px; } }
+@media screen and (min-width: 768px) and (min-height: 768px) { .wizard .mainRow, .wizard .slideArea { min-height: 512px; } }
+@media screen and (min-width: 768px) and (min-height: 800px) { .wizard .mainRow, .wizard .slideArea { min-height: 544px; } }
+@media screen and (min-width: 768px) and (min-height: 916px) { .wizard .mainRow, .wizard .slideArea { min-height: 644px; } }
+@media screen and (min-width: 768px) and (min-height: 928px) { .wizard .mainRow, .wizard .slideArea { min-height: 650px; } }
+
+
+/*=========================================================================================================
+	Additional styles conditionally applied when running wizardConfigPersonas
+  =========================================================================================================*/
+
+body.duringWizard.wizardConfigPersonas #topMenu {
+	display: none;
+}
+
+body.mpceView.wizardConfigPersonas #topMenu .useWizardButton {
+	/* For the personas config, there is no switching back to wizard from the full tool */
+	display: none !important;
+}
+
+body.duringWizard.wizardConfigPersonas #topMenuPersonas {
+	display: block;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapRow {
+	display: revert;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapTable tr {
+	display: revert !important;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapTable tr td {
+	border-right: none !important;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapTable tr td div.icon {
+	padding: 0;
+	height: 1.375rem;
+	display: revert;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapTable tr td div.title {
+	background-color: transparent;
+	color: #949494;
+	min-height: 1.875rem;
+	font-size: 0.9375rem;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 0.4375rem 0.25rem 0 0.25rem;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapTable tr td.current div.title {
+	color: #000000;
+	font-size: 1.0625rem;
+}
+
+body.wizardConfigPersonas .wizard .sectionMapTable tr td.visited:hover div.title {
+	background-color: transparent;
+	text-decoration: underline;
+	color: #888888;
+}
+
+body.wizardConfigPersonas .wizard .slideArea {
+	padding: 0.5rem 1.5rem 1rem 1.5rem;
+}
+
+body.wizardConfigPersonas .wizard .slide {
+	padding-top: 0.75rem;
+}
+
+body.wizardConfigPersonas .wizard .slide h1 {
+	color: #333333;
+	font-size: 2.25rem;
+	text-align: center;
+	margin-bottom: 1.325rem;
+}
+
+body.wizardConfigPersonas .wizard .slide h1 .fa,
+body.wizardConfigPersonas .wizard .slide h1 .fad,
+body.wizardConfigPersonas .wizard .slide h1 .fal,
+body.wizardConfigPersonas .wizard .slide h1 .far,
+body.wizardConfigPersonas .wizard .slide h1 .fas {
+	font-size: 80%;
+}
+
+body.wizardConfigPersonas .wizard .slide h2 {
+	color: #333333;
+	font-size: 1.75rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+body.wizardConfigPersonas .wizard .slide h3 {
+	color: #000000;
+	font-size: 1.5rem;
+	text-transform: uppercase;
+	margin-bottom: 1.5rem;
+}
+
+body.wizardConfigPersonas .wizard .btn-primary,
+body.wizardConfigPersonas .wizard .btn-secondary {
+	text-transform: uppercase;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+body.wizardConfigPersonas .wizard .alert-light {
+	background-color: transparent;
+	border-color: transparent;
+	color: #333333;
+}
+
+body.wizardConfigPersonas .wizard .mainRow .previousArea,
+body.wizardConfigPersonas .wizard .mainRow .nextArea {
+	display: none;
+}
+
+body.wizardConfigPersonas .wizard .buttonsAboveSlide {
+	display: flex;
+}
+
+body.wizardConfigPersonas .wizard .buttonsAboveSlide .btn.disabled {
+	display: none;
+}
+
+body.wizardConfigPersonas .wizard .buttonsBelowSlide {
+	display: none !important; /* in personas config each slide has its own next button with potentially distinct title */
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers {
+	padding-left: 0;
+	text-align: center;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn {
+	padding: 1.5rem 0.5rem 1rem 0.5rem;
+	border: solid 2px transparent;
+	box-shadow: none;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn div.text {
+	color: #565656;
+	background-color: transparent;
+	padding: 0;
+	margin: 0.75rem 0.25rem 0.5rem 0.25rem;
+	line-height: 1.125rem;
+	word-wrap: break-word;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn div.text {
+	color: #000000;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn:focus,
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn:focus:active {
+	box-shadow: none;
+	border: solid 2px #B1326E;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn:hover,
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn:active:hover {
+	box-shadow: none;
+	border: solid 2px transparent;
+	background-color: #F2F2F2;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn,
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn:active {
+	box-shadow: none;
+	border: solid 2px var(--color-btn-primary);
+	background-color: #FFF7FA;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn img {
+	width: 80px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li.selectedAnswer .btn:focus {
+	box-shadow: none;
+}
+
+body.wizardConfigPersonas .wizard .slide .btn .flip-box {
+	height: 80px;
+}
+
+body.wizardConfigPersonas .wizard .slide .btn .flip-box-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+body.wizardConfigPersonas .wizard .slide .btn .flip-box-inner {
+	transition: transform 1.0s;
+	transform-style: preserve-3d;
+}
+
+body.wizardConfigPersonas .wizard .slide .btn:hover .flip-box .flip-box-inner,
+body.wizardConfigPersonas .wizard .slide .btn .flip-box-back {
+	transform: rotateY(180deg);
+}
+
+body.wizardConfigPersonas .wizard .slide .btn .flip-box-front,
+body.wizardConfigPersonas .wizard .slide .btn .flip-box-back {
+	position: absolute;
+	width: 100%;
+	-webkit-backface-visibility: hidden; /* Safari */
+	backface-visibility: hidden;
+}
+
+body.wizardConfigPersonas .wizard .slide button.nakedButton,
+body.wizardConfigPersonas .wizard .slide button:not(.btn)[data-bs-toggle="modal"] {
+	color: #EE3D8B;
+}
+
+body.wizardConfigPersonas .wizard .slide button.nakedButton:hover,
+body.wizardConfigPersonas .wizard .slide button:not(.btn)[data-bs-toggle="modal"]:hover {
+	color: #DB4189;
+}
+
+body.wizardConfigPersonas .wizard .slideMatch .bestMatchPlan {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+body.wizardConfigPersonas .wizard .slideMatch img.bestMatchIcon {
+	width: 3rem;
+	max-width: 3rem;
+}
+
+body.wizardConfigPersonas .wizard .slideMatch .bestMatchPlan .text {
+	font-size: 1.375rem;
+	font-weight: bold;
+	line-height: 1;
+	margin: auto 0 1rem 0.75rem;
+}
+
+body.wizardConfigPersonas .wizard .slideMatch .bestMatchPlan .text .winningPlanName {
+	color: #EE3D8B;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel {
+	background-color: #F6F6F6;
+	color: #222222;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel .small {
+	color: #555555;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-item {
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-item > div.d-block {
+	padding-left: 6%;
+	padding-right: 6%;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-next,
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-prev {
+	width: 10%;
+	bottom: 4rem;
+	color: var(--wizard-color-slide-nav-arrows);
+	opacity: 1;
+	font-size: 2.75rem;
+	text-decoration: none;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-next:hover,
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-prev:hover {
+	color: var(--wizard-color-slide-nav-arrows-hover);
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-next:hover i.fad:before,
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-prev:hover i.fad:before {
+	color: var(--wizard-color-slide-nav-arrows-hover-inner);
+	opacity: 1;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-next i.fad:before,
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-prev i.fad:before {
+	color: var(--wizard-color-slide-nav-arrows-inner);
+	opacity: 1;
+}
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-next i.fad:after,
+body.wizardConfigPersonas .wizard .slideDetails .carousel-control-prev i.fad:after {
+	color: inherit;
+	opacity: 1;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-indicators {
+	list-style-type: none;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-indicators li {
+	color: var(--wizard-color-slide-nav-arrows-inner);
+	background-color: var(--wizard-color-slide-nav-arrows);
+	opacity: 0.4;
+	font-size: 0.875rem;
+	font-weight: bold;
+	text-indent: 0;
+	text-align: center;
+	line-height: 2rem;
+	width: 1.875rem;
+	height: 1.875rem;
+	border-radius: 100%;
+	padding: 0 1px 0 0;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-indicators li:not(.active):hover {
+	background-color: var(--wizard-color-slide-nav-arrows-hover);
+	opacity: 1;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-indicators {
+	margin-bottom: 1.25rem;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel-indicators .active {
+	opacity: 1;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails h3 {
+	margin: 1rem 1rem 0.5rem 1rem;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .alert {
+	padding: 0.1875rem 0.5rem;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .alert h3 {
+	margin-bottom: 0.5rem;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .alert p.keyInfo {
+	font-size: 1.375rem;
+}
+
+@keyframes full-tool-button-shadow-pulse {
+	0% { box-shadow: 0 0 0 0 rgba(160, 160, 160, 0.75); }
+	100% { box-shadow: 0 0 0 7px rgba(0, 0, 0, 0); }
+}
+
+body.wizardConfigPersonas .wizard .btn.clickGoesToFullTool.full-tool-button-shadow-pulse {
+	animation: full-tool-button-shadow-pulse 1s infinite;
+}
+
+/*=========================================================================================================
+	Styles for custom Vue components supporting wizardConfigPersonas
+  =========================================================================================================*/
+
+/* ----- match-name component ----- */
+
+.match-name {
+}
+
+/* ----- your-match component ----- */
+
+.your-match .photo {
+	text-align: center;
+}
+
+.your-match .photo img {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 267px;
+	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+    pointer-events: none;
+}
+
+.your-match .description {
+	flex-grow: 1;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.your-match .description .introduction {
+	color: #000000;
+	font-size: 1.375rem;
+	font-weight: bold;
+	line-height: 1.1;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	text-align: center;
+}
+
+.your-match .description .values {
+	flex-grow: 1;
+	align-content: stretch !important;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.your-match .description .values > div {
+	width: 100%;
+	flex-grow: 1;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	text-align: center;
+}
+
+.your-match .description .values > div > .icon > img {
+	width: 80px;
+/*	margin: 0.75rem; */
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.your-match .description .values > div > .name {
+	color: #000000;
+	font-weight: bold;
+	margin-bottom: 0.125rem;
+}
+
+.your-match .description .values > div > .value {
+	line-height: 1.1;
+}
+
+/* ----- plan-tiles and plan-tile components ----- */
+
+.plan-tiles {
+}
+
+.plan-tile {
+	padding: 0;
+	margin: 0.5rem;
+	text-align: left;
+	width: 11.5rem;
+	min-width: 11.5rem;
+	max-width: 11.5rem;
+	min-height: 16rem;
+	line-height: 1;
+}
+
+body.wizardConfigPersonas .wizard .slideDetails .carousel .plan-tile {
+	margin: 0.25rem;
+}
+
+.plan-tile:not(.totalCosts) {
+	min-height: 14rem;
+}
+
+.plan-tile .flip-box {
+	height: 100%;
+	perspective: 1000px;
+}
+
+.plan-tile .flip-box .flip-box-inner {
+	/* Avoid setting a background-color here; it causes an issue specific to Safari. */
+	border: solid 2px #CCCCCC;
+	border-radius: 5px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.plan-tile.winner .flip-box .flip-box-inner {
+	border-color: #00AC41;
+}
+
+body .plan-tile.totalCosts .flip-box .flip-box-inner {
+	transition: transform 1.0s, box-shadow 1.0s;
+	transform-style: preserve-3d;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+body .plan-tile.totalCosts:hover .flip-box .flip-box-inner {
+	box-shadow: -3px 3px 7px rgba(0, 0, 0, 0.25);
+	transform: rotateY(180deg);
+}
+
+body .plan-tile.totalCosts.winner .flip-box .flip-box-inner {
+	box-shadow: 3px 3px 7px rgba(0, 128, 0, 0.45);
+}
+
+body .plan-tile.totalCosts.winner:hover .flip-box .flip-box-inner {
+	box-shadow: -3px 3px 9px rgba(0, 128, 0, 0.55);
+}
+
+.plan-tile .front,
+.plan-tile .back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	-webkit-backface-visibility: hidden; /* Safari */
+	backface-visibility: hidden;
+	background-color: #FFFFFF;
+	color: #333333;
+}
+
+.plan-tile .back {
+	transform: rotateY(180deg);
+	background-color: #F9F9F9;
+	color: #111111;
+	font-size: 0.9375rem;
+}
+
+.plan-tile.winner .front,
+.plan-tile.winner .back {
+	background-color: #E1F6E9;
+	color: #111111;
+}
+
+.plan-tile .front > div {
+	padding: 0.375rem 0.5rem 0.25rem 0.5rem;
+}
+
+.plan-tile .back > div {
+	margin-top: auto;
+	margin-bottom: auto;
+	padding: 0.5rem 0.75rem;
+}
+
+.plan-tile .dollarIcons img {
+	width: 2.5rem;
+	padding-right: 0.5rem;
+	margin-top: 0.1875rem;
+	display: block;
+	float: left;
+}
+
+.plan-tile .amount .value {
+	font-size: 1.875rem;
+	font-weight: bold;
+}
+
+.plan-tile .amount .description {
+	font-size: 0.875rem;
+	padding-top: 0.125rem;
+	color: #666666;
+}
+
+.plan-tile.winner .amount .description {
+	color: #333333;
+}
+
+.plan-tile.taxSavings .amount {
+	color: #FF1D25;
+}
+
+.plan-tile div.planName {
+	vertical-align: top;
+	flex-grow: 1;
+	text-transform: uppercase;
+	font-size: 1.25rem;
+	font-weight: bold;
+	padding-bottom: 0.75rem;
+}
+
+.plan-tile div.planName div.text {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.plan-tile.winner div.planName div.text {
+	padding-right: 2.5rem; /* Makes room for the badge icon */
+}
+
+.plan-tile div.carryover {
+	background-color: #F2F2F2;
+	color: #333333;
+	font-size: 0.875rem;
+	line-height: 1.2;
+}
+
+.plan-tile.winner div.carryover {
+	padding-right: 3rem; /* Makes room for the badge icon */
+}
+
+.plan-tile.winner div.carryover {
+	background-color: green;
+	color: white;
+}
+
+.plan-tile:not(.totalCosts) div.carryover {
+	display: none;
+}
+
+.plan-tile div.carryover img {
+	width: 2.25rem;
+	float: left;
+	padding-left: 0.25rem;
+	padding-right: 0.5rem;
+}
+
+.plan-tile:not(.winner) div.carryover img {
+	filter: invert(50%) sepia(100%) saturate(700%) hue-rotate(87deg) brightness(79%) contrast(100%);
+}
+
+.plan-tile img.bestMatchIcon {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 3rem;
+}
+
+.plan-tile.totalCosts img.bestMatchIcon {
+	bottom: 1.25rem;
+}
+
+/*=========================================================================================================
+	Additional responsive adjustments specific to wizardConfigPersonas
+  =========================================================================================================*/
+
+@media screen and (min-width: 1346px) {
+	.plan-tile {
+		width: 15rem;
+		min-width: 15rem;
+		max-width: 15rem;
+	}
+
+	.plan-tile .front > div {
+		padding: 0.5rem 0.5rem 0.5rem 0.625rem;
+	}
+
+	.plan-tile .dollarIcons img {
+		width: 2.75rem;
+		padding-right: 0.625rem;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	body.wizardConfigPersonas .wizard .slideDetails .carousel-indicators {
+		display: none;
+	}
+
+	body.wizardConfigPersonas .wizard .slideDetails .carousel-item > div.d-block {
+		padding-left: 8%;
+		padding-right: 8%;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	body.wizardConfigPersonas .wizard .sectionMapTable tr td div.title {
+		font-size: 0.875rem !important;
+		font-weight: normal;
+	}
+
+	body.wizardConfigPersonas .wizard .slide {
+		padding-top: 1.25rem;
+	}
+
+	body.wizardConfigPersonas .wizard .slide h1 {
+		margin-bottom: 0.75rem;
+	}
+
+	body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons {
+		flex-wrap: wrap;
+	}
+
+	body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li {
+		display: flex;
+	}
+
+	body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn {
+		padding: 0.75rem 0.5rem;
+	}
+
+	body.wizardConfigPersonas .wizard .slide .btn .flip-box {
+		height: 60px;
+	}
+
+	body.wizardConfigPersonas .wizard .slide ul.answers.list-inline.with-icons li .btn img {
+		width: 60px;
+	}
+
+	body.wizardConfigPersonas .wizard .slideDetails .carousel .plan-tile {
+		margin: 0.25rem 0.75rem;
+	}
+
+	body.wizardConfigPersonas .wizard .slideDetails .carousel-control-next,
+	body.wizardConfigPersonas .wizard .slideDetails .carousel-control-prev {
+		font-size: 1.75rem;
+	}
+}
+
+@media screen and (max-width: 479px) {
+	body.wizardConfigPersonas .wizard .sectionMapTable tr td div.title {
+		font-size: 0.8125rem !important;
+	}
+
+	body.wizardConfigPersonas .wizard .slideArea {
+		padding: 0.5rem 0.375rem 1rem 0.375rem;
+	}
+
+	body.wizardConfigPersonas .wizard .your-match .photo {
+		padding-top: 0.75rem;
+	}
+
+	body.wizardConfigPersonas .wizard .slideDetails .carousel {
+		/* Makes more width available for carousel */
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	body.wizardConfigPersonas .wizard .sectionMapTable tr td div.title {
+		font-size: 0.75rem !important;
+	}
+
+	body.wizardConfigPersonas .wizard .btn-primary,
+	body.wizardConfigPersonas .wizard .btn-secondary {
+		font-weight: normal;
+	}
+
+	body.wizardConfigPersonas .wizard .your-match .photo img {
+		max-width: 16rem;
+	}
+}

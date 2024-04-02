@@ -1,0 +1,34 @@
+/*=========================================================================================================
+	Cookie Constent styling
+  =========================================================================================================*/
+
+#consent-banner {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 3147483647;
+}
+
+#consent-banner p
+{
+	font-size: 12px;
+	font-weight: 400;
+	color: #ffffff;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 1rem;
+	line-height: 1rem;
+}
+
+#consent-banner a
+{
+	font-size: 12px;
+}
+
+#teconsent a
+{
+	font-size: 12px;
+	position: fixed;
+	bottom: 0;
+}

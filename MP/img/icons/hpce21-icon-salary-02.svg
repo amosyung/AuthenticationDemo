@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+	<defs>
+		<style>
+			.cls-1 { fill: #fff; font-family: 'Arial'; font-size: 75px; letter-spacing: .07em; }
+			.cls-2 { fill: #00958e; }
+		</style>
+	</defs>
+	<g id="Layer_2">
+		<path class="cls-2" d="M100,200c55.23,0,100-44.77,100-100S155.23,0,100,0,0,44.77,0,100s44.77,100,100,100"/>
+	</g>
+	<text class="cls-1" transform="translate(56.62 124.27)">
+		<tspan x="0" y="0">$$</tspan>
+	</text>
+</svg>

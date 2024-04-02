@@ -1,0 +1,78 @@
+.tabs_wrapper_PlanProvisions {
+	width: 100%;
+	height: 1000px;
+	margin: 0 auto;
+}
+
+.tabs_PlanProvisions {
+	position: relative;
+/*	margin: 2rem 0; */
+	background: #006B90;
+}
+
+.tabs_PlanProvisions::before,
+.tabs_PlanProvisions::after {
+	content: "";
+	display: table;
+}
+
+.tabs_PlanProvisions::after {
+	clear: both;
+}
+
+.tab_PlanProvisions {
+	float: left;
+}
+
+.tab-switch_PlanProvisions {
+	display: none;
+}
+
+.tab-label_PlanProvisions {
+	position: relative;
+	display: block;
+	line-height: 2.75em;
+	height: 3em;
+	padding: 0 1.618em;
+	background: #006B90;
+	border-right: 0.125rem solid #ffffff;
+	color: #fff;
+	cursor: pointer;
+	top: 0;
+	transition: all 0.25s;
+}
+
+.tab-label_PlanProvisions:hover {
+	top: -0.25rem;
+	transition: top 0.25s;
+}
+
+.tab-content_PlanProvisions {
+	position: absolute;
+	z-index: 1;
+	top: 2.75em;
+	left: 0;
+	padding: 1.618rem;
+	background: #fff;
+	color: #2c3e50;
+	opacity: 0;
+	transition: all 0.35s;
+	border: 2px solid #006B90;
+}
+
+.tab-switch_PlanProvisions:checked + .tab-label_PlanProvisions {
+	background: #002c77;
+	color: #ffffff;
+	border-bottom: 0;
+	border-right: 0.125rem solid #fff;
+	transition: all 0.35s;
+	z-index: 1;
+	top: -0.0625rem;
+}
+
+.tab-switch_PlanProvisions:checked + label + .tab-content_PlanProvisions {
+	z-index: 2;
+	opacity: 1;
+	transition: all 0.35s;
+}
+

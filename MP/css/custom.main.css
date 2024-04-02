@@ -1,0 +1,2350 @@
+/*=========================================================================================================
+	Application-wide styles.
+  =========================================================================================================*/
+
+/* Variables for those style properties that are most likely to vary by client. */
+:root {
+	--color-body-background: #F3F3F3;
+	--color-pageHeader-background: #FFFFFF;
+	--color-pageHeader-text: #333333;
+	--color-pageHeader-topMenu-link: #666666;
+	--color-pageHeader-topMenu-link-hover: #005F7F;
+	--color-pageHeader-topMenu-icon: #00A9C8;
+	--color-pageHeader-topMenu-icon-hover: #036E9F;
+	--color-main-content-background: #FFFFFF;
+	--color-headings: #006B90;
+	--color-plain-text: #333333;
+	--color-bold-text: #000000;
+	--color-lighter-text: #666666;
+	--color-link: #006B90;
+	--color-link-hover: #005F7F;
+	--color-modal-title: #006B90;
+	--color-modal-body-headings: #222222;
+	--color-neutral-background: #F2F3F4;
+	--color-neutral-text: #111111;
+	--color-neutral-border: #D6D8DB;
+	--color-sectionHeader-background: #006B90;
+	--color-sectionHeader-text: #FFFFFF;
+	--color-adjustSection-modeling-pane: #D7E9ED;
+	--color-adjustSection-modeling-pane-text: #222222;
+	--color-adjustSection-modeling-pane-link: #006B90;
+	--color-adjustSection-modeling-pane-link-hover: #005F7F;
+	--color-adjustSection-modeling-pane-border: #B6D2DB;
+	--color-hsaSlider-background: #F2ACC1;
+	--color-fsaSlider-background: #C4E1C8;
+	--color-carryoverSlider-background: #9BD1D0;
+	--color-resultsTable-header-background: #9BCDDB;
+	--color-resultsTable-header-text: #333333;
+	--color-resultsTable-regular-background: #E6F2F7;
+	--color-resultsTable-regular-text: #333333;
+	--color-resultsTable-cell-border: #CBE7EF;
+	--color-resultsTable-summaryRow-background: #C7E5F0;
+	--color-resultsTable-summaryRow-text: #000000;
+	--color-resultsTable-summaryRow-link: #006B90;
+	--color-resultsTable-footer-background: transparent;
+	--color-resultsTable-footer-text: inherit;
+	--color-pageFooter-background: #FFFFFF;
+	--color-pageFooter-text: #767676;
+	--color-btn-primary: #007990;
+	--color-btn-primary-text: #FFFFFF;
+	--color-btn-primary-focus: #0393AD;
+	--color-btn-primary-focus-text: #FFFFFF;
+	--color-btn-primary-hover: #014956;
+	--color-btn-primary-hover-text: #FFFFFF;
+	--color-btn-primary-active: #204F75;
+	--color-btn-primary-active-text: #FFFFFF;
+	--boxshadow-btn-primary-focus: 0 0 0 0.2rem #92C7FF;
+	--color-btn-secondary: #009DE0;
+	--color-btn-secondary-text: #FFFFFF;
+	--color-btn-secondary-focus: #009DE0;
+	--color-btn-secondary-focus-text: #FFFFFF;
+	--color-btn-secondary-hover: #0081B5;
+	--color-btn-secondary-hover-text: #FFFFFF;
+	--color-btn-secondary-active: #0074A3;
+	--color-btn-secondary-active-text: #FFFFFF;
+	--boxshadow-btn-secondary-focus: 0 0 0 0.2rem #ABCEDB;
+	--color-tooltip-background: #204F75;
+	--color-tooltip-text: #FFFFFF;
+	--color-plain-value: #0022AA;
+	--color-highlight-value: #036E9F;
+	--color-positive-value: #28A745;
+	--color-negative-value: #C6303E;
+	--color-warning-value: #B14616;
+	--color-zero-value: #AAAAAA;
+	--font-family: ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--sectionHeaderIcon-display: none; /* "initial" to show, or "none" to hide */
+}
+
+:root {
+	overflow-y: scroll;
+	font-size: 16px;
+}
+
+body {
+	font-family: var(--font-family);
+	line-height: 1.25;
+	background-color: var(--color-body-background);
+	color: var(--color-plain-text);
+	border: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+svg text {
+	/* "svg text" is for Highcharts to use the same font as above */
+	font-family: var(--font-family);
+}
+
+[v-cloak] {
+	/* Used to hide Vue elements before Vue has been loaded. */
+	display: none !important;
+}
+
+a {
+	cursor: pointer;
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+a.btn,
+a.btn:hover {
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	text-decoration: underline;
+}
+
+button.nakedButton,
+button:not(.btn)[data-bs-toggle="modal"] {
+	background: none;
+	border: none;
+	padding: 0;
+	font-family: var(--font-family);
+	color: var(--color-link);
+	text-decoration: none;
+	cursor: pointer;
+	text-align: left;
+}
+
+button.nakedButton:hover,
+button:not(.btn)[data-bs-toggle="modal"]:hover {
+	color: var(--color-link-hover);
+	text-decoration: underline;
+}
+
+b,
+strong {
+	color: var(--color-bold-text);
+	font-weight: bold;
+}
+
+select.form-control {
+	padding: 0 2rem 0 0.75rem;
+	height: calc(2rem + 2px);
+	color: var(--color-plain-text);
+}
+
+select.form-control.form-select {
+	background-position: right 0.25rem center;
+}
+
+div.form-control {
+	height: calc(2rem + 2px);
+}
+
+select::-ms-expand {
+	width: 0.75rem;
+	border: none;
+	background-color: var(--color-main-content-background);
+}
+
+.small,
+small {
+	color: var(--color-lighter-text);
+	font-style: italic;
+	font-size: 0.875rem;
+	line-height: 0.9375rem;
+	text-transform: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--color-headings);
+}
+
+h1 b,
+h2 b,
+h3 b,
+h4 b,
+h5 b,
+h6 b {
+	color: inherit;
+}
+
+h1 {
+	font-size: 1.875rem;
+	line-height: 2rem;
+	margin-bottom: 0.75rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	margin-bottom: 0.625rem;
+}
+
+h3 {
+	font-size: 1.1875rem;
+}
+
+h4,
+h5,
+h6 {
+	font-size: 1rem;
+}
+
+p {
+	margin-bottom: 0.75rem;
+}
+
+label {
+}
+
+img {
+	border: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.3);
+}
+
+input[type="radio"] {
+	transform: scale(1.3);
+	margin-right: 0.375rem;
+}
+
+input[type="radio"]:checked+label {
+	font-weight: bold;
+}
+
+.printOnly {
+	display: none;
+}
+
+body.initialized .hiddenOnceInitialized {
+	display: none !important;
+}
+
+body:not(.initialized) .hiddenUntilInitialized {
+	display: none !important;
+}
+
+.template,
+.hiddenNotApplicable {
+	display: none !important;
+}
+
+.notInUse {
+	/* Tip: Use class="notInUse" to suppress elements not required by a particular client implementation. This is
+		better than a direct style="display: none;" on an element, as it could possibly still be shown by app logic
+		that performs conditional .show()/.hide() etc., while this class will always remain on the element. */
+	display: none !important;
+}
+
+.planSpecific {
+	/* Markup classed as plan-specific should start as invisible will be
+		displayed only when application logic requests; e.g. if plan is part
+		of the currently selected config/region, etc. */
+	display: none;
+}
+
+.companyFundingRow,
+.companyMatchRow {
+	/* Similarly, the company funding and company match rows will remain hidden
+		until there is a plan active that has such a match. */
+	display: none;
+}
+
+body:not(.duringWizard) .hideInFullTool {
+	display: none !important;
+}
+
+body.duringWizard .hideInWizard {
+	display: none !important;
+}
+
+body:not(.fullToolEnabled) .fullToolEnabledOnly,
+body.fullToolEnabled .fullToolNotEnabledOnly,
+body:not(.wizardEnabled) .wizardEnabledOnly,
+body:not(.wizardEnabled) .hiddenIfWizardDisabled,
+body.wizardEnabled .wizardNotEnabledOnly,
+body:not(.simplifiedModelingEnabled) .simplifiedModelingOnly,
+body:not(.simplifiedModelingEnabled) .simplifiedModelingEnabledOnly,
+body.simplifiedModelingEnabled .simplifiedModelingNotEnabledOnly,
+body:not(.detailedModelingEnabled) .detailedModelingOnly,
+body:not(.detailedModelingEnabled) .detailedModelingEnabledOnly,
+body.detailedModelingEnabled .detailedModelingNotEnabledOnly,
+body:not(.bothModelingModesEnabled) .bothModelingModesOnly,
+body:not(.bothModelingModesEnabled) .bothModelingModesEnabledOnly,
+body.bothModelingModesEnabled .bothModelingModesNotEnabledOnly,
+body:not(.anyContributionsFeature) .anyContributionsFeatureOnly,
+body:not(.taxCalculatorEnabled) .taxCalculatorEnabledOnly,
+body:not(.taxCalculatorEnabled) .hideIfTaxCalculatorDisabled,
+body.taxCalculatorEnabled .taxCalculatorNotEnabledOnly {
+	display: none !important;
+}
+
+body:not(.modelingModeIsSimplified) .showWhenModelingModeIsSimplified,
+body:not(.modelingModeIsDetailed) .showWhenModelingModeIsDetailed {
+	display: none !important;
+}
+
+body:not(.saveScenarioEnabled) .saveScenarioButton,
+body:not(.saveScenarioEnabled) .saveScenarioEnabledOnly,
+body.saveScenarioEnabled .saveScenarioNotEnabledOnly {
+	display: none !important;
+}
+
+body:not(.scenarioLoaded):not(.presetLoaded) .clearScenarioButton {
+	display: none !important;
+}
+
+body:not(.planRecommendationEnabled) #prioritiesSection,
+body:not(.planRecommendationEnabled) .planRecommendationResult,
+body:not(.planRecommendationEnabled) .planRecommendationResultNone,
+body:not(.planRecommendationEnabled) .planRecommendationEnabledOnly,
+body.planRecommendationEnabled .planRecommendationNotEnabledOnly {
+	display: none !important;
+}
+
+body:not(.simpleFeedbackEnabled) .simpleFeedback,
+body:not(.simpleFeedbackEnabled) .simpleFeedbackEnabledOnly,
+body.simpleFeedbackEnabled .simpleFeedbackNotEnabledOnly {
+	display: none !important;
+}
+
+body:not(.videoLibraryEnabled) .videoLibraryButton,
+body:not(.videoLibraryEnabled) .videoLibraryEnabledOnly,
+body.videoLibraryEnabled .videoLibraryNotEnabledOnly {
+	display: none !important;
+}
+
+.radioCell,
+.checkboxCell {
+	vertical-align: top;
+	padding-top: 0.5em;
+}
+
+.slider {
+	margin: 0.625rem 0 0.625rem 0.75rem;
+	width: 65%;
+	float: left;
+}
+
+.ui-slider.ui-widget-content {
+	border-color: #BAD9EF;
+}
+
+.ui-slider .ui-slider-handle {
+	width: 1.3em;
+	height: 1.3em;
+	top: -0.325em;
+	margin-left: -0.65em;
+	border-radius: 15px;
+	border-color: #9DCAE8;
+}
+
+.ui-slider-range.ui-widget-header {
+	background: #E3F0F7 none;
+}
+
+.sliderTextInput {
+	width: 5rem;
+	float: left;
+	border: solid 1px #D7E7F2;
+	border-radius: 3px;
+	color: #343A40;
+	background-color: #F9F9F9;
+	font-weight: bold;
+	font-variant-numeric: tabular-nums;
+	padding: 0.125rem 0.375rem;
+	margin: 0.25rem 0 0.125rem 0.75rem;
+}
+
+.carryoverSliderTextInput {
+	width: 5.5rem;
+}
+
+.sliderTextInput:focus {
+	background-color: #E9F4FC;
+	color: #113388;
+	border: solid 1px #AED0EA;
+}
+
+.sliderTextWithTooltip,
+.textWithTooltip {
+	color: var(--color-link);
+	font-weight: normal;
+}
+
+.sliderTextWithTooltip {
+	float: left;
+}
+
+.sliderTextNoTooltip {
+	float: left;
+	font-weight: normal;
+}
+
+.sliderTextWithTooltip.disabled,
+.textWithTooltip.disabled,
+.sliderTextInput.disabled,
+.savingsAccountSliderLabel.disabled {
+	opacity: 0.4;
+}
+
+.chartTooltip {
+	min-width: 320px;
+	font-family: var(--font-family);
+	font-size: 0.875rem;
+	margin: 0;
+	padding: 0;
+}
+
+.chartTooltip .seriesName {
+	color: var(--color-plain-text);
+	white-space: break-spaces;
+}
+
+.chartTooltip > .value {
+	font-size: 0.9375rem;
+	font-weight: bold;
+	color: var(--color-plain-value);
+}
+
+.chartTooltip .highlight {
+	color: var(--color-highlight-value);
+}
+
+.feedbackButton {
+	margin-left: 0.125rem;
+	margin-right: 0.125rem;
+}
+
+todo,
+.todo {
+	background-color: #FFFF00;
+}
+
+.radioButtonsDiv fieldset .field {
+	width: 100%;
+	display: table-row;
+	vertical-align: middle;
+}
+
+.radioButtonsDiv input {
+	display: table-cell;
+	margin-left: 1rem;
+	margin-right: 0.5rem;
+}
+
+.radioButtonsDiv label {
+	width: 100%;
+	display: table-cell;
+	padding-bottom: 0.1875rem;
+}
+
+/* Overrides of some Bootstrap styles */
+
+.alert-primary {
+	background-color: #E6F2FF;
+	border-color: #C7DDE2;
+	color: var(--color-plain-text);
+}
+
+.alert-secondary {
+	background-color: var(--color-neutral-background);
+	color: var(--color-neutral-text);
+	border-color: var(--color-neutral-border);
+}
+
+.alert-warning {
+	background-color: #FFFBCC;
+	border-color: #FFF056;
+	color: #111111;
+}
+
+.alert-success {
+	background-color: #E1F6E9;
+	border: solid 2px #00AC41;
+}
+
+div.topmost.container,
+div.topmost.container-fluid {
+	margin-bottom: 0.625rem;
+	background-color: inherit;
+	max-width: 1346px; /* becomes 1320 after accounting for padding */
+	padding: 0 13px;
+	overflow: hidden;
+}
+
+.btn {
+	border: none;
+	cursor: pointer;
+	padding-right: 1.75rem;
+	padding-left: 1.75rem;
+}
+
+.btn-lg {
+	padding: 0.5625rem 1.75rem 0.5rem 1.75rem;
+	min-width: 12rem;
+}
+
+.btn.disabled,
+.btn:disabled {
+	opacity: .25;
+}
+
+.btn-primary {
+	color: var(--color-btn-primary-text);
+	background-color: var(--color-btn-primary);
+	border-color: var(--color-btn-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:hover:focus {
+	color: var(--color-btn-primary-hover-text);
+	background-color: var(--color-btn-primary-hover);
+	border-color: var(--color-btn-primary-hover);
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+	color: var(--color-btn-primary-focus-text);
+	background-color: var(--color-btn-primary-focus);
+	border-color: var(--color-btn-primary-focus);
+	box-shadow: var(--boxshadow-btn-primary-focus);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+	color: var(--color-btn-primary-text);
+	background-color: var(--color-btn-primary);
+	border-color: var(--color-btn-primary);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+	color: var(--color-btn-primary-active-text);
+	background-color: var(--color-btn-primary-active);
+	border-color: var(--color-btn-primary-active);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+	box-shadow: var(--boxshadow-btn-primary-focus);
+}
+
+.btn-secondary {
+	color: var(--color-btn-secondary-text);
+	background-color: var(--color-btn-secondary);
+	border-color: var(--color-btn-secondary);
+}
+
+.btn-secondary:hover,
+.btn-secondary:hover:focus {
+	color: var(--color-btn-secondary-hover-text);
+	background-color: var(--color-btn-secondary-hover);
+	border-color: var(--color-btn-secondary-hover);
+}
+
+.btn-secondary:focus,
+.btn-secondary.focus {
+	color: var(--color-btn-secondary-hover-text);
+	background-color: var(--color-btn-secondary-focus);
+	border-color: var(--color-btn-secondary-focus);
+	box-shadow: var(--boxshadow-btn-secondary-focus);
+}
+
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+	color: var(--color-btn-secondary-text);
+	background-color: var(--color-btn-secondary);
+	border-color: var(--color-btn-secondary);
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active,
+.btn-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-secondary.dropdown-toggle {
+	color: var(--color-btn-secondary-active-text);
+	background-color: var(--color-btn-secondary-active);
+	border-color: var(--color-btn-secondary-active);
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active:focus,
+.btn-secondary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-secondary.dropdown-toggle:focus {
+	box-shadow: var(--boxshadow-btn-secondary-focus);
+}
+
+.btn-light {
+	background-color: #F0F0F0;
+}
+
+.tooltip {
+	font-family: var(--font-family);
+	font-size: 0.9375rem;
+}
+
+.tooltip.show {
+	opacity: 1;
+}
+
+.tooltip .tooltip-inner {
+	background-color: var(--color-tooltip-background);
+	color: var(--color-tooltip-text);
+	padding: 0.75rem;
+	max-width: 20rem;
+}
+
+.tooltip .arrow::before {
+	border-top-color: var(--color-tooltip-background);
+}
+
+.modal-open[style] {
+	/* Prevents the page body from shifting a little to the left when a modal is open */
+	padding-right: 0 !important;
+}
+
+.modal-header {
+	border-bottom-color: #E2E2E2;
+	padding: 0.75rem 1rem 0.625rem 1rem;
+}
+
+.modal-header .modal-title {
+	font-size: 1.3125rem;
+	line-height: 1.3125rem;
+	color: var(--color-modal-title);
+}
+
+.modal-header div.buttons {
+	min-width: 5rem;
+	text-align: right;
+}
+
+.modal-header .fa.fa-print {
+	color: #888888;
+}
+
+.modal-header .fa.fa-print:hover {
+	color: #333333;
+}
+
+.modal-header .btn-close {
+	width: 0.75rem;
+	height: 0.75rem;
+	padding-left: 1rem;
+	opacity: 0.4;
+}
+
+.modal-header .btn-close:hover {
+	opacity: 0.8;
+}
+
+.modal-body {
+	max-height: 480px;
+	overflow: auto;
+	line-height: 1.25;
+}
+
+.modal-body h1,
+.modal-body h2,
+.modal-body h3,
+.modal-body h4,
+.modal-body h5,
+.modal-body h6 {
+	color: var(--color-modal-body-headings);
+	line-height: 1;
+	margin-bottom: 0.5625rem;
+}
+
+.modal-body h1 {
+	font-size: 1.375rem;
+	margin-top: 0;
+}
+
+.modal-body h2 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.modal-body h3,
+.modal-body h4,
+.modal-body h5,
+.modal-body h6 {
+	font-size: 1.0625rem;
+	margin-top: 1rem;
+}
+
+.modal-body p {
+	margin-bottom: 0.625rem;
+}
+
+.modal-body ul,
+.modal-body ol {
+	margin-bottom: 1rem;
+}
+
+.modal-body li {
+	margin-bottom: 0.125rem;
+}
+
+.modal-footer {
+	border-top-color: #E2E2E2;
+}
+
+.ui-effects-transfer {
+	/* for jQuery UI transfer effect */
+	border: 1px dotted #777777;
+	background-color: rgba(224, 224, 224, 0.4);
+	border-radius: 5px;
+}
+
+.equal,
+.equal > div[class*='col-'] {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex:1 1 auto;
+}
+
+/*=========================================================================================================
+	Page header: Includes the logo, title, and top menu.
+  =========================================================================================================*/
+
+#pageHeader {
+	background-color: var(--color-pageHeader-background);
+	color: var(--color-pageHeader-text);
+	margin-bottom: 0;
+	display: flex;
+	align-items: center;
+	text-align: left;
+}
+
+#pageHeader .headerBox {
+	font-size: 1.75rem;
+	line-height: 1;
+}
+
+#pageHeader #headerBox1 {
+}
+
+#pageHeader #headerBox1 img {
+}
+
+#pageHeader #headerBox2 {
+}
+
+#pageHeader #headerBox2 .mainTitle {
+}
+
+#pageHeader #headerBox2 .subTitle {
+	font-size: 67%;
+	margin-top: 0.125rem;
+}
+
+#pageHeader .topMenu {
+	background-color: var(--color-pageHeader-background);
+	line-height: 1.25;
+	text-align: right;
+}
+
+#pageHeader .topMenu.ownRow {
+	padding: 0 0.25rem 0.3125rem !important;
+	flex: 0 0 100%;
+	max-width: 100%;
+}
+
+#pageHeader .topMenu a,
+#pageHeader .topMenu button {
+	background: none;
+	border: none;
+	padding: 0 0.125rem 0 0.3125rem;
+	font-family: var(--font-family);
+	color: var(--color-pageHeader-topMenu-link);
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+#pageHeader .topMenu a:hover span,
+#pageHeader .topMenu button:hover span {
+	color: var(--color-pageHeader-topMenu-link-hover);
+	text-decoration: underline;
+}
+
+#pageHeader .topMenu a .fa,
+#pageHeader .topMenu a .fad,
+#pageHeader .topMenu a .fal,
+#pageHeader .topMenu a .far,
+#pageHeader .topMenu a .fas,
+#pageHeader .topMenu button .fa,
+#pageHeader .topMenu button .fad,
+#pageHeader .topMenu button .fal,
+#pageHeader .topMenu button .far,
+#pageHeader .topMenu button .fas {
+	color: var(--color-pageHeader-topMenu-icon);
+	padding-right: 0.25rem;
+	padding-left: 0.0625rem;
+}
+
+#pageHeader .topMenu a:hover,
+#pageHeader .topMenu a:hover .fa,
+#pageHeader .topMenu a:hover .fad,
+#pageHeader .topMenu a:hover .fal,
+#pageHeader .topMenu a:hover .far,
+#pageHeader .topMenu a:hover .fas,
+#pageHeader .topMenu button:hover,
+#pageHeader .topMenu button:hover .fa,
+#pageHeader .topMenu button:hover .fad,
+#pageHeader .topMenu button:hover .fal,
+#pageHeader .topMenu button:hover .far,
+#pageHeader .topMenu button:hover .fas {
+	text-decoration: none;
+	color: var(--color-pageHeader-topMenu-icon-hover);
+}
+
+body.taxView .hiddenInTaxView {
+	display: none !important; /* e.g. Hides the "Guide Me" / "Full Tool" links while only in the tax view */
+}
+
+body.duringWizard .useWizardButton {
+	display: none !important; /* e.g. Hides the "Guide Me" link while already using wizard */
+}
+
+body:not(.duringWizard) .useFullToolButton {
+	display: none !important; /* e.g. Hides the "Full Tool" button while already using full tool */
+}
+
+/* Hide top menu links specific to wizardConfigPersonas when not running in that configuration */
+body:not(.wizardConfigPersonas) .startOverLink,
+body:not(.wizardConfigPersonas) #topMenuPersonas {
+	display: none;
+}
+
+/*=========================================================================================================
+	Page main body: Sections include #loadingToolSection, #toolIntroSection, #wizardSection (optional,
+	with content loaded at run-time), #personalSection, #adjustSection, #mpceSection, #feedbackSection,
+	#taxIntroSection, and #taxCalcSection (which is hidden until requested for a specific plan).
+
+	NOTE: Styles for #wizardSection are contained in custom.wizard.css; don't include wizard styles here.
+  =========================================================================================================*/
+
+body:not(.launchPage) #pageBody {
+	background-color: transparent;
+}
+
+#loadingToolSection {
+	font-size: 1.25rem;
+	padding: 7rem 3.5rem 5.25rem 3.5rem;
+	background-color: var(--color-main-content-background);
+}
+
+#toolIntroSection {
+	font-size: 1.125rem;
+}
+
+#toolIntroSection .sectionBody {
+	padding-top: 1.5rem;
+}
+
+#warning,
+#error {
+	font-size: 1.125rem;
+	padding: 1.75rem 2rem 1.5rem 2rem;
+	background-color: #FFF9F9;
+	border: solid 1px #E3B8B8;
+	color: #AA1122;
+}
+
+#warning p.detail,
+#error p.detail {
+	background-color: #FFFFFF;
+	border: solid 1px #E3B8B8;
+	margin-top: 1rem;
+	padding: 0.75rem 1rem;
+	font-size: 0.9375rem;
+	color: #000000;
+}
+
+#warning code,
+#error code {
+	font-size: inherit;
+	color: inherit;
+	white-space: pre-line;
+}
+
+/* Things in common across sections */
+
+.sectionHeader {
+	color: var(--color-sectionHeader-text);
+	background-color: var(--color-sectionHeader-background);
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0.375rem 1rem 0.3125rem 1rem;
+	vertical-align: middle;
+}
+
+.sectionHeader .sectionHeaderIcon {
+	display: var(--sectionHeaderIcon-display);
+	float: left;
+	padding: 0.0625rem 0.5rem 0 0;
+}
+
+.sectionHeader .sectionHeaderTitle {
+}
+
+.sectionBody {
+	background-color: var(--color-main-content-background);
+	padding: 1rem 2rem 0.75rem 2rem;
+}
+
+#pageHeader,
+#loadingToolSection,
+#warning,
+#error,
+#toolIntroSection,
+#wizardSection,
+#personalSection,
+#prioritiesSection,
+#adjustSection,
+#mpceSection,
+#feedbackSection,
+#taxIntroSection,
+#taxCalcSection,
+#pageFooter,
+#pageBodyDisagree {
+	margin: 0;
+}
+
+/*=========================================================================================================
+	Styles primarily for #personalSection / "Tell us about you"
+  =========================================================================================================*/
+
+#personalSection .sectionHeader {
+}
+
+#personalSection .sectionHeader .sectionHeaderIcon {
+}
+
+#personalSection .dropdownDiv {
+}
+
+#personalSection .dropdownDiv label {
+	margin-bottom: 0.25rem;
+}
+
+#personalSection .dropdownDiv select {
+	margin: 0 0.5rem 0.75rem 0;
+}
+
+#personalSection .textInputDiv {
+	margin-bottom: 0.75rem;
+}
+
+#personalSection .labelForReadOnlyValue {
+	line-height: 1.25rem;
+	margin-bottom: 0.375rem;
+}
+
+#personalSection .form-control.readOnlyValue {
+	background-color: var(--color-neutral-background);
+	color: var(--color-neutral-text);
+	border-color: var(--color-neutral-border);
+	padding-top: 0.25rem;
+	margin-bottom: 0.75rem;
+}
+
+/*===========================================================================================================
+	Styles primarily for #prioritiesSection / "Tell us what's most important to you about a health care plan"
+  ===========================================================================================================*/
+
+#prioritiesSection .sectionHeader {
+}
+
+#prioritiesSection .sectionHeader .sectionHeaderIcon {
+}
+
+.planPriorityRadioButtonsContainer {
+	margin-right: 0;
+}
+
+.planPriorityDescriptionContainer {
+}
+
+.planPriorityDescription {
+	height: 90%;
+}
+
+/*=========================================================================================================
+	Styles primarily for #adjustSection / "Enter your expected plan usage here"
+  =========================================================================================================*/
+
+#adjustSection {
+	height: auto;
+}
+
+#adjustSection .sectionHeader {
+}
+
+#adjustSection .sectionHeader .sectionHeaderIcon {
+}
+
+#adjustSection .alert p {
+	line-height: 1.2;
+}
+
+#adjustSection .modellerPaneTabs {
+	float: left; /* or "right" to move tabs to right side instead */
+	margin: 0.5rem 1.25rem 0 1rem;
+}
+
+#adjustSection .tab-content {
+	overflow: visible;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+#adjustSection .tab-pane {
+	background-color: var(--color-adjustSection-modeling-pane);
+	color: var(--color-adjustSection-modeling-pane-text);
+	overflow: auto;
+	margin: 0;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+#adjustSection .tab-pane button {
+	color: var(--color-adjustSection-modeling-pane-link);
+}
+
+#adjustSection .tab-pane button:hover {
+	color: var(--color-adjustSection-modeling-pane-link-hover);
+}
+
+#adjustSection .nav-tabs {
+	line-height: 2rem;
+	border-bottom: 0;
+}
+
+#adjustSection .nav-tabs > li > button {
+	padding: 8px 11px;
+	background-color: #EEEEEE;
+	text-decoration: none;
+	margin-right: 2px;
+	line-height: 1.125rem;
+	color: var(--color-link);
+}
+
+#adjustSection .nav-tabs > li > button:hover {
+	background-color: #D2D2D2;
+	color: var(--color-link-hover);
+	text-decoration: underline;
+}
+
+#adjustSection .nav-tabs > .active > button,
+#adjustSection .nav-tabs > .active > button:hover {
+	color: var(--color-plain-text);
+	font-weight: bold;
+	background-color: var(--color-adjustSection-modeling-pane);
+	border: 1px solid var(--color-adjustSection-modeling-pane);
+	border-bottom-color: transparent;
+	cursor: default;
+	text-decoration: none;
+}
+
+/* modelingContents (applies to both modeling modes) */
+
+.modelingContents button .fa,
+.modelingContents button .fad,
+.modelingContents button .fal,
+.modelingContents button .far,
+.modelingContents button .fas {
+	padding-right: 0.25rem;
+}
+
+/* simplifiedModelingContents */
+
+.simplifiedModelingContents,
+.detailedModelingContents {
+	padding: 0;
+	margin: 0.125rem 0.25rem 0.25rem 0.5rem;
+}
+
+.simplifiedModelingContents button[data-bs-toggle="modal"],
+.detailedModelingContents button[data-bs-toggle="modal"] {
+	font-weight: bold;
+}
+
+.simplifiedModelingContents .personContainer {
+	float: left;
+	width: auto;
+	padding: 0 0 0.5rem 0;
+}
+
+.simplifiedModelingContents .personContainer.headings .title,
+.simplifiedModelingContents .personContainer .personTitle {
+	min-height: 1.75rem;
+	font-weight: bold;
+	padding: 0.625rem 0.25rem 0 0.25rem;
+}
+
+.simplifiedModelingContents .personContainer.headings .usageCategory {
+	min-height: 44px;
+	line-height: 44px;
+	font-weight: bold;
+	text-align: right;
+	background-color: var(--color-adjustSection-modeling-pane);
+	padding: 0 8px 0 12px;
+}
+
+.simplifiedModelingContents .personContainer.headings .usageCategory.category2,
+.simplifiedModelingContents .personContainer .usageCategoryDropdownOuter.usageCategory.category2 {
+	background-color: var(--color-adjustSection-modeling-pane);
+}
+
+.simplifiedModelingContents .personContainer .usageCategoryDropdownOuter {
+	display: table;
+	height: 44px;
+	background-color: var(--color-adjustSection-modeling-pane);
+	padding: 0 0.375rem 0.25rem 0.125rem;
+}
+
+.simplifiedModelingContents .personContainer .usageCategoryDropdown {
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 2px;
+}
+
+.simplifiedModelingContents .personContainer .usageCategoryDropdown select {
+}
+
+/* detailedModelingContents */
+
+.detailedModelingContents table {
+	float: left;
+	margin-bottom: 0.5rem;
+}
+
+.detailedModelingContents table th {
+}
+
+.detailedModelingContents table th.person {
+	height: 1rem;
+	text-align: center;
+	padding: 3px 2px;
+	color: var(--color-plain-text);
+}
+
+.detailedModelingContents table th.person:first-child {
+	color: var(--color-plain-text);
+	font-weight: normal;
+	text-align: right;
+	vertical-align: top;
+}
+
+.detailedModelingContents table th.person:first-child .usageCategory {
+	line-height: 34px;
+	vertical-align: middle;
+	font-weight: bold;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.detailedModelingContents table th.person:first-child .usageCategory {
+	margin-right: 5px;
+}
+
+.detailedModelingContents table th.person .personTypeHeader {
+	font-size: 0.9375rem;
+	font-weight: bold;
+	padding: 0.625rem 0 0.3125rem 0;
+}
+
+.detailedModelingContents table th.person select.form-control {
+	margin: 1px 0 3px 0;
+	font-variant-numeric: tabular-nums;
+	font-weight: normal;
+	padding-left: 0.3125rem;
+}
+
+.detailedModelingContents table th.categoryDescription {
+	padding: 0.75rem 0 0.125rem 0.875rem;
+	border-top: solid 1px var(--color-adjustSection-modeling-pane-border);
+}
+
+.detailedModelingContents table td {
+	padding: 0 8px 0 2px;
+	vertical-align: top;
+	font-size: 0.9375rem;
+	line-height: 1;
+}
+
+.detailedModelingContents table td select.form-control {
+	margin: 1px 0 1px 8px;
+	width: 66px;
+	height: 28px;
+	font-size: 0.9375rem;
+	padding-top: 2px;
+	padding-left: 0.3125rem;
+}
+
+.detailedModelingContents table td select.form-control.additionalServices {
+	width: 98px; /* needs to be wider to accommodate dollar amounts */
+}
+
+.detailedModelingContents table td.serviceDescription {
+	min-width: 180px;
+	max-width: 330px;
+	padding-top: 6px;
+}
+
+.detailedModelingContents table.withCategoryHeadings td.serviceDescription {
+	padding-left: 1.75rem;
+}
+
+.detailedModelingContents table tr.firstCategory th.categoryDescription {
+	border-top: none;
+}
+
+.detailedModelingContents table.withCategoryHeadings tr.onlyServiceInCategory td,
+.detailedModelingContents table.withCategoryHeadings tr.lastServiceInCategory td {
+	padding-bottom: 0.75rem;
+}
+
+.detailedModelingContents .serviceSpecificFootnotes {
+	clear: both;
+	padding: 0 0.875rem 0.875rem 0.875rem;
+	line-height: 1;
+}
+
+/*=========================================================================================================
+	Styles primarily for #mpceSection / "Compare how much you'll spend"
+  =========================================================================================================*/
+
+#mpceSection .sectionHeader {
+}
+
+#mpceSection .sectionHeader .sectionHeaderIcon {
+}
+
+#mpceSection .sectionBody {
+}
+
+/* Left side: MPCE chart options, chart, and legend. These are not prefixed #mpceSection as they also appear in the wizard. */
+
+.chartArea {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.chartArea .coverageLevelHeading {
+	font-size: 1.125rem;
+	color: var(--color-lighter-text);
+	font-weight: normal;
+}
+
+.chartArea .coverageLevel {
+	color: var(--color-plain-text);
+	font-weight: bold;
+}
+
+.chartOptions {
+	background-color: var(--color-neutral-background);
+	color: var(--color-neutral-text);
+	border: solid 1px var(--color-neutral-border);
+	font-size: 1rem;
+	padding: 0.3125rem 0.625rem 0.1875rem 0.625rem;
+	margin-bottom: 0.625rem;
+}
+
+.chartOptions .form-check-input {
+	margin-right: 0.4375rem;
+}
+
+.chartOptions .form-check-label {
+	padding-top: 0.1875rem;
+}
+
+button.planProvisionsButton {
+	font-weight: normal;
+	font-size: 1rem;
+}
+
+button.planProvisionsButton .fa,
+button.planProvisionsButton .fad,
+button.planProvisionsButton .fal,
+button.planProvisionsButton .far,
+button.planProvisionsButton .fas {
+	padding: 0 0.325rem;
+}
+
+.mpceChartTitle {
+}
+
+#mainChart {
+	height: 525px;
+}
+
+.mainChartTopNotes,
+.mainChartTopNotesCopy {
+	margin: 0;
+}
+
+.mainChartFootnotes,
+.mainChartFootnotesCopy,
+.taxChartFootnotes {
+	color: var(--color-lighter-text);
+	margin: 0.5rem 0 0 0;
+	padding: 0 0 0 0.75rem;
+	line-height: 1.1;
+}
+
+.mainChartTopNotes div.alert,
+.mainChartTopNotesCopy div.alert,
+.mainChartFootnotes div.alert,
+.mainChartFootnotesCopy div.alert {
+	padding: 0.6875rem 1rem 0.5625rem 1rem;
+	margin-bottom: 0.5rem;
+	line-height: 1.1;
+}
+
+.mainChartTopNotes p,
+.mainChartTopNotesCopy p,
+.mainChartFootnotes p,
+.mainChartFootnotesCopy p,
+.taxChartFootnotes p {
+	display: inline-block;
+	font-size: 93.75%;
+	margin-bottom: 0.5rem;
+}
+
+.mainChartTopNotes p:last-child,
+.mainChartTopNotesCopy p:last-child,
+.mainChartFootnotes p:last-child,
+.mainChartFootnotesCopy p:last-child,
+.taxChartFootnotes p:last-child {
+	margin-bottom: 0;
+}
+
+.mainChartTooltip .planName {
+	color: var(--color-bold-text);
+	font-style: italic;
+	margin: 2px 0 5px 0;
+}
+
+.mainChartTooltip.worstCaseCosts {
+	min-width: 220px;
+}
+
+.mainChartTooltip.worstCaseCosts > .value {
+	color: #EE4444;
+}
+
+.mainChartTooltip .chartSeriesDetails {
+	color: var(--color-lighter-text);
+	font-weight: normal;
+	font-variant-numeric: tabular-nums;
+	margin: 12px 12px 6px 12px;
+}
+
+.mainChartTooltip .chartSeriesDetails > tbody > tr > td {
+	vertical-align: top;
+}
+
+.mainChartTooltip .chartSeriesDetails table tr td {
+	padding: 1px 2px 1px 1px;
+}
+
+.mainChartTooltip .chartSeriesDetails table tr td.name {
+	padding-left: 5px;
+	padding-right: 12px;
+}
+
+.mainChartTooltip .chartSeriesDetails table tr td.value {
+	min-width: 40px;
+	text-align: right;
+	margin: 0 6px 0 0;
+}
+
+.mainChartTooltip .oopCostsDetails table tr.totalCopays td.value,
+.mainChartTooltip .oopCostsDetails table tr.totalDeductibles td.value,
+.mainChartTooltip .oopCostsDetails table tr.totalCoinsurance td.value,
+.mainChartTooltip .oopCostsDetails table tr.totalExpensesNotCovered td.value {
+	color: var(--color-warning-value);
+}
+
+.mainChartTooltip .oopCostsDetails table tr.totalMedicalAndDrugCosts td.value {
+	color: var(--color-negative-value);
+	border-top: solid 1px var(--color-plain-text);
+}
+
+.mainChartTooltip .oopCostsDetails table tr.totalFundAmountOffset td.value {
+	color: var(--color-positive-value);
+}
+
+.mainChartTooltip .oopCostsDetails table tr.totalMedicalAndDrugCostsLessFundOffset td.value {
+	color: var(--color-plain-value);
+	border-top: solid 1px var(--color-plain-text);
+	border-bottom: double var(--color-plain-text);
+	padding-top: 3px;
+	padding-bottom: 2px;
+}
+
+.mainChartTooltip .oopCostsDetails .notes {
+	min-width: 150px;
+	float: right;
+	color: var(--color-lighter-text);
+	margin-left: 12px;
+}
+
+.mainChartTooltip .oopCostsDetails .notes .header {
+	text-decoration: underline;
+	margin-bottom: 6px;
+}
+
+.mainChartTooltip .oopCostsDetails .notes ul {
+	margin: 0 0 0 18px;
+	padding: 0;
+}
+
+.mainChartTooltip .oopCostsDetails .notes ul li {
+	white-space: normal;
+	margin-top: 4px;
+}
+
+.mainChartTooltip .oopCostsDetails .ifDeductibleNotMet,
+.mainChartTooltip .oopCostsDetails .ifDeductibleMet,
+.mainChartTooltip .oopCostsDetails .ifOopMaxNotReached,
+.mainChartTooltip .oopCostsDetails .ifOopMaxReached,
+.mainChartTooltip .oopCostsDetails .applyERFundsOnly,
+.mainChartTooltip .oopCostsDetails .applyERCoreFundsOnly,
+.mainChartTooltip .oopCostsDetails .applyEEFundsOnly,
+.mainChartTooltip .oopCostsDetails .applyNoFunds {
+	display: none;
+}
+
+.mainChartTooltip .oopCostsDetails.deductibleMet .ifDeductibleMet,
+.mainChartTooltip .oopCostsDetails:not(.deductibleMet) .ifDeductibleNotMet,
+.mainChartTooltip .oopCostsDetails.oopMaxReached .ifOopMaxReached,
+.mainChartTooltip .oopCostsDetails:not(.oopMaxReached) .ifOopMaxNotReached,
+.mainChartTooltip .oopCostsDetails.applyERFundsOnly:not(.noFundAmountOffset) .applyERFundsOnly,
+.mainChartTooltip .oopCostsDetails.applyERCoreFundsOnly:not(.noFundAmountOffset) .applyERCoreFundsOnly,
+.mainChartTooltip .oopCostsDetails.applyEEFundsOnly:not(.noFundAmountOffset) .applyEEFundsOnly,
+.mainChartTooltip .oopCostsDetails.applyNoFunds .applyNoFunds {
+	display: list-item;
+}
+
+.mainChartTooltip .employeePremiumsDetails table tr.adjustmentAmount td.name,
+.mainChartTooltip .employerPremiumsDetails table tr.adjustmentAmount td.name {
+	padding-left: 18px;
+}
+
+.mainChartTooltip .employeePremiumsDetails table tr td.value,
+.mainChartTooltip .employerPremiumsDetails table tr td.value {
+	color: var(--color-warning-value);
+}
+
+.mainChartTooltip .employeePremiumsDetails table tr td.value.incentive,
+.mainChartTooltip .employerPremiumsDetails table tr td.value.incentive {
+	color: var(--color-positive-value);
+}
+
+.mainChartTooltip .employeePremiumsDetails table tr td.value.surcharge,
+.mainChartTooltip .employerPremiumsDetails table tr td.value.surcharge {
+	color: var(--color-negative-value);
+}
+
+.mainChartTooltip .employeePremiumsDetails table tr.totalAnnualPayrollContributions td.value,
+.mainChartTooltip .employerPremiumsDetails table tr.employerPlanPremium td.value {
+	color: var(--color-plain-value);
+	border-top: solid 1px var(--color-plain-text);
+	border-bottom: double var(--color-plain-text);
+	padding-top: 3px;
+	padding-bottom: 2px;
+}
+
+.mainChartTableDiv,
+.taxChartTableDiv {
+	margin: 1rem 0.25rem;
+	float: none;
+}
+
+.mainChartTable,
+.taxChartTable {
+	margin: auto;
+	width: 92%;
+	line-height: 1.125rem;
+}
+
+.mainChartTable th,
+.taxChartTable th {
+	padding: 0.25rem;
+	border-collapse: collapse;
+}
+
+.mainChartTable th,
+.taxChartTable th {
+	border-bottom: solid 1px var(--color-plain-text);
+}
+
+.mainChartTable td,
+.taxChartTable td {
+	padding: 0.25rem;
+	border-collapse: collapse;
+}
+
+.mainChartTable td:first-child {
+	width: 180px;
+	text-align: left;
+}
+
+.mainChartTable .planName,
+.taxChartTable .resultName {
+	text-align: right;
+	vertical-align: bottom;
+	font-weight: bold;
+}
+
+.mainChartTable .summaryRow td {
+	padding-top: 1.125rem;
+	font-weight: bold;
+}
+
+.mainChartTable .summaryRow td {
+	border-top: solid 1px var(--color-plain-text);
+	border-bottom: double var(--color-plain-text);
+}
+
+.taxChartTable .resultName {
+	font-weight: normal;
+	text-align: center;
+}
+
+.mainChartTable .resultName {
+	min-width: 150px;
+	text-align: left;
+}
+
+.mainChartTable .resultValue {
+	text-align: right;
+}
+
+.taxChartTable .resultValue {
+	text-align: center;
+}
+
+/* Right side: Savings account contribution area. */
+
+.savingsArea:not(.notInUse) {
+	padding-left: 0;
+}
+
+.savingsArea > div,
+.savingsArea > p {
+	clear: both;
+}
+
+.savingsAccountSliderRow:not(.notInUse) {
+	clear: both;
+	width: 100%;
+}
+
+.savingsAccountSliderRow .savingsAccountSliderLabel {
+	width: 2.5rem; /* The "HSA:" and "FSA:" labels that may appear before each slider */
+	color: var(--color-lighter-text);
+	font-weight: bold;
+	padding-top: 0.5rem;
+}
+
+.savingsAccountSliderRow .slider {
+	width: 61%;
+}
+
+.sliderMinimum,
+.sliderMaximum {
+	color: var(--color-lighter-text);
+	font-style: italic;
+	display: none; /* TIP: Use display: block to show slider min & max to left and right of slider; adjust slider width above */
+	float: left;
+	padding-top: 0.5rem;
+	padding-right: 0.25rem;
+}
+
+.sliderMaximum {
+	padding-left: 0.625rem;
+}
+
+.savingsAccountSliderRow .sliderTextInput {
+	/* The dollar value following the slider */
+	display: block; /* TIP: Use display: none if you're going to use the sliderMinimum and sliderMaximum labels above */
+}
+
+body:not(.duringWizard) .hsaSlider .ui-slider-range.ui-widget-header {
+	background: var(--color-hsaSlider-background) none;
+}
+
+body:not(.duringWizard) .fsaSlider .ui-slider-range.ui-widget-header {
+	background: var(--color-fsaSlider-background) none;
+}
+
+body:not(.duringWizard) .carryoverSlider .ui-slider-range.ui-widget-header {
+	background: var(--color-carryoverSlider-background) none;
+}
+
+.carryoverSliderRow.savingsAccountSliderRow .slider {
+	width: 73%;
+}
+
+.savingsAccountSliderRow .sliderChangedTip {
+	/* for mobile; to appear below sliders when value changed */
+	clear: both;
+	color: var(--color-positive-value);
+	padding: 0 0 0.375rem 0.1875rem;
+}
+
+.savingsArea div.applyFundsToCostOfCareDropdown label {
+	margin: 0 0.375rem 0.125rem 0;
+}
+
+.savingsArea select.applyFundsToCostOfCareDropdown {
+	display: inline-block;
+	width: auto;
+	border-radius: 5px;
+	margin: 0;
+}
+
+.savingsArea select.applyFundsToCostOfCareDropdown.form-control {
+	height: 2rem;
+}
+
+.savingsArea select.applyFundsToCostOfCareDropdown.form-control[data-option='applyERFundsOnly'],
+.savingsArea select.applyFundsToCostOfCareDropdown.form-control[data-option='applyERCoreFundsOnly'],
+.savingsArea select.applyFundsToCostOfCareDropdown.form-control[data-option='applyEEFundsOnly'],
+.savingsArea select.applyFundsToCostOfCareDropdown.form-control[data-option='applyNoFunds'],
+select.applyFundsAnswers.form-control[data-option='applyERFundsOnly'], /* in wizard */
+select.applyFundsAnswers.form-control[data-option='applyERCoreFundsOnly'],
+select.applyFundsAnswers.form-control[data-option='applyEEFundsOnly'],
+select.applyFundsAnswers.form-control[data-option='applyNoFunds'] {
+	font-weight: bold;
+}
+
+.savingsArea select.applyFundsToCostOfCareDropdown.form-control option,
+select.applyFundsAnswers.form-control option /* in wizard */ {
+	color: var(--color-plain-text);
+	font-weight: normal;
+}
+
+.resultsTable {
+	width: 100%;
+	color: var(--color-plain-text);
+	font-size: 0.875rem;
+	border: none;
+	line-height: 1.1;
+}
+
+.resultsTable caption {
+	caption-side: top;
+	color: var(--color-plain-text);
+	padding: 0.25rem 0 0.3125rem 0;
+	font-style: italic;
+	font-size: 1rem;
+}
+
+.resultsTable tr th {
+	font-weight: bold;
+	background-color: var(--color-resultsTable-header-background);
+	color: var(--color-resultsTable-header-text);
+	border-bottom: solid 1px var(--color-resultsTable-cell-border);
+	vertical-align: bottom;
+	text-align: center;
+	padding: 0.5625rem 0.25rem 0.3125rem 0.25rem;
+}
+
+.resultsTable tr th.resultName {
+	text-align: left;
+	font-style: italic;
+	width: 42%;
+}
+
+.resultsTable .applyFundsDetail[data-option='default'],
+.resultsTable .applyFundsDetail[data-option='applyAllFunds'] {
+	display: none;
+}
+
+.resultsTable .tbd,
+.resultsTable .applyFundsDescription {
+	color: var(--color-lighter-text);
+	font-style: italic;
+	font-size: 0.875rem;
+}
+
+.resultsTable tr.limitedPotentialRollover td:not(.resultName),
+.resultsTable tr.totalMedicalAndDrugCostsLessFundOffset td:not(.resultName) {
+	font-weight: bold;
+}
+
+.resultsTable tr td {
+	font-variant-numeric: tabular-nums;
+	padding: 0.4375rem 0.1875rem 0.3125rem 0.25rem;
+	background-color: var(--color-resultsTable-regular-background);
+	color: var(--color-resultsTable-regular-text);
+	border-top: solid 1px var(--color-resultsTable-cell-border);
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.resultsTable td.sliderHighlight {
+	color: var(--color-positive-value);
+	background-color: #F4FFF6;
+	font-weight: bold;
+}
+
+.resultsTable td.resultName {
+	text-align: left;
+	font-size: 0.875rem;
+	padding-left: 0.375rem;
+}
+
+.resultsTable tr.totalFundAmount td {
+	border-top: double var(--color-resultsTable-cell-border);
+	font-weight: bold;
+}
+
+.resultsTable tr.summaryRow td {
+	padding: 0.5625rem 0.25rem 0.375rem 0.375rem;
+	border-top: solid 1px var(--color-resultsTable-cell-border);
+	border-bottom: double var(--color-resultsTable-cell-border);
+	background-color: var(--color-resultsTable-summaryRow-background);
+	color: var(--color-resultsTable-summaryRow-text);
+}
+
+.resultsTable tr.summaryRow span.textWithTooltip {
+	color: var(--color-resultsTable-summaryRow-link);
+}
+
+.resultsTable tfoot tr td {
+	background-color: var(--color-resultsTable-footer-background);
+	color: var(--color-resultsTable-footer-text);
+	border-top: none;
+	text-align: left;
+	padding-top: 0.3125rem;
+}
+
+.resultsTable tr td.zero::after {
+	/* Table cells classed "zero" will be empty. This style inserts the default content of "$0". It's done
+	   this way so certain styles (just below) can selectively override "$0" with an n-dash instead. */
+	content: "$0"
+}
+
+.resultsTable tr.planFundAmount td.zero::after,
+.resultsTable tr.planFundAmountExcludingAdjustment td.zero::after,
+.resultsTable tr.planFundAdjustmentAmount td.zero::after,
+.resultsTable tr.planFundAdditionalMatchAmount td.zero::after,
+.resultsTable tr.planFundAndMatchTotalPaid td.zero::after,
+.resultsTable tr.totalFundAmount td.zero::after,
+.resultsTable tr.forfeitedPotentialRollover td.zero::after,
+.resultsTable tr td.noValue::after {
+	content: "\2013"; /* CSS equivalent of &ndash; */
+	color: var(--color-zero-value);
+}
+
+.resultsTable tr td.negative {
+	color: var(--color-negative-value);
+}
+
+.resultsTable tr td.limitedRolloverAmount {
+	color: var(--color-warning-value);
+}
+
+.resultsTable tr td.limitedRolloverAmount::after {
+	content: "*";
+}
+
+.resultsTable tr td.limitedRolloverAmount.zero::after {
+	content: "$0*";
+}
+
+#nonWizardSections .resultsTable .intermediateResultsVersion {
+	display: none !important; /* Hide elements classed "intermediateResultsVersion" (used only by the wizard) from appearing in the main tool. */
+}
+
+/* Your match image in the full tool (below the results graph) */
+div.planRecommendationResult table tr td img.bestMatchIcon {
+	width: 72px;
+	padding-right: 20px;
+}
+
+/*=========================================================================================================
+	Styles primarily for #feedbackSection / "Give us your feedback"
+  =========================================================================================================*/
+
+#feedbackSection .sectionHeader {
+}
+
+#feedbackSection .sectionHeader .sectionHeaderIcon {
+}
+
+#feedbackSection .sectionBody {
+}
+
+#feedbackSection .dropdownDiv label {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+/*=========================================================================================================
+	Styles primarily for #taxIntroSection / "View your potential tax savings"
+  =========================================================================================================*/
+
+#taxIntroSection .sectionHeader {
+}
+
+#taxIntroSection .sectionHeader .sectionHeaderIcon {
+}
+
+#taxIntroSection .sectionBody {
+}
+
+/*=========================================================================================================
+	Styles primarily for #taxCalcSection / "___ Tax Calculator" (dynamic title based on chosen plan)
+  =========================================================================================================*/
+
+#taxCalcSection {
+	display: none; /* Initially not visible! Displayed when user requests it. */
+}
+
+#taxCalcSection .sectionHeader {
+}
+
+#taxCalcSection .sectionHeader .sectionHeaderIcon {
+}
+
+#taxCalcSection .sectionBody {
+}
+
+#taxCalcSection .taxCalcTopNotes p:last-child {
+	margin-bottom: 1.25rem;
+}
+
+#taxCalcSourcePlanDiv {
+	font-size: 1.125rem;
+}
+
+#taxCalcSourcePlanName {
+	font-weight: bold;
+}
+
+#taxChart {
+	height: 535px;
+	padding-top: 1rem;
+}
+
+#taxCalcInputs label {
+	display: block;
+	font-weight: normal;
+	padding-top: 0.375rem;
+	padding-right: 0.25rem;
+}
+
+#taxCalcInputs select.form-control {
+	width: inherit;
+}
+
+#taxNumDependents small {
+	white-space: nowrap;
+	padding: 0.5rem 0 0 0.25rem;
+}
+
+#taxNumDependents {
+	margin-top: 0.5rem;
+}
+
+#taxCalcSliders {
+	display: table;
+	clear: both;
+	width: 100%;
+	margin-top: 0.5rem;
+}
+
+#taxCalcSection .slider {
+	margin-top: 0.75rem;
+	margin-bottom: 1rem;
+}
+
+#taxCalcSection .sliderDiv {
+	display: table-row;
+}
+
+#taxCalcSection .sliderTextInput {
+	width: 6rem;
+	margin-top: 0.3125rem;
+}
+
+#taxCalcSection .btnSwitchToMpceView {
+	margin-bottom: 1rem;
+}
+
+/*=========================================================================================================
+	Page footer: Includes the copyright notice.
+  =========================================================================================================*/
+
+#pageFooter {
+	font-size: 0.875rem;
+	background-color: var(--color-pageFooter-background);
+	color: var(--color-pageFooter-text);
+	padding: 0.875rem 0.5rem 0.75rem 0.5rem;
+}
+
+#pageFooter select.form-control {
+	height: 1.5rem;
+}
+
+/*=========================================================================================================
+	Styles primarily for modal help dialogs.
+  =========================================================================================================*/
+
+/* costsAssumptionsTable */
+
+.costsAssumptionsTable {
+	--bs-table-color: #000000;
+	--bs-table-bg: #EAEAEA;
+	--bs-table-striped-bg: #F6F6F6;
+	--bs-table-border-color: #DDDDDD;
+}
+
+.costsAssumptionsTable tr th {
+	border-top: solid 0.75rem #FFFFFF;
+	padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+}
+
+.costsAssumptionsTable tbody tr td {
+	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	text-align: right;
+}
+
+.costsAssumptionsTable td:first-child {
+	text-align: left;
+}
+
+.costsAssumptionsTable td:last-child {
+	text-align: right;
+	width: 4rem;
+}
+
+/* planProvisionsTabList */
+
+.planProvisionsTabList.nav-pills {
+	--bs-nav-link-color: var(--color-link);
+	--bs-nav-link-hover-color: var(--color-link-hover);
+}
+
+.planProvisionsTabList.nav-pills .nav-link.active,
+.planProvisionsTabList.nav-pills .show > .nav-link {
+	color: #333333;
+	background-color: #E4E6EA;
+	font-weight: bold;
+}
+
+/* planProvisionsTable */
+
+table.planProvisionsTable {
+	background-color: #F2F2F2;
+	font-size: 0.9375rem;
+    width: 100%;
+}
+
+table.planProvisionsTable tr > th,
+table.planProvisionsTable tr > td {
+	padding: 0.625rem 0.625rem 0.5625rem 0.625rem;
+	line-height: 1.125rem;
+	vertical-align: top;
+	border-top: 1px solid #DEE2E6;
+}
+
+table.planProvisionsTable tr > th {
+	text-align: center;
+	vertical-align: bottom;
+	line-height: 1.0625rem;
+}
+
+table.planProvisionsTable tr > th:first-child {
+	text-align: left;
+	vertical-align: middle;
+	font-weight: normal;
+	font-style: italic;
+}
+
+table.planProvisionsTable tr > td {
+	background-color: #FFFFFF;
+	text-align: center;
+	min-width: 130px;
+}
+
+table.planProvisionsTable tr > td > *,
+table.planProvisionsTable tr > th > * {
+	background-color: inherit;
+	padding: 0;
+}
+
+table.planProvisionsTable tr > td > i {
+	color: #000000;
+	font-size: 0.875rem;
+	border-bottom: dotted 1px #AAAAAA;
+	line-height: 1.625rem;
+}
+
+table.planProvisionsTable tr > td > div.small {
+	font-size: 0.875rem;
+}
+
+table.planProvisionsTable tr:hover:not(.separator) > td {
+	background-color: #ECEEF2;
+	color: #111111;
+}
+
+table.planProvisionsTable tr:hover:not(.separator) > td:first-child {
+	background-color: #E4E6EA;
+	color: #2A828C;
+}
+
+table.planProvisionsTable tr:not(.separator) > td:first-child {
+	background-color: inherit;
+	color: inherit;
+	text-align: left;
+	min-width: 140px;
+	max-width: 280px;
+	font-weight: bold;
+	line-height: 1.0625rem;
+}
+
+table.planProvisionsTable tr > th.selected,
+table.planProvisionsTable tr > td.selected {
+	background-color: #DFF0F2;
+	border-top: solid 1px #C0E0E5;
+}
+
+table.planProvisionsTable tr:hover > td.selected {
+	background-color: #BEE1E5;
+}
+
+table.planProvisionsTable tr > th.recommended,
+table.planProvisionsTable tr > td.recommended {
+	background-color: #FFC166;
+}
+
+table.planProvisionsTable tr:hover > td.recommended {
+	background-color: #FFD699;
+}
+
+table.planProvisionsTable tr.separator > td {
+	padding: 0.125rem;
+}
+
+table.planProvisionsTable > tfoot > tr > td {
+	border: none;
+	border-top: 1px solid #DEE2E6;
+	background-color: #FFFFFF;
+	padding-top: 0.75rem;
+}
+
+table.planProvisionsSubTable {
+	font-size: 0.75rem;
+}
+
+table.planProvisionsSubTable tr td {
+	padding: 0.25rem 0.25rem 0.25rem 0;
+	line-height: 1;
+	text-align: left;
+	vertical-align: middle;
+}
+
+/*=========================================================================================================
+	Disagree and unsupported browser page bodies.
+  =========================================================================================================*/
+
+#pageBodyDisagree,
+#pageBodyUnsupportedBrowser {
+	background-color: var(--color-main-content-background);
+	color: var(--color-plain-text);
+	padding: 4rem 0 2.5rem 0;
+	text-align: center;
+}
+
+#pageBodyDisagree p,
+#pageBodyUnsupportedBrowser p {
+	padding: 1rem;
+}
+
+/*=========================================================================================================
+	Responsive adjustments for narrower screens (tablets, phones, etc.)
+  =========================================================================================================*/
+
+@media (max-width: 1199px) {
+	.chartArea {
+		padding-right: 15px;
+	}
+}
+
+@media (min-width: 992px) {
+	.costsAssumptionsTable {
+		min-width: 500px;
+	}
+}
+
+@media (max-width: 991px) {
+	#pageHeader .headerBox {
+		font-size: 1.5rem;
+	}
+
+	.savingsArea:not(.notInUse) {
+		padding-left: 15px;
+	}
+}
+
+@media (max-width: 1024px) {
+	div.topmost.container,
+	div.topmost.container-fluid {
+		padding: 0;
+	}
+
+	.sectionBody {
+		padding: 1rem;
+	}
+
+	.savingsAccountSliderRow .slider {
+		width: 46%;
+	}
+
+	.chartArea {
+		padding-left: 15px;
+	}
+}
+
+@media (min-width: 768px) {
+	.modal-dialog { max-width: 640px; }
+	#modal_PlanProvisions .modal-dialog, #modal_VideoLibrary .modal-dialog { max-width: 1200px; }
+	#modal_PlanProvisions .modal-dialog .preamble { margin: 0 0 20px 0; }
+	.chartTooltip { min-width: 400px; }
+}
+
+@media (max-width: 768px) {
+	:root {
+		font-size: 15px;
+	}
+}
+
+@media (max-width: 767px) {
+	div.topmost.container,
+	div.topmost.container-fluid {
+		overflow: initial;
+	}
+
+	#loadingToolSection,
+	#warning,
+	#error {
+		padding: 2rem 1.5rem 1.25rem 1.5rem;
+	}
+
+	#mpceSection .nav-tabs .nav-link {
+		padding-top: 0.375rem;
+		text-align: left;
+	}
+
+	.btnSwitchToTaxView {
+		margin-top: 0.5rem;
+	}
+
+	#taxCalcSection .col-auto.form-control {
+		margin-left: 15px;
+		margin-bottom: 0.5rem;
+	}
+
+	#modal_UserAgreement {
+		position: absolute;
+		left: 0;
+		top: 0;
+		margin-left: 0;
+		width: 100%;
+	}
+
+	.modal-dialog {
+		max-width: inherit;
+		margin: 0.75rem;
+	}
+
+	.modal-header,
+	.modal-footer {
+		padding: 0.67rem;
+	}
+
+	.modal.fade.show {
+		top: 10px; /* Helps fix modal not displaying on some mobile displays, w/height adjustments below */
+	}
+
+	#taxCalcSection .sliderDiv .slider {
+		margin-top: 0.5625rem;
+	}
+}
+
+@media (max-width: 480px) {
+
+	#pageHeader .headerBox {
+		font-size: 1.375rem;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		transform: scale(1.1);
+	}
+
+	.btn {
+		padding: 0.375rem 0.75rem;
+	}
+
+	.modal-body {
+		padding: 0.75rem;
+	}
+
+	.modal-body p,
+	.modal-body ul {
+		margin-bottom: 0.5rem;
+	}
+
+	.sectionBody {
+		padding: 0.75rem;
+	}
+
+	#adjustSection .tab-content {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.resultsTable tr th {
+		font-size: 0.8375rem;
+		padding: 0.375rem 0.1875rem;
+	}
+
+	.savingsAccountSliderRow .slider {
+		width: 55%;
+	}
+
+	.carryoverSliderRow.savingsAccountSliderRow .slider {
+		width: 60%;
+	}
+
+	#taxCalcSection .sliderDiv .slider {
+		width: 66%;
+	}
+
+	#taxCalcSection .sliderTextWithTooltip,
+	#taxCalcSection .sliderTextNoTooltip {
+		margin-bottom: 0.1875rem;
+	}
+}
+
+@media (max-width: 360px) {
+
+	#pageHeader .topMenu a,
+	#pageHeader .topMenu button {
+		padding: 0 0.125rem;
+	}
+
+	#adjustSection .modellerPaneTabs {
+		margin: initial;
+	}
+
+	.detailedModelingContents table th.categoryDescription {
+		padding-left: 0.375rem;
+	}
+
+	.detailedModelingContents table.withCategoryHeadings td.serviceDescription {
+		padding-left: 0.75rem;
+	}
+
+	.savingsAccountSliderRow .slider {
+		width: 50%;
+	}
+
+	#taxCalcSection .sliderDiv .slider {
+		width: 61%;
+	}
+}
+
+@media (max-height: 599px) {
+	.sectionHeader {
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+	}
+
+	.sectionBody {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
+}
+
+/*=========================================================================================================
+	Responsive adjustments for specific mobile screen resolutions (tablets, phones, etc.)
+  =========================================================================================================*/
+
+@media (min-height: 800px) { #modal_PlanProvisions .modal-body, #modal_VideoLibrary .modal-body { max-height: 650px; }}
+@media (min-height: 910px) { #modal_PlanProvisions .modal-body, #modal_VideoLibrary .modal-body{ max-height: 760px; }}
+
+@media (max-height: 736px) { .modal-body { max-height: 465px; } }
+@media (max-height: 667px) { .modal-body { max-height: 405px; } }
+@media (max-height: 568px) { .modal-body { max-height: 313px; } }
+@media (max-height: 480px) { .modal-body { max-height: 255px; } }
+@media (max-height: 420px) { .modal-body { max-height: 211px; } }
+@media (max-height: 375px) { .modal-body { max-height: 180px; } }
+@media (max-height: 360px) { .modal-body { max-height: 163px; } }
+@media (max-height: 320px) { .modal-body { max-height: 129px; } }
+
+/*=========================================================================================================
+	Responsive adjustments based on portrait vs. landscape modes.
+  =========================================================================================================*/
+
+@media screen and (orientation: portrait) {
+}
+
+@media screen and (orientation: landscape) {
+}
+
+/*=========================================================================================================
+	Browser-specific hacks to fix stuff.
+  =========================================================================================================*/
+
+/* Scaling of checkbox and radio above currently doesn't work well in Safari. This hack reverts for Safari, only. */
+@media not all and (min-resolution:.001dpcm) {
+	@supports (-webkit-appearance:none) and (display:flow-root) {
+		input[type="checkbox"],
+		input[type="radio"] {
+			transform: revert;
+		}
+	}
+}
