@@ -1,0 +1,11 @@
+{
+    "name": ".NET Core Launch (console)",
+    "type": "coreclr",
+    "request": "launch",
+    "preLaunchTask": "build",
+    "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name>.dll",
+    "args": ["-d","C:\\temp\\mpce_go\\mpce_zip.m","c:\\temp\\mpce_go\\mpce.zip"],
+    "cwd": "${workspaceFolder}",
+    "console": "internalConsole",
+    "stopAtEntry": false
+}
